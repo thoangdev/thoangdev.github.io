@@ -10947,14 +10947,17 @@ p.lead {
 section.resume-section {
   display: flex;
   align-items: center;
+  justify-content: center;
   padding-left: 1rem;
   padding-right: 1rem;
   padding-top: 5rem;
   padding-bottom: 5rem;
   max-width: 75rem;
+  text-align: center;
 }
 section.resume-section .resume-section-content {
   width: 100%;
+  max-width: 60rem;
 }
 
 @media (min-width: 768px) {
@@ -11279,6 +11282,7 @@ h2::after {
 .download-resume-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   font-weight: 600;
   margin-bottom: 1.5rem;
   margin-right: 1rem;
@@ -11288,6 +11292,12 @@ h2::after {
   opacity: 0.7;
   cursor: not-allowed;
   transform: none;
+}
+
+/* Center social icons */
+.social-icons {
+  text-align: center;
+  margin-top: 1rem;
 }
 
 .btn-outline-primary {
@@ -11623,6 +11633,19 @@ body::before {
   .lead {
     font-size: 1.1rem;
     line-height: 1.6;
+  }
+  
+  /* Center content on smaller screens */
+  section.resume-section .resume-section-content {
+    text-align: center;
+  }
+  
+  /* Left align text content for readability */
+  section.resume-section .resume-section-content p,
+  section.resume-section .resume-section-content .lead,
+  section.resume-section .resume-section-content ul,
+  section.resume-section .resume-section-content .d-flex {
+    text-align: left;
   }
 }
 

@@ -137,35 +137,49 @@ function generateAndDownloadPDF(btn, originalHTML) {
         doc.setTextColor(100, 100, 100);
         doc.text('Tech Lead Quality Engineer', 20, 35);
         
-        // Contact Info
+        // Contact Info with clickable links
         doc.setFontSize(10);
         doc.setTextColor(0, 0, 0);
-        doc.text('New Orleans, LA (Remote) | hoangtommyquoc@gmail.com | (504) 453-8178', 20, 45);
-        doc.text('LinkedIn: linkedin.com/in/tommyqhoang | GitHub: github.com/thoangdev', 20, 52);
+        doc.text('New Orleans, LA (Remote) | (504) 453-8178', 20, 45);
+        
+        // Email link
+        doc.setTextColor(37, 99, 235);
+        doc.textWithLink('hoangtommyquoc@gmail.com', 20, 52, { url: 'mailto:hoangtommyquoc@gmail.com' });
+        
+        // LinkedIn and GitHub links
+        doc.setTextColor(0, 0, 0);
+        doc.text('LinkedIn: ', 20, 59);
+        doc.setTextColor(37, 99, 235);
+        doc.textWithLink('linkedin.com/in/tommyqhoang', 40, 59, { url: 'https://linkedin.com/in/tommyqhoang' });
+        
+        doc.setTextColor(0, 0, 0);
+        doc.text(' | GitHub: ', 95, 59);
+        doc.setTextColor(37, 99, 235);
+        doc.textWithLink('github.com/thoangdev', 120, 59, { url: 'https://github.com/thoangdev' });
         
         // Line separator
         doc.setDrawColor(37, 99, 235);
-        doc.line(20, 58, 190, 58);
+        doc.line(20, 65, 190, 65);
         
         // Professional Summary
         doc.setFontSize(14);
         doc.setTextColor(37, 99, 235);
-        doc.text('PROFESSIONAL SUMMARY', 20, 70);
+        doc.text('PROFESSIONAL SUMMARY', 20, 77);
         
         doc.setFontSize(10);
         doc.setTextColor(0, 0, 0);
-        const summaryText = 'Innovative and results-oriented QA leader with 7+ years of experience in test automation, DevSecOps, API validation, and performance/security testing. Proven success driving automation frameworks, CI/CD pipelines, fraud detection systems, and quality-focused release processes.';
+        const summaryText = 'Innovative and results-oriented QA leader with 7+ years of experience in test automation, DevSecOps, API validation, and performance/security testing. Proven success driving automation frameworks, CI/CD pipelines, fraud detection systems, and quality-focused release processes. Passionate about scaling test strategies, integrating AI tools, and delivering secure, seamless user experiences.';
         const summaryLines = doc.splitTextToSize(summaryText, 170);
-        doc.text(summaryLines, 20, 80);
+        doc.text(summaryLines, 20, 87);
         
         // Experience Section
-        let yPos = 100;
+        let yPos = 110;
         doc.setFontSize(14);
         doc.setTextColor(37, 99, 235);
-        doc.text('EXPERIENCE', 20, yPos);
+        doc.text('PROFESSIONAL EXPERIENCE', 20, yPos);
         yPos += 15;
         
-        // Job 1
+        // Job 1 - Dispel
         doc.setFontSize(12);
         doc.setTextColor(0, 0, 0);
         doc.setFont('helvetica', 'bold');
@@ -173,15 +187,16 @@ function generateAndDownloadPDF(btn, originalHTML) {
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(10);
         doc.setTextColor(100, 100, 100);
-        doc.text('June 2025 - Present', 140, yPos);
+        doc.text('June 2025 - Present', 130, yPos);
         yPos += 8;
         
         doc.setFontSize(9);
         doc.setTextColor(0, 0, 0);
         const job1Points = [
             '• Built modular K6-based performance testing framework with Docker, CI/CD, Grafana, and InfluxDB',
-            '• Automated smoke and regression testing across products using Robot Framework + Playwright',
-            '• Integrated OWASP ZAP for security testing with robust data seeding/teardown in PostgreSQL'
+            '• Automated smoke and regression testing across products (STIG, ABB, DSMD) using Robot Framework + Playwright with parallel execution via Pabot',
+            '• Integrated OWASP ZAP for security testing with robust data seeding/teardown in PostgreSQL',
+            '• Enabled end-to-end visibility with Tuskr reporting, Slack alerts, and full-stack test coverage'
         ];
         
         job1Points.forEach(point => {
@@ -191,7 +206,7 @@ function generateAndDownloadPDF(btn, originalHTML) {
         });
         yPos += 5;
         
-        // Job 2
+        // Job 2 - Cognizant
         doc.setFontSize(12);
         doc.setTextColor(0, 0, 0);
         doc.setFont('helvetica', 'bold');
@@ -199,7 +214,7 @@ function generateAndDownloadPDF(btn, originalHTML) {
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(10);
         doc.setTextColor(100, 100, 100);
-        doc.text('Dec 2023 - June 2025', 140, yPos);
+        doc.text('Dec 2023 - June 2025', 130, yPos);
         yPos += 8;
         
         doc.setFontSize(9);
@@ -207,10 +222,120 @@ function generateAndDownloadPDF(btn, originalHTML) {
         const job2Points = [
             '• Led fraud payment QA efforts for AT&T DirecTV, ensuring PCI and security compliance',
             '• Owned API test coverage, UI validation, and error-code monitoring using Postman and Zephyr',
-            '• Oversaw multiple zero-defect launches by optimizing regression pipelines'
+            '• Oversaw multiple zero-defect launches by optimizing regression pipelines and test case audits',
+            '• Integrated AI-based tools (e.g., Copilot, ChatGPT) to streamline test reviews and documentation'
         ];
         
         job2Points.forEach(point => {
+            const lines = doc.splitTextToSize(point, 170);
+            doc.text(lines, 20, yPos);
+            yPos += lines.length * 5;
+        });
+        yPos += 5;
+        
+        // Job 3 - DXC Technology
+        doc.setFontSize(12);
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('helvetica', 'bold');
+        doc.text('Test Manager - DXC Technology', 20, yPos);
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(10);
+        doc.setTextColor(100, 100, 100);
+        doc.text('May 2022 - Oct 2023', 130, yPos);
+        yPos += 8;
+        
+        doc.setFontSize(9);
+        doc.setTextColor(0, 0, 0);
+        const job3Points = [
+            '• Delivered scalable test strategies for TVOD and MDU launches, ensuring streaming reliability',
+            '• Automated UI and API test cases to reduce manual test hours by 70%',
+            '• Leveraged Docker and CI pipelines for parallel execution and faster feedback loops'
+        ];
+        
+        job3Points.forEach(point => {
+            const lines = doc.splitTextToSize(point, 170);
+            doc.text(lines, 20, yPos);
+            yPos += lines.length * 5;
+        });
+        yPos += 5;
+        
+        // Check if we need a new page
+        if (yPos > 250) {
+            doc.addPage();
+            yPos = 20;
+        }
+        
+        // Job 4 - insightsoftware
+        doc.setFontSize(12);
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('helvetica', 'bold');
+        doc.text('Automation Engineer - insightsoftware', 20, yPos);
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(10);
+        doc.setTextColor(100, 100, 100);
+        doc.text('Nov 2021 - May 2022', 130, yPos);
+        yPos += 8;
+        
+        doc.setFontSize(9);
+        doc.setTextColor(0, 0, 0);
+        const job4Points = [
+            '• Built automated test suites for financial Excel plugins using Ranorex with C#',
+            '• Deployed Dockerized environments for scalable cross-platform test scenarios',
+            '• Enhanced test coverage for data validation and financial formula accuracy'
+        ];
+        
+        job4Points.forEach(point => {
+            const lines = doc.splitTextToSize(point, 170);
+            doc.text(lines, 20, yPos);
+            yPos += lines.length * 5;
+        });
+        yPos += 5;
+        
+        // Job 5 - Dialexa (IBM)
+        doc.setFontSize(12);
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('helvetica', 'bold');
+        doc.text('Quality Engineer - Dialexa (IBM)', 20, yPos);
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(10);
+        doc.setTextColor(100, 100, 100);
+        doc.text('Feb 2021 - Oct 2021', 130, yPos);
+        yPos += 8;
+        
+        doc.setFontSize(9);
+        doc.setTextColor(0, 0, 0);
+        const job5Points = [
+            '• Led iOS and Apple Watch QA for glucose monitoring app, validating compliance and reliability',
+            '• Conducted data sync testing across mobile/health platforms and built performance benchmarks'
+        ];
+        
+        job5Points.forEach(point => {
+            const lines = doc.splitTextToSize(point, 170);
+            doc.text(lines, 20, yPos);
+            yPos += lines.length * 5;
+        });
+        yPos += 5;
+        
+        // Job 6 - Accruent
+        doc.setFontSize(12);
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('helvetica', 'bold');
+        doc.text('Software Engineer in Test - Accruent', 20, yPos);
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(10);
+        doc.setTextColor(100, 100, 100);
+        doc.text('Nov 2018 - Feb 2021', 130, yPos);
+        yPos += 8;
+        
+        doc.setFontSize(9);
+        doc.setTextColor(0, 0, 0);
+        const job6Points = [
+            '• Architected CI/CD-ready security and performance test suites',
+            '• Built onboarding automation tools to streamline setup and reduce errors',
+            '• Conducted continuous regression testing to support fast, stable deployments'
+        ];
+        
+        job6Points.forEach(point => {
             const lines = doc.splitTextToSize(point, 170);
             doc.text(lines, 20, yPos);
             yPos += lines.length * 5;
@@ -226,11 +351,12 @@ function generateAndDownloadPDF(btn, originalHTML) {
         doc.setFontSize(10);
         doc.setTextColor(0, 0, 0);
         const skills = [
-            'Automation & Quality: Robot Framework, Playwright, Selenium, Cypress, Appium, Postman',
-            'Security & Performance: OWASP ZAP, K6, JMeter, API Security, DevSecOps',
-            'DevOps & CI/CD: Docker, GitHub Actions, Jenkins, AWS, Linux, Bash',
-            'Programming: Python, JavaScript, Java, C#, YAML',
-            'Databases: PostgreSQL, MySQL, JSON APIs'
+            'Automation & Quality: Robot Framework, Playwright, Selenium, Cypress, Appium, Postman, Zephyr, TestRail, Tuskr, Jira, Pabot, K6, JMeter, NeoLoad',
+            'Security & Performance: OWASP ZAP, API Security, Encryption, Authentication, Firewall Testing, Load/Stress/Soak/Spike Testing',
+            'DevOps & CI/CD: Docker, GitHub Actions, Jenkins, AWS, Linux, Bash, DevSecOps, InfluxDB, Grafana',
+            'Programming & Scripting: Python, JavaScript (Node.js), Java, YAML, C#',
+            'Database & Data: PostgreSQL, MySQL, JSON APIs, Data Seeding, Cleanup Utilities',
+            'Productivity Tools: Copilot, ChatGPT, AI-assisted Test Planning, Automated Docs'
         ];
         
         skills.forEach(skill => {
@@ -239,6 +365,12 @@ function generateAndDownloadPDF(btn, originalHTML) {
             yPos += lines.length * 6;
         });
         yPos += 5;
+        
+        // Check if we need a new page for remaining sections
+        if (yPos > 220) {
+            doc.addPage();
+            yPos = 20;
+        }
         
         // Certifications
         doc.setFontSize(14);
@@ -252,6 +384,7 @@ function generateAndDownloadPDF(btn, originalHTML) {
             '• CompTIA Security+',
             '• AWS Certified Cloud Practitioner',
             '• Google Cybersecurity Certificate',
+            '• Google Project Management',
             '• Professional Scrum Master (Scrum.org)'
         ];
         
@@ -273,7 +406,85 @@ function generateAndDownloadPDF(btn, originalHTML) {
         doc.text('Southern University at New Orleans', 20, yPos);
         doc.setFont('helvetica', 'normal');
         yPos += 6;
-        doc.text('Bachelor of Science - Computer Information Systems (2015-2017)', 20, yPos);
+        doc.text('Bachelor of Science - Computer Information Systems (Jan 2015 - Dec 2017)', 20, yPos);
+        yPos += 10;
+        
+        // Highlights & Impact
+        doc.setFontSize(14);
+        doc.setTextColor(37, 99, 235);
+        doc.text('HIGHLIGHTS & IMPACT', 20, yPos);
+        yPos += 15;
+        
+        doc.setFontSize(10);
+        doc.setTextColor(0, 0, 0);
+        const highlights = [
+            '• Launched 5+ major features with near-zero production bugs and full regression coverage',
+            '• Reduced manual test time by 70% via cross-product automation and AI-driven test audits',
+            '• Prevented payment fraud at scale through proactive security testing for telecom clients',
+            '• Built performance testing pipelines from scratch using K6, Docker, and cloud monitoring tools'
+        ];
+        
+        highlights.forEach(highlight => {
+            const lines = doc.splitTextToSize(highlight, 170);
+            doc.text(lines, 20, yPos);
+            yPos += lines.length * 6;
+        });
+        yPos += 5;
+        
+        // Leadership & Collaboration
+        doc.setFontSize(14);
+        doc.setTextColor(37, 99, 235);
+        doc.text('LEADERSHIP & COLLABORATION', 20, yPos);
+        yPos += 15;
+        
+        doc.setFontSize(10);
+        doc.setTextColor(0, 0, 0);
+        const leadership = [
+            '• Mentored junior QA engineers on automation, API, and security testing',
+            '• Collaborated with dev/ops/product teams across Agile/Scrum environments',
+            '• Led quality-focused strategies that reduced release blockers and improved team velocity'
+        ];
+        
+        leadership.forEach(item => {
+            const lines = doc.splitTextToSize(item, 170);
+            doc.text(lines, 20, yPos);
+            yPos += lines.length * 6;
+        });
+        yPos += 5;
+        
+        // GitHub Activity & Projects
+        doc.setFontSize(14);
+        doc.setTextColor(37, 99, 235);
+        doc.text('GITHUB ACTIVITY & PROJECTS', 20, yPos);
+        yPos += 15;
+        
+        doc.setFontSize(10);
+        doc.setTextColor(0, 0, 0);
+        doc.setFont('helvetica', 'bold');
+        doc.text('Active Developer Profile:', 20, yPos);
+        doc.setFont('helvetica', 'normal');
+        yPos += 8;
+        
+        const githubActivity = [
+            '• 199+ contributions in the last year, demonstrating consistent coding practice',
+            '• Active repositories: Robot Framework automation, Playwright testing, portfolio development',
+            '• Primary languages: Python (Robot Framework, test automation), JavaScript (Node.js, web dev)',
+            '• Recent projects: dispel_robot_framework, playwright_sample, thoangdev.github.io',
+            '• Contributions include: test automation frameworks, security testing, CI/CD pipelines'
+        ];
+        
+        githubActivity.forEach(activity => {
+            const lines = doc.splitTextToSize(activity, 170);
+            doc.text(lines, 20, yPos);
+            yPos += lines.length * 6;
+        });
+        yPos += 5;
+        
+        // Add GitHub link
+        doc.setTextColor(0, 0, 0);
+        doc.text('View live activity: ', 20, yPos);
+        doc.setTextColor(37, 99, 235);
+        doc.textWithLink('github.com/thoangdev', 60, yPos, { url: 'https://github.com/thoangdev' });
         
         // Download the PDF
         doc.save('Tommy_Hoang_Resume.pdf');
@@ -281,7 +492,7 @@ function generateAndDownloadPDF(btn, originalHTML) {
         // Reset button and show success
         btn.innerHTML = originalHTML;
         btn.disabled = false;
-        showNotification('PDF resume downloaded successfully!', 'success');
+        showNotification('Complete PDF resume downloaded successfully!', 'success');
         
     } catch (error) {
         console.error('PDF generation failed:', error);
@@ -313,35 +524,79 @@ New Orleans, LA (Remote) | hoangtommyquoc@gmail.com | (504) 453-8178
 LinkedIn: linkedin.com/in/tommyqhoang | GitHub: github.com/thoangdev
 
 PROFESSIONAL SUMMARY
-Innovative and results-oriented QA leader with 7+ years of experience in test automation, DevSecOps, API validation, and performance/security testing. Proven success driving automation frameworks, CI/CD pipelines, fraud detection systems, and quality-focused release processes.
+Innovative and results-oriented QA leader with 7+ years of experience in test automation, DevSecOps, API validation, and performance/security testing. Proven success driving automation frameworks, CI/CD pipelines, fraud detection systems, and quality-focused release processes. Passionate about scaling test strategies, integrating AI tools, and delivering secure, seamless user experiences.
 
-EXPERIENCE
+PROFESSIONAL EXPERIENCE
+
 Senior QA Engineer - Dispel (June 2025 - Present)
 • Built modular K6-based performance testing framework with Docker, CI/CD, Grafana, and InfluxDB
-• Automated smoke and regression testing across products using Robot Framework + Playwright
+• Automated smoke and regression testing across products (STIG, ABB, DSMD) using Robot Framework + Playwright with parallel execution via Pabot
 • Integrated OWASP ZAP for security testing with robust data seeding/teardown in PostgreSQL
+• Enabled end-to-end visibility with Tuskr reporting, Slack alerts, and full-stack test coverage
 
 Technical Lead (QA) - Cognizant (Dec 2023 - June 2025)
 • Led fraud payment QA efforts for AT&T DirecTV, ensuring PCI and security compliance
 • Owned API test coverage, UI validation, and error-code monitoring using Postman and Zephyr
-• Oversaw multiple zero-defect launches by optimizing regression pipelines
+• Oversaw multiple zero-defect launches by optimizing regression pipelines and test case audits
+• Integrated AI-based tools (e.g., Copilot, ChatGPT) to streamline test reviews and documentation
+
+Test Manager - DXC Technology (May 2022 - Oct 2023)
+• Delivered scalable test strategies for TVOD and MDU launches, ensuring streaming reliability
+• Automated UI and API test cases to reduce manual test hours by 70%
+• Leveraged Docker and CI pipelines for parallel execution and faster feedback loops
+
+Automation Engineer - insightsoftware (Nov 2021 - May 2022)
+• Built automated test suites for financial Excel plugins using Ranorex with C#
+• Deployed Dockerized environments for scalable cross-platform test scenarios
+• Enhanced test coverage for data validation and financial formula accuracy
+
+Quality Engineer - Dialexa (IBM) (Feb 2021 - Oct 2021)
+• Led iOS and Apple Watch QA for glucose monitoring app, validating compliance and reliability
+• Conducted data sync testing across mobile/health platforms and built performance benchmarks
+
+Software Engineer in Test - Accruent (Nov 2018 - Feb 2021)
+• Architected CI/CD-ready security and performance test suites
+• Built onboarding automation tools to streamline setup and reduce errors
+• Conducted continuous regression testing to support fast, stable deployments
 
 TECHNICAL SKILLS
-• Automation & Quality: Robot Framework, Playwright, Selenium, Cypress, Appium, Postman
-• Security & Performance: OWASP ZAP, K6, JMeter, API Security, DevSecOps
-• DevOps & CI/CD: Docker, GitHub Actions, Jenkins, AWS, Linux, Bash
-• Programming: Python, JavaScript, Java, C#, YAML
-• Databases: PostgreSQL, MySQL, JSON APIs
+Automation & Quality: Robot Framework, Playwright, Selenium, Cypress, Appium, Postman, Zephyr, TestRail, Tuskr, Jira, Pabot, K6, JMeter, NeoLoad
+Security & Performance: OWASP ZAP, API Security, Encryption, Authentication, Firewall Testing, Load/Stress/Soak/Spike Testing
+DevOps & CI/CD: Docker, GitHub Actions, Jenkins, AWS, Linux, Bash, DevSecOps, InfluxDB, Grafana
+Programming & Scripting: Python, JavaScript (Node.js), Java, YAML, C#
+Database & Data: PostgreSQL, MySQL, JSON APIs, Data Seeding, Cleanup Utilities
+Productivity Tools: Copilot, ChatGPT, AI-assisted Test Planning, Automated Docs
 
 CERTIFICATIONS
 • CompTIA Security+
 • AWS Certified Cloud Practitioner
 • Google Cybersecurity Certificate
+• Google Project Management
 • Professional Scrum Master (Scrum.org)
 
 EDUCATION
 Southern University at New Orleans
-Bachelor of Science - Computer Information Systems (2015-2017)`;
+Bachelor of Science - Computer Information Systems (Jan 2015 - Dec 2017)
+
+HIGHLIGHTS & IMPACT
+• Launched 5+ major features with near-zero production bugs and full regression coverage
+• Reduced manual test time by 70% via cross-product automation and AI-driven test audits
+• Prevented payment fraud at scale through proactive security testing for telecom clients
+• Built performance testing pipelines from scratch using K6, Docker, and cloud monitoring tools
+
+LEADERSHIP & COLLABORATION
+• Mentored junior QA engineers on automation, API, and security testing
+• Collaborated with dev/ops/product teams across Agile/Scrum environments
+• Led quality-focused strategies that reduced release blockers and improved team velocity
+
+GITHUB ACTIVITY & PROJECTS
+Active Developer Profile:
+• 199+ contributions in the last year, demonstrating consistent coding practice
+• Active repositories: Robot Framework automation, Playwright testing, portfolio development
+• Primary languages: Python (Robot Framework, test automation), JavaScript (Node.js, web dev)
+• Recent projects: dispel_robot_framework, playwright_sample, thoangdev.github.io
+• Contributions include: test automation frameworks, security testing, CI/CD pipelines
+• View live activity: github.com/thoangdev`;
     
     return new Blob([resumeText], { type: 'text/plain' });
 }
@@ -400,26 +655,27 @@ function initializeScrollAnimations() {
     });
 }
 
-// Typing animation for lead text
+// Typing animation for lead text (disabled for better UX)
 function initializeTypingAnimation() {
-    const leadText = document.querySelector('.lead');
-    if (leadText && !leadText.dataset.typed) {
-        leadText.dataset.typed = 'true';
-        const originalText = leadText.textContent;
-        leadText.textContent = '';
-        
-        let i = 0;
-        const typeWriter = () => {
-            if (i < originalText.length) {
-                leadText.textContent += originalText.charAt(i);
-                i++;
-                setTimeout(typeWriter, 30);
-            }
-        };
-        
-        // Start typing animation after a short delay
-        setTimeout(typeWriter, 500);
-    }
+    // Typing animation disabled - text appears immediately for better user experience
+    // const leadText = document.querySelector('.lead');
+    // if (leadText && !leadText.dataset.typed) {
+    //     leadText.dataset.typed = 'true';
+    //     const originalText = leadText.textContent;
+    //     leadText.textContent = '';
+    //     
+    //     let i = 0;
+    //     const typeWriter = () => {
+    //         if (i < originalText.length) {
+    //             leadText.textContent += originalText.charAt(i);
+    //             i++;
+    //             setTimeout(typeWriter, 30);
+    //         }
+    //     };
+    //     
+    //     // Start typing animation after a short delay
+    //     setTimeout(typeWriter, 500);
+    // }
 }
 
 // Skills animation

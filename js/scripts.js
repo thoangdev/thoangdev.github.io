@@ -137,43 +137,44 @@ function generateAndDownloadPDF(btn, originalHTML) {
         doc.setTextColor(100, 100, 100);
         doc.text('Tech Lead Quality Engineer', 20, 35);
         
-        // Contact Info with clickable links
+        // Contact Info with clickable links (mobile-friendly format)
         doc.setFontSize(10);
         doc.setTextColor(0, 0, 0);
-        doc.text('New Orleans, LA (Remote) | (504) 453-8178', 20, 45);
+        doc.text('New Orleans, LA (Remote)', 20, 45);
+        doc.text('(504) 453-8178', 20, 52);
         
         // Email link
         doc.setTextColor(37, 99, 235);
-        doc.textWithLink('hoangtommyquoc@gmail.com', 20, 52, { url: 'mailto:hoangtommyquoc@gmail.com' });
+        doc.textWithLink('hoangtommyquoc@gmail.com', 20, 59, { url: 'mailto:hoangtommyquoc@gmail.com' });
         
         // LinkedIn and GitHub links
         doc.setTextColor(0, 0, 0);
-        doc.text('LinkedIn: ', 20, 59);
+        doc.text('LinkedIn: ', 20, 66);
         doc.setTextColor(37, 99, 235);
-        doc.textWithLink('linkedin.com/in/tommyqhoang', 40, 59, { url: 'https://linkedin.com/in/tommyqhoang' });
+        doc.textWithLink('linkedin.com/in/tommyqhoang', 40, 66, { url: 'https://linkedin.com/in/tommyqhoang' });
         
         doc.setTextColor(0, 0, 0);
-        doc.text(' | GitHub: ', 95, 59);
+        doc.text('GitHub: ', 20, 73);
         doc.setTextColor(37, 99, 235);
-        doc.textWithLink('github.com/thoangdev', 120, 59, { url: 'https://github.com/thoangdev' });
+        doc.textWithLink('github.com/thoangdev', 40, 73, { url: 'https://github.com/thoangdev' });
         
         // Line separator
         doc.setDrawColor(37, 99, 235);
-        doc.line(20, 65, 190, 65);
+        doc.line(20, 79, 190, 79);
         
         // Professional Summary
         doc.setFontSize(14);
         doc.setTextColor(37, 99, 235);
-        doc.text('PROFESSIONAL SUMMARY', 20, 77);
+        doc.text('PROFESSIONAL SUMMARY', 20, 91);
         
         doc.setFontSize(10);
         doc.setTextColor(0, 0, 0);
         const summaryText = 'Innovative and results-oriented QA leader with 7+ years of experience in test automation, DevSecOps, API validation, and performance/security testing. Proven success driving automation frameworks, CI/CD pipelines, fraud detection systems, and quality-focused release processes. Passionate about scaling test strategies, integrating AI tools, and delivering secure, seamless user experiences.';
         const summaryLines = doc.splitTextToSize(summaryText, 170);
-        doc.text(summaryLines, 20, 87);
+        doc.text(summaryLines, 20, 101);
         
         // Experience Section
-        let yPos = 110;
+        let yPos = 124;
         doc.setFontSize(14);
         doc.setTextColor(37, 99, 235);
         doc.text('PROFESSIONAL EXPERIENCE', 20, yPos);
@@ -409,6 +410,13 @@ function generateAndDownloadPDF(btn, originalHTML) {
         doc.text('Bachelor of Science - Computer Information Systems (Jan 2015 - Dec 2017)', 20, yPos);
         yPos += 10;
         
+        doc.setFont('helvetica', 'bold');
+        doc.text('Delgado Community College', 20, yPos);
+        doc.setFont('helvetica', 'normal');
+        yPos += 6;
+        doc.text('Associate of Applied Science - Computer Information Technology (Jan 2012 - Dec 2014)', 20, yPos);
+        yPos += 10;
+        
         // Highlights & Impact
         doc.setFontSize(14);
         doc.setTextColor(37, 99, 235);
@@ -520,8 +528,11 @@ function generateTextResume(btn, originalHTML) {
 function generateResumeData() {
     const resumeText = `TOMMY HOANG
 Tech Lead Quality Engineer
-New Orleans, LA (Remote) | hoangtommyquoc@gmail.com | (504) 453-8178
-LinkedIn: linkedin.com/in/tommyqhoang | GitHub: github.com/thoangdev
+New Orleans, LA (Remote)
+(504) 453-8178
+hoangtommyquoc@gmail.com
+LinkedIn: linkedin.com/in/tommyqhoang
+GitHub: github.com/thoangdev
 
 PROFESSIONAL SUMMARY
 Innovative and results-oriented QA leader with 7+ years of experience in test automation, DevSecOps, API validation, and performance/security testing. Proven success driving automation frameworks, CI/CD pipelines, fraud detection systems, and quality-focused release processes. Passionate about scaling test strategies, integrating AI tools, and delivering secure, seamless user experiences.
@@ -577,6 +588,9 @@ CERTIFICATIONS
 EDUCATION
 Southern University at New Orleans
 Bachelor of Science - Computer Information Systems (Jan 2015 - Dec 2017)
+
+Delgado Community College
+Associate of Applied Science - Computer Information Technology (Jan 2012 - Dec 2014)
 
 HIGHLIGHTS & IMPACT
 • Launched 5+ major features with near-zero production bugs and full regression coverage

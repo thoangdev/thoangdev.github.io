@@ -352,8 +352,8 @@ function generateAndDownloadPDF(btn, originalHTML) {
         doc.setTextColor(0, 0, 0);
         const skills = [
             'Automation & Quality: Robot Framework, Playwright, Selenium, Cypress, Appium, Postman, Zephyr, TestRail, Tuskr, Jira, Pabot, K6, JMeter, NeoLoad',
-            'Security & Performance: OWASP ZAP, API Security, Encryption, Authentication, Firewall Testing, Load/Stress/Soak/Spike Testing',
-            'DevOps & CI/CD: Docker, GitHub Actions, Jenkins, AWS, Linux, Bash, DevSecOps, InfluxDB, Grafana',
+            'Security & Performance: OWASP ZAP, Snyk, API Security, Encryption, Authentication, Firewall Testing, Load/Stress/Soak/Spike Testing',
+            'DevOps & CI/CD: Docker, GitHub Actions, Jenkins, AWS, Sentry, Linux, Bash, DevSecOps, InfluxDB, Grafana',
             'Programming & Scripting: Python, JavaScript (Node.js), Java, YAML, C#',
             'Database & Data: PostgreSQL, MySQL, JSON APIs, Data Seeding, Cleanup Utilities',
             'Productivity Tools: Copilot, ChatGPT, AI-assisted Test Planning, Automated Docs'
@@ -561,8 +561,8 @@ Software Engineer in Test - Accruent (Nov 2018 - Feb 2021)
 
 TECHNICAL SKILLS
 Automation & Quality: Robot Framework, Playwright, Selenium, Cypress, Appium, Postman, Zephyr, TestRail, Tuskr, Jira, Pabot, K6, JMeter, NeoLoad
-Security & Performance: OWASP ZAP, API Security, Encryption, Authentication, Firewall Testing, Load/Stress/Soak/Spike Testing
-DevOps & CI/CD: Docker, GitHub Actions, Jenkins, AWS, Linux, Bash, DevSecOps, InfluxDB, Grafana
+Security & Performance: OWASP ZAP, Snyk, API Security, Encryption, Authentication, Firewall Testing, Load/Stress/Soak/Spike Testing
+DevOps & CI/CD: Docker, GitHub Actions, Jenkins, AWS, Sentry, Linux, Bash, DevSecOps, InfluxDB, Grafana
 Programming & Scripting: Python, JavaScript (Node.js), Java, YAML, C#
 Database & Data: PostgreSQL, MySQL, JSON APIs, Data Seeding, Cleanup Utilities
 Productivity Tools: Copilot, ChatGPT, AI-assisted Test Planning, Automated Docs

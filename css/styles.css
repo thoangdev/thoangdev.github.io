@@ -11817,3 +11817,28 @@ body {
     page-break-inside: avoid;
   }
 }
+
+/* Custom styles for company logos */
+.company-logo {
+  max-height: 30px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0.9);
+  transition: filter 0.3s ease;
+}
+
+.company-logo:hover {
+  filter: brightness(1.1);
+}
+
+/* Ensure proper alignment of company name with logo */
+.subheading.d-flex.align-items-center {
+  line-height: 1.2;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+  .company-logo {
+    height: 25px;
+  }
+}

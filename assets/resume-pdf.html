@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tommy Hoang - Resume</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0.5in;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            font-size: 11px;
+            line-height: 1.4;
+            color: #333;
+            background: white;
+        }
+        
+        .container {
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #bd5d38;
+            padding-bottom: 15px;
+        }
+        
+        .name {
+            font-size: 28px;
+            font-weight: bold;
+            color: #bd5d38;
+            margin-bottom: 5px;
+            letter-spacing: 2px;
+        }
+        
+        .title {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .contact {
+            font-size: 10px;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .contact a {
+            color: #bd5d38;
+            text-decoration: none;
+        }
+        
+        .section {
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+        }
+        
+        .section-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #bd5d38;
+            text-transform: uppercase;
+            border-bottom: 1px solid #bd5d38;
+            margin-bottom: 8px;
+            padding-bottom: 2px;
+            letter-spacing: 1px;
+        }
+        
+        .job {
+            margin-bottom: 12px;
+            page-break-inside: avoid;
+        }
+        
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 3px;
+        }
+        
+        .job-title {
+            font-weight: bold;
+            font-size: 12px;
+            color: #333;
+        }
+        
+        .company {
+            color: #bd5d38;
+            font-weight: 500;
+            font-size: 11px;
+        }
+        
+        .duration {
+            color: #666;
+            font-size: 10px;
+            font-style: italic;
+        }
+        
+        .description {
+            margin-top: 4px;
+            margin-left: 15px;
+        }
+        
+        .description ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .description li {
+            margin-bottom: 2px;
+            padding-left: 12px;
+            position: relative;
+        }
+        
+        .description li:before {
+            content: "•";
+            color: #bd5d38;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 5px;
+        }
+        
+        .skills-category {
+            margin-bottom: 8px;
+        }
+        
+        .skills-category-title {
+            font-weight: bold;
+            color: #bd5d38;
+            font-size: 11px;
+            margin-bottom: 3px;
+        }
+        
+        .skills-list {
+            font-size: 10px;
+            line-height: 1.5;
+        }
+        
+        .education-item {
+            margin-bottom: 8px;
+        }
+        
+        .degree {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .school {
+            color: #bd5d38;
+            font-weight: 500;
+        }
+        
+        .summary {
+            text-align: justify;
+            line-height: 1.5;
+            margin-top: 5px;
+        }
+        
+        .achievements {
+            margin-top: 5px;
+        }
+        
+        .achievements ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .achievements li {
+            margin-bottom: 2px;
+            padding-left: 12px;
+            position: relative;
+        }
+        
+        .achievements li:before {
+            content: "★";
+            color: #bd5d38;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        @media print {
+            body {
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+            
+            .container {
+                padding: 0;
+            }
+            
+            .section {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="name">TOMMY HOANG</div>
+            <div class="title">Tech Lead Quality Engineer</div>
+            <div class="contact">
+                New Orleans, LA (Remote) • (504) 453-8178<br>
+                <a href="mailto:hoangtommyquoc@gmail.com">hoangtommyquoc@gmail.com</a> • 
+                <a href="https://linkedin.com/in/tommyqhoang">linkedin.com/in/tommyqhoang</a> • 
+                <a href="https://github.com/thoangdev">github.com/thoangdev</a><br>
+                Portfolio: <a href="https://thoangdev.github.io">thoangdev.github.io</a>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Professional Summary</div>
+            <div class="summary">
+                Innovative and results-oriented QA leader with 7+ years of experience in test automation, DevSecOps, API validation, and performance/security testing. Proven success driving automation frameworks, CI/CD pipelines, fraud detection systems, and quality-focused release processes. Passionate about scaling test strategies, integrating AI tools, and delivering secure, seamless user experiences.
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Professional Experience</div>
+            
+            <div class="job">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Senior QA Engineer</div>
+                        <div class="company">Dispel</div>
+                    </div>
+                    <div class="duration">June 2025 - Present</div>
+                </div>
+                <div class="description">
+                    <ul>
+                        <li>Built modular K6-based performance testing framework with Docker, CI/CD, Grafana, and InfluxDB</li>
+                        <li>Automated smoke and regression testing across products (STIG, ABB, DSMD) using Robot Framework + Playwright</li>
+                        <li>Integrated OWASP ZAP for security testing with robust data seeding/teardown in PostgreSQL</li>
+                        <li>Enabled end-to-end visibility with Tuskr reporting, Slack alerts, and full-stack test coverage</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Technical Lead (QA)</div>
+                        <div class="company">Cognizant</div>
+                    </div>
+                    <div class="duration">December 2023 - June 2025</div>
+                </div>
+                <div class="description">
+                    <ul>
+                        <li>Led fraud payment QA efforts for AT&T DirecTV, ensuring PCI and security compliance</li>
+                        <li>Owned API test coverage, UI validation, and error-code monitoring using Postman and Zephyr</li>
+                        <li>Managed Jira dashboards for tracking defect trends, full lifecycle defect management</li>
+                        <li>Facilitated Scrum ceremonies: sprint planning, daily stand-ups, retrospectives, backlog refinement</li>
+                        <li>Consistently delivered zero-defect launches through optimized regression pipelines</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Test Manager</div>
+                        <div class="company">DXC Technology</div>
+                    </div>
+                    <div class="duration">May 2022 - October 2023</div>
+                </div>
+                <div class="description">
+                    <ul>
+                        <li>Delivered scalable test strategies for TVOD and MDU launches, ensuring streaming reliability</li>
+                        <li>Automated UI and API test cases to reduce manual test hours by 70%</li>
+                        <li>Leveraged Docker and CI pipelines for parallel execution and faster feedback loops</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Automation Engineer</div>
+                        <div class="company">insightsoftware</div>
+                    </div>
+                    <div class="duration">November 2021 - May 2022</div>
+                </div>
+                <div class="description">
+                    <ul>
+                        <li>Built automated test suites for financial Excel plugins using Ranorex with C#</li>
+                        <li>Deployed Dockerized environments for scalable cross-platform test scenarios</li>
+                        <li>Enhanced test coverage for data validation and financial formula accuracy</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Quality Engineer</div>
+                        <div class="company">Dialexa (IBM)</div>
+                    </div>
+                    <div class="duration">February 2021 - October 2021</div>
+                </div>
+                <div class="description">
+                    <ul>
+                        <li>Led iOS and Apple Watch QA for glucose monitoring app, validating compliance and reliability</li>
+                        <li>Conducted data sync testing across mobile/health platforms and built performance benchmarks</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Software Engineer in Test</div>
+                        <div class="company">Accruent (Fortive)</div>
+                    </div>
+                    <div class="duration">November 2018 - February 2021</div>
+                </div>
+                <div class="description">
+                    <ul>
+                        <li>Architected CI/CD-ready security and performance test suites</li>
+                        <li>Built onboarding automation tools to streamline setup and reduce errors</li>
+                        <li>Conducted continuous regression testing to support fast, stable deployments</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Core Competencies</div>
+            <div class="skills-grid">
+                <div>
+                    <div class="skills-category">
+                        <div class="skills-category-title">Test Automation & Frameworks</div>
+                        <div class="skills-list">Robot Framework, Playwright, Selenium, Cypress, Appium, K6, JMeter</div>
+                    </div>
+                    <div class="skills-category">
+                        <div class="skills-category-title">Security & Performance</div>
+                        <div class="skills-list">OWASP ZAP, Snyk, PCI Compliance, Load/Stress Testing, DevSecOps</div>
+                    </div>
+                    <div class="skills-category">
+                        <div class="skills-category-title">Programming & Databases</div>
+                        <div class="skills-list">Python, JavaScript, Java, C#, PostgreSQL, MySQL, API Testing</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="skills-category">
+                        <div class="skills-category-title">CI/CD & DevOps</div>
+                        <div class="skills-list">Docker, Kubernetes, GitHub Actions, Jenkins, AWS, Grafana, InfluxDB</div>
+                    </div>
+                    <div class="skills-category">
+                        <div class="skills-category-title">Tools & Platforms</div>
+                        <div class="skills-list">Postman, TestRail, Tuskr, Zephyr, Jira, Confluence, Slack</div>
+                    </div>
+                    <div class="skills-category">
+                        <div class="skills-category-title">Leadership & Process</div>
+                        <div class="skills-list">Agile/Scrum, Team Management, Sprint Planning, Mentoring, Process Optimization</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Education</div>
+            <div class="education-item">
+                <div class="degree">Bachelor of Science - Computer Information Systems</div>
+                <div class="school">Southern University at New Orleans</div>
+                <div class="duration">January 2015 - December 2017</div>
+            </div>
+            <div class="education-item">
+                <div class="degree">Associate of Applied Science - Computer Information Technology</div>
+                <div class="school">Delgado Community College</div>
+                <div class="duration">January 2012 - December 2014</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Certifications & Awards</div>
+            <div class="skills-grid">
+                <div>
+                    <div class="skills-list">
+                        • CompTIA Security+ Certified<br>
+                        • AWS Certified Cloud Practitioner<br>
+                        • Google Cybersecurity Certificate<br>
+                        • Google Project Management Certificate<br>
+                        • Professional Scrum Master (Scrum.org)
+                    </div>
+                </div>
+                <div>
+                    <div class="skills-list">
+                        • Multiple Zero-Defect Production Launches<br>
+                        • 70% Reduction in Manual Testing Time<br>
+                        • Successfully Led Fraud Prevention QA for AT&T DirecTV<br>
+                        • Built Performance Testing Pipelines from Scratch
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Key Achievements</div>
+            <div class="achievements">
+                <ul>
+                    <li>Launched 5+ major features with near-zero production bugs</li>
+                    <li>Reduced manual test time by 70% via automation and AI-driven audits</li>
+                    <li>Prevented payment fraud at scale through proactive security testing</li>
+                    <li>Built performance testing pipelines from scratch using cloud monitoring</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Auto-print when opened directly
+        if (window.location.search.includes('print=true')) {
+            window.onload = function() {
+                setTimeout(function() {
+                    window.print();
+                }, 500);
+            }
+        }
+    </script>
+</body>
+</html>

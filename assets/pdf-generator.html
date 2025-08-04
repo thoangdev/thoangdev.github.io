@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate PDF Resume</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .instructions {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .btn {
+            background: #bd5d38;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background: #a04a2b;
+            color: white;
+        }
+        .step {
+            text-align: left;
+            margin: 10px 0;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .step:last-child {
+            border-bottom: none;
+        }
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>📄 Tommy Hoang - Resume PDF Generator</h1>
+    
+    <div class="instructions">
+        <h3>How to Save as PDF:</h3>
+        <div class="step">
+            <strong>Step 1:</strong> Click "View Resume" below to see the formatted resume
+        </div>
+        <div class="step">
+            <strong>Step 2:</strong> Right-click on the resume and select "Print..." or press Ctrl+P (Cmd+P on Mac)
+        </div>
+        <div class="step">
+            <strong>Step 3:</strong> In the print dialog, choose "Save as PDF" as the destination
+        </div>
+        <div class="step">
+            <strong>Step 4:</strong> Click "Save" and choose where to save your PDF file
+        </div>
+    </div>
+
+    <a href="resume-pdf.html" target="_blank" class="btn">
+        📋 View Resume (Ready for PDF)
+    </a>
+    
+    <a href="javascript:void(0)" onclick="openAndPrint()" class="btn">
+        🖨️ Auto-Print Resume
+    </a>
+
+    <div style="margin-top: 30px;">
+        <h3>Preview:</h3>
+        <iframe src="resume-pdf.html" frameborder="0"></iframe>
+    </div>
+
+    <script>
+        function openAndPrint() {
+            const printWindow = window.open('resume-pdf.html?print=true', '_blank');
+            printWindow.focus();
+        }
+        
+        // Auto-generate filename with current date
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date();
+            const dateStr = today.getFullYear() + '-' + 
+                          String(today.getMonth() + 1).padStart(2, '0') + '-' + 
+                          String(today.getDate()).padStart(2, '0');
+            document.title = `Tommy_Hoang_Resume_${dateStr}`;
+        });
+    </script>
+</body>
+</html>

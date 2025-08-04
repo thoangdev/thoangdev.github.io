@@ -11842,3 +11842,389 @@ body {
     height: 25px;
   }
 }
+
+/* ====== ENHANCED UI IMPROVEMENTS ====== */
+
+/* Smooth animations for all interactive elements */
+* {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Enhanced card hover effects */
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Achievement badges animations */
+.achievements .badge {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.achievements .badge:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Progress bar animations */
+.progress {
+  height: 8px;
+  border-radius: 10px;
+  background-color: #f8f9fa;
+  overflow: hidden;
+}
+
+.progress-bar {
+  border-radius: 10px;
+  transition: width 1.5s ease-in-out;
+  animation: progressLoad 2s ease-in-out;
+}
+
+@keyframes progressLoad {
+  0% { width: 0%; }
+  100% { width: var(--progress-width, 0%); }
+}
+
+/* Skills proficiency section */
+.skill-item {
+  padding: 10px 0;
+}
+
+.skill-item:hover .progress-bar {
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+/* Call-to-action buttons enhancement */
+.cta-section {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.cta-section .btn {
+  padding: 15px 35px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 50px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  min-width: 200px;
+  text-align: center;
+  font-size: 0.9rem;
+  border-width: 2px;
+  margin: 5px;
+}
+
+.cta-section .btn:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.cta-section .btn:hover:before {
+  left: 100%;
+}
+
+.cta-section .btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.cta-section .btn-primary {
+  background: linear-gradient(45deg, #007bff, #0056b3);
+  border-color: #007bff;
+  color: white;
+}
+
+.cta-section .btn-primary:hover {
+  background: linear-gradient(45deg, #0056b3, #004085);
+  border-color: #0056b3;
+  color: white;
+}
+
+/* Button container styling */
+.cta-section .d-flex {
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Responsive button adjustments */
+@media (max-width: 768px) {
+  .cta-section .btn {
+    min-width: 180px;
+    padding: 12px 25px;
+    font-size: 0.85rem;
+    margin: 8px 5px;
+  }
+  
+  .cta-section .d-flex {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .cta-section .btn {
+    min-width: 160px;
+    padding: 10px 20px;
+    font-size: 0.8rem;
+    width: 90%;
+    max-width: 280px;
+  }
+}
+
+/* Metrics section enhancements */
+.achievement-metric h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  line-height: 1.1;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  white-space: normal;
+  max-width: 100%;
+}
+
+.achievement-metric {
+  text-align: center;
+  padding: 15px 10px;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.achievement-metric:hover {
+  transform: scale(1.05);
+}
+
+/* Ensure cards have proper width for text */
+.achievement-metric .card-text {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.achievement-metric small {
+  font-size: 0.8rem;
+  line-height: 1.1;
+}
+
+/* Fix responsive text sizing */
+@media (max-width: 992px) {
+  .achievement-metric h2 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .achievement-metric h2 {
+    font-size: 1.6rem;
+  }
+  
+  .achievement-metric {
+    padding: 10px 5px;
+    min-height: 100px;
+  }
+}
+
+@media (max-width: 576px) {
+  .achievement-metric h2 {
+    font-size: 1.4rem;
+  }
+  
+  .achievement-metric .card-text {
+    font-size: 0.9rem;
+  }
+}
+
+/* Testimonials section */
+.fa-quote-left {
+  opacity: 0.3;
+}
+
+.testimonials .card {
+  border-left: 4px solid var(--bs-primary);
+}
+
+.testimonials .card:nth-child(2) .card {
+  border-left-color: var(--bs-success);
+}
+
+.testimonials .card:nth-child(3) .card {
+  border-left-color: var(--bs-info);
+}
+
+.rating .fa-star {
+  font-size: 0.9rem;
+  margin-right: 2px;
+}
+
+/* Enhanced typography */
+.subheading {
+  font-weight: 500;
+  color: var(--bs-gray-600);
+}
+
+h2 {
+  position: relative;
+  display: inline-block;
+}
+
+h2:after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(45deg, var(--bs-primary), var(--bs-warning));
+  border-radius: 2px;
+}
+
+/* Section dividers */
+hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--bs-primary), transparent);
+  margin: 2rem 0;
+}
+
+/* Enhanced navigation */
+#sideNav .navbar-nav .nav-link {
+  transition: all 0.3s ease;
+  border-radius: 5px;
+  margin: 2px 0;
+}
+
+#sideNav .navbar-nav .nav-link:hover {
+  background-color: rgba(189, 93, 56, 0.1);
+  transform: translateX(5px);
+}
+
+/* Responsive enhancements */
+@media (max-width: 768px) {
+  .achievement-metric h2 {
+    font-size: 2rem;
+  }
+  
+  .cta-section .btn {
+    padding: 10px 20px;
+    margin-bottom: 10px;
+  }
+  
+  .card {
+    margin-bottom: 1rem;
+  }
+}
+
+/* Loading animations for on-scroll reveals */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.resume-section {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Enhanced social icons */
+.social-icons {
+  margin-top: 2rem;
+}
+
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  width: 60px;
+  background-color: #495057;
+  color: #fff;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.social-icon:hover {
+  background-color: #007bff;
+  color: #fff;
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
+}
+
+.social-icon:last-child {
+  margin-right: 0;
+}
+
+/* LinkedIn specific styling */
+.social-icon[href*="linkedin"]:hover {
+  background-color: #0077b5;
+  box-shadow: 0 8px 25px rgba(0, 119, 181, 0.3);
+}
+
+/* GitHub specific styling */
+.social-icon[href*="github"]:hover {
+  background-color: #333;
+  box-shadow: 0 8px 25px rgba(51, 51, 51, 0.3);
+}
+
+@media (max-width: 768px) {
+  .social-icon {
+    height: 50px;
+    width: 50px;
+    font-size: 1.3rem;
+    margin-right: 0.8rem;
+  }
+}
+
+/* Print optimizations */
+@media print {
+  .cta-section,
+  .achievements,
+  .rating,
+  .btn,
+  .social-icons {
+    display: none !important;
+  }
+  
+  .card {
+    box-shadow: none !important;
+    border: 1px solid #ddd !important;
+  }
+  
+  .progress {
+    display: none !important;
+  }
+}

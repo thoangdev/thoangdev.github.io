@@ -71,13 +71,9 @@
             <strong>Step 4:</strong> Click "Save" and choose where to save your PDF file
         </div>
     </div>
-
-    <a href="resume-pdf.html" target="_blank" class="btn">
-        📋 View Resume (Ready for PDF)
-    </a>
     
     <a href="javascript:void(0)" onclick="openAndPrint()" class="btn">
-        🖨️ Auto-Print Resume
+        📋 View Resume (Ready for PDF)
     </a>
 
     <div style="margin-top: 30px;">
@@ -86,19 +82,32 @@
     </div>
 
     <script>
-        function openAndPrint() {
-            const printWindow = window.open('resume-pdf.html?print=true', '_blank');
-            printWindow.focus();
-        }
-        
-        // Auto-generate filename with current date
+        // Only show content if accessed intentionally
         document.addEventListener('DOMContentLoaded', function() {
+            // Check if accessed directly without proper referrer or parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const isIntentional = urlParams.get('access') === 'resume' || 
+                                document.referrer.includes('thoangdev.github.io') ||
+                                window.location.hash === '#resume-pdf';
+            
+            if (!isIntentional && window.history.length > 1) {
+                // Redirect to main page if accessed accidentally
+                window.location.replace('../index.html');
+                return;
+            }
+            
+            // Auto-generate filename with current date
             const today = new Date();
             const dateStr = today.getFullYear() + '-' + 
                           String(today.getMonth() + 1).padStart(2, '0') + '-' + 
                           String(today.getDate()).padStart(2, '0');
             document.title = `Tommy_Hoang_Resume_${dateStr}`;
         });
+        
+        function openAndPrint() {
+            const printWindow = window.open('resume-pdf.html?print=true', '_blank');
+            printWindow.focus();
+        }
     </script>
 </body>
 </html>

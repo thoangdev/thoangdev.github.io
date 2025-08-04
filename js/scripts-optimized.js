@@ -93,8 +93,8 @@ function setupDownloadButton() {
             this.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Opening PDF Generator...';
             this.disabled = true;
             
-            // Open the PDF generator page
-            const pdfWindow = window.open('assets/pdf-generator.html', '_blank');
+            // Open the PDF generator page with access parameter
+            const pdfWindow = window.open('assets/pdf-generator.html?access=resume', '_blank');
             pdfWindow.focus();
             
             // Reset button after a short delay

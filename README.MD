@@ -8,7 +8,7 @@ Professional portfolio showcasing 7+ years of experience in:
 **Bio and Experience:**
 - Tech Lead Quality Engineer with expertise in test automation, DevSecOps, and performance testing
 - Current Senior QA Engineer at Dispel (June 2025 - Present)
-- Previously: Cognizant, DXC Technology, insightsoftware, Dialexa (IBM), Accruent
+- Previously: Cognizant, DXC Technology, insightsoftware, Dialexa (IBM), Accruent (Fortive)
 
 **Technical Skills & Tools:**
 - **Automation:** Robot Framework, Playwright, Selenium, Cypress, Appium

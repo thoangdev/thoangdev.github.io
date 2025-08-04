@@ -317,11 +317,11 @@ function generateAndDownloadPDF(btn, originalHTML) {
         });
         yPos += 5;
         
-        // Job 6 - Accruent
+        // Job 6 - Accruent (Fortive)
         doc.setFontSize(12);
         doc.setTextColor(0, 0, 0);
         doc.setFont('helvetica', 'bold');
-        doc.text('Software Engineer in Test - Accruent', 20, yPos);
+        doc.text('Software Engineer in Test - Accruent (Fortive)', 20, yPos);
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(10);
         doc.setTextColor(100, 100, 100);
@@ -343,6 +343,12 @@ function generateAndDownloadPDF(btn, originalHTML) {
         });
         yPos += 10;
         
+        // Check if we need a new page before Technical Skills
+        if (yPos > 200) {
+            doc.addPage();
+            yPos = 20;
+        }
+        
         // Technical Skills
         doc.setFontSize(14);
         doc.setTextColor(37, 99, 235);
@@ -361,6 +367,11 @@ function generateAndDownloadPDF(btn, originalHTML) {
         ];
         
         skills.forEach(skill => {
+            // Check if we need a new page for each skill line
+            if (yPos > 260) {
+                doc.addPage();
+                yPos = 20;
+            }
             const lines = doc.splitTextToSize(`• ${skill}`, 170);
             doc.text(lines, 20, yPos);
             yPos += lines.length * 6;
@@ -390,10 +401,21 @@ function generateAndDownloadPDF(btn, originalHTML) {
         ];
         
         certs.forEach(cert => {
+            // Check for page break before each certification
+            if (yPos > 270) {
+                doc.addPage();
+                yPos = 20;
+            }
             doc.text(cert, 20, yPos);
             yPos += 6;
         });
         yPos += 5;
+        
+        // Check for page break before Education
+        if (yPos > 250) {
+            doc.addPage();
+            yPos = 20;
+        }
         
         // Education
         doc.setFontSize(14);
@@ -417,6 +439,12 @@ function generateAndDownloadPDF(btn, originalHTML) {
         doc.text('Associate of Applied Science - Computer Information Technology (Jan 2012 - Dec 2014)', 20, yPos);
         yPos += 10;
         
+        // Check for page break before Highlights
+        if (yPos > 230) {
+            doc.addPage();
+            yPos = 20;
+        }
+        
         // Highlights & Impact
         doc.setFontSize(14);
         doc.setTextColor(37, 99, 235);
@@ -433,11 +461,22 @@ function generateAndDownloadPDF(btn, originalHTML) {
         ];
         
         highlights.forEach(highlight => {
+            // Check for page break before each highlight
+            if (yPos > 265) {
+                doc.addPage();
+                yPos = 20;
+            }
             const lines = doc.splitTextToSize(highlight, 170);
             doc.text(lines, 20, yPos);
             yPos += lines.length * 6;
         });
         yPos += 5;
+        
+        // Check for page break before Leadership
+        if (yPos > 230) {
+            doc.addPage();
+            yPos = 20;
+        }
         
         // Leadership & Collaboration
         doc.setFontSize(14);
@@ -454,11 +493,22 @@ function generateAndDownloadPDF(btn, originalHTML) {
         ];
         
         leadership.forEach(item => {
+            // Check for page break before each leadership item
+            if (yPos > 265) {
+                doc.addPage();
+                yPos = 20;
+            }
             const lines = doc.splitTextToSize(item, 170);
             doc.text(lines, 20, yPos);
             yPos += lines.length * 6;
         });
         yPos += 5;
+        
+        // Check for page break before GitHub section
+        if (yPos > 200) {
+            doc.addPage();
+            yPos = 20;
+        }
         
         // GitHub Activity & Projects
         doc.setFontSize(14);
@@ -482,11 +532,22 @@ function generateAndDownloadPDF(btn, originalHTML) {
         ];
         
         githubActivity.forEach(activity => {
+            // Check for page break before each GitHub activity item
+            if (yPos > 260) {
+                doc.addPage();
+                yPos = 20;
+            }
             const lines = doc.splitTextToSize(activity, 170);
             doc.text(lines, 20, yPos);
             yPos += lines.length * 6;
         });
         yPos += 5;
+        
+        // Check for page break before GitHub link
+        if (yPos > 270) {
+            doc.addPage();
+            yPos = 20;
+        }
         
         // Add GitHub link
         doc.setTextColor(0, 0, 0);
@@ -565,7 +626,7 @@ Quality Engineer - Dialexa (IBM) (Feb 2021 - Oct 2021)
 • Led iOS and Apple Watch QA for glucose monitoring app, validating compliance and reliability
 • Conducted data sync testing across mobile/health platforms and built performance benchmarks
 
-Software Engineer in Test - Accruent (Nov 2018 - Feb 2021)
+Software Engineer in Test - Accruent (Fortive) (Nov 2018 - Feb 2021)
 • Architected CI/CD-ready security and performance test suites
 • Built onboarding automation tools to streamline setup and reduce errors
 • Conducted continuous regression testing to support fast, stable deployments

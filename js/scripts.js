@@ -158,23 +158,28 @@ function generateAndDownloadPDF(btn, originalHTML) {
         doc.setTextColor(37, 99, 235);
         doc.textWithLink('github.com/thoangdev', 40, 73, { url: 'https://github.com/thoangdev' });
         
+        doc.setTextColor(0, 0, 0);
+        doc.text('Portfolio: ', 20, 80);
+        doc.setTextColor(37, 99, 235);
+        doc.textWithLink('thoangdev.github.io', 45, 80, { url: 'https://thoangdev.github.io' });
+        
         // Line separator
         doc.setDrawColor(37, 99, 235);
-        doc.line(20, 79, 190, 79);
+        doc.line(20, 86, 190, 86);
         
         // Professional Summary
         doc.setFontSize(14);
         doc.setTextColor(37, 99, 235);
-        doc.text('PROFESSIONAL SUMMARY', 20, 91);
+        doc.text('PROFESSIONAL SUMMARY', 20, 98);
         
         doc.setFontSize(10);
         doc.setTextColor(0, 0, 0);
         const summaryText = 'Innovative and results-oriented QA leader with 7+ years of experience in test automation, DevSecOps, API validation, and performance/security testing. Proven success driving automation frameworks, CI/CD pipelines, fraud detection systems, and quality-focused release processes. Passionate about scaling test strategies, integrating AI tools, and delivering secure, seamless user experiences.';
         const summaryLines = doc.splitTextToSize(summaryText, 170);
-        doc.text(summaryLines, 20, 101);
+        doc.text(summaryLines, 20, 108);
         
         // Experience Section
-        let yPos = 124;
+        let yPos = 131;
         doc.setFontSize(14);
         doc.setTextColor(37, 99, 235);
         doc.text('PROFESSIONAL EXPERIENCE', 20, yPos);
@@ -363,6 +368,9 @@ function generateAndDownloadPDF(btn, originalHTML) {
             'DevOps & CI/CD: Docker, GitHub Actions, Jenkins, AWS, Sentry, Linux, Bash, DevSecOps, InfluxDB, Grafana',
             'Programming & Scripting: Python, JavaScript (Node.js), Java, YAML, C#',
             'Database & Data: PostgreSQL, MySQL, JSON APIs, Data Seeding, Cleanup Utilities',
+            'Enterprise Web Applications: React 18, TypeScript, Tailwind CSS, Node.js, Fastify, PostgreSQL, JWT, RBAC, SSO',
+            'Real-time Analytics & Monitoring: PostHog, Sentry, Health Checks, Advanced Trend Analysis, ML Insights',
+            'Test Results Management: Multi-source ingestion (Robot Framework, OWASP ZAP, K6), Intelligent Notifications, Enterprise RBAC',
             'Productivity Tools: Copilot, ChatGPT, AI-assisted Test Planning, Automated Docs'
         ];
         
@@ -594,6 +602,7 @@ New Orleans, LA (Remote)
 hoangtommyquoc@gmail.com
 LinkedIn: linkedin.com/in/tommyqhoang
 GitHub: github.com/thoangdev
+Portfolio: thoangdev.github.io
 
 PROFESSIONAL SUMMARY
 Innovative and results-oriented QA leader with 7+ years of experience in test automation, DevSecOps, API validation, and performance/security testing. Proven success driving automation frameworks, CI/CD pipelines, fraud detection systems, and quality-focused release processes. Passionate about scaling test strategies, integrating AI tools, and delivering secure, seamless user experiences.
@@ -637,6 +646,9 @@ Security & Performance: OWASP ZAP, Snyk, API Security, Encryption, Authenticatio
 DevOps & CI/CD: Docker, GitHub Actions, Jenkins, AWS, Sentry, Linux, Bash, DevSecOps, InfluxDB, Grafana
 Programming & Scripting: Python, JavaScript (Node.js), Java, YAML, C#
 Database & Data: PostgreSQL, MySQL, JSON APIs, Data Seeding, Cleanup Utilities
+Enterprise Web Applications: React 18, TypeScript, Tailwind CSS, Node.js, Fastify, PostgreSQL, JWT, RBAC, SSO
+Real-time Analytics & Monitoring: PostHog, Sentry, Health Checks, Advanced Trend Analysis, ML Insights
+Test Results Management: Multi-source ingestion (Robot Framework, OWASP ZAP, K6), Intelligent Notifications, Enterprise RBAC
 Productivity Tools: Copilot, ChatGPT, AI-assisted Test Planning, Automated Docs
 
 CERTIFICATIONS

@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tommy Hoang - Resume</title>
     <style>
+        @page {
+            size: letter;
+            margin: 0;
+        }
+
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap');
 
         :root {
@@ -30,6 +35,8 @@
             line-height: 1.55;
             color: #0f172a;
             background: #f1f5f9;
+            margin: 0;
+            padding: 0;
         }
 
         .container {
@@ -277,16 +284,26 @@
         }
 
         @media print {
+            * {
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+
             body {
                 background: #ffffff;
+                margin: 0;
+                padding: 0;
             }
 
             .container {
                 box-shadow: none;
                 border-radius: 0;
                 border: none;
-                max-width: none;
-                padding: 0.25in 0.3in;
+                max-width: 100%;
+                width: 100%;
+                /* This creates the margin effect - 0.5in all around */
+                padding: 0.5in;
+                margin: 0;
             }
 
             .header {

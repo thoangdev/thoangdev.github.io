@@ -38,9 +38,10 @@
         }
 
         .container {
-            max-width: 8.5in;
+            width: 100%;
+            max-width: 7.75in;
             margin: 0 auto;
-            padding: 32px 36px;
+            padding: 28px 32px;
             background: #ffffff;
             border-radius: 20px;
             box-shadow: var(--shadow);
@@ -289,7 +290,9 @@
                 box-shadow: none;
                 border-radius: 0;
                 border: none;
-                padding: 0;
+                max-width: none;
+                width: calc(100% - 0.4in);
+                padding: 0.2in;
             }
 
             .section-title::after {

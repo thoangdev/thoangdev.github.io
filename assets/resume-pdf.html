@@ -6,8 +6,8 @@
     <title>Tommy Hoang - Resume</title>
     <style>
         @page {
-            size: A4;
-            margin: 0.4in 0.5in;
+            size: letter;
+            margin: 0.5in;
         }
 
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap');
@@ -39,9 +39,9 @@
 
         .container {
             width: 100%;
-            max-width: 7.75in;
+            max-width: 7.5in;
             margin: 0 auto;
-            padding: 24px 28px;
+            padding: 20px 24px;
             background: #ffffff;
             border-radius: 20px;
             box-shadow: var(--shadow);
@@ -50,25 +50,25 @@
 
         .header {
             text-align: center;
-            margin-bottom: 28px;
+            margin-bottom: 20px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
         }
 
         .name {
             font-family: 'Poppins', 'Inter', sans-serif;
-            font-size: 30px;
-            letter-spacing: 1.6px;
+            font-size: 28px;
+            letter-spacing: 1.4px;
             font-weight: 700;
             color: var(--accent);
         }
 
         .title {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 600;
             color: var(--primary-dark);
-            letter-spacing: 1px;
+            letter-spacing: 0.8px;
         }
 
         .contact {
@@ -294,20 +294,41 @@
                 border: none;
                 max-width: none;
                 width: 100%;
-                padding: 0.15in 0.25in;
+                padding: 0;
                 margin: 0;
+            }
+
+            .header {
+                margin-bottom: 16px;
+                gap: 8px;
+            }
+
+            .name {
+                font-size: 26px;
+            }
+
+            .title {
+                font-size: 13px;
+            }
+
+            .section {
+                margin-bottom: 16px;
+            }
+
+            .section-title {
+                margin-bottom: 10px;
             }
 
             .section-title::after {
                 background: var(--primary);
             }
 
-            .section {
-                margin-bottom: 18px;
+            .job {
+                margin-bottom: 11px;
             }
 
-            .header {
-                margin-bottom: 22px;
+            .summary {
+                line-height: 1.5;
             }
         }
     </style>

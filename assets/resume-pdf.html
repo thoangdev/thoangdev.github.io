@@ -9,208 +9,291 @@
             size: A4;
             margin: 0.5in;
         }
-        
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap');
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --accent: #0f172a;
+            --muted: #64748b;
+            --chip-bg: rgba(37, 99, 235, 0.12);
+            --chip-text: #1d4ed8;
+            --border: rgba(15, 23, 42, 0.12);
+            --shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Inter', Arial, sans-serif;
             font-size: 11px;
-            line-height: 1.4;
-            color: #333;
-            background: white;
+            line-height: 1.55;
+            color: #0f172a;
+            background: #f1f5f9;
         }
-        
+
         .container {
             max-width: 8.5in;
             margin: 0 auto;
-            padding: 20px;
+            padding: 32px 36px;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
         }
-        
+
         .header {
             text-align: center;
-            margin-bottom: 25px;
-            border-bottom: 2px solid #bd5d38;
-            padding-bottom: 15px;
+            margin-bottom: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
-        
+
         .name {
-            font-size: 28px;
-            font-weight: bold;
-            color: #bd5d38;
-            margin-bottom: 5px;
-            letter-spacing: 2px;
+            font-family: 'Poppins', 'Inter', sans-serif;
+            font-size: 30px;
+            letter-spacing: 1.6px;
+            font-weight: 700;
+            color: var(--accent);
         }
-        
+
         .title {
-            font-size: 16px;
-            color: #666;
-            margin-bottom: 10px;
-            font-weight: 500;
-        }
-        
-        .contact {
-            font-size: 10px;
-            color: #555;
-            line-height: 1.6;
-        }
-        
-        .contact a {
-            color: #bd5d38;
-            text-decoration: none;
-        }
-        
-        .section {
-            margin-bottom: 20px;
-            page-break-inside: avoid;
-        }
-        
-        .section-title {
-            font-size: 14px;
-            font-weight: bold;
-            color: #bd5d38;
-            text-transform: uppercase;
-            border-bottom: 1px solid #bd5d38;
-            margin-bottom: 8px;
-            padding-bottom: 2px;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--primary-dark);
             letter-spacing: 1px;
         }
-        
-        .job {
-            margin-bottom: 12px;
+
+        .contact {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px 14px;
+            font-size: 10.5px;
+            color: var(--muted);
+        }
+
+        .contact > * {
+            position: relative;
+        }
+
+        .contact > *:not(:last-child)::after {
+            content: '•';
+            margin-left: 10px;
+            color: var(--border);
+        }
+
+        .contact a {
+            color: var(--primary-dark);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact a:hover {
+            text-decoration: underline;
+        }
+
+        .section {
+            margin-bottom: 22px;
             page-break-inside: avoid;
         }
-        
+
+        .section-title {
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--accent);
+            margin-bottom: 12px;
+            position: relative;
+            padding-bottom: 6px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 56px;
+            height: 3px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        }
+
+        .summary {
+            text-align: justify;
+            color: #1f2937;
+        }
+
+        .summary-highlights {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 10px;
+            margin-top: 12px;
+        }
+
+        .summary-highlights span {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: var(--chip-bg);
+            color: var(--chip-text);
+            font-size: 10.5px;
+            font-weight: 600;
+        }
+
+        .summary-highlights span::before {
+            content: '•';
+            font-size: 14px;
+        }
+
+        .job {
+            margin-bottom: 14px;
+            page-break-inside: avoid;
+        }
+
         .job-header {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            margin-bottom: 3px;
+            margin-bottom: 4px;
         }
-        
+
         .job-title {
-            font-weight: bold;
+            font-weight: 700;
             font-size: 12px;
-            color: #333;
+            color: var(--accent);
         }
-        
+
         .company {
-            color: #bd5d38;
-            font-weight: 500;
+            color: var(--primary-dark);
+            font-weight: 600;
             font-size: 11px;
         }
-        
+
         .duration {
-            color: #666;
+            color: var(--muted);
             font-size: 10px;
             font-style: italic;
         }
-        
+
         .description {
-            margin-top: 4px;
-            margin-left: 15px;
+            margin-top: 5px;
+            margin-left: 14px;
         }
-        
+
         .description ul {
             list-style: none;
-            padding: 0;
         }
-        
+
         .description li {
-            margin-bottom: 2px;
+            margin-bottom: 3px;
             padding-left: 12px;
             position: relative;
         }
-        
-        .description li:before {
-            content: "•";
-            color: #bd5d38;
-            font-weight: bold;
+
+        .description li::before {
+            content: '';
             position: absolute;
             left: 0;
+            top: 6px;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--primary);
         }
-        
+
         .skills-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 5px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 6px;
         }
-        
+
         .skills-category {
-            margin-bottom: 8px;
+            margin-bottom: 4px;
         }
-        
+
         .skills-category-title {
-            font-weight: bold;
-            color: #bd5d38;
-            font-size: 11px;
-            margin-bottom: 3px;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 4px;
         }
-        
+
         .skills-list {
-            font-size: 10px;
-            line-height: 1.5;
+            font-size: 10.5px;
+            color: #1f2937;
         }
-        
+
         .education-item {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
-        
+
         .degree {
-            font-weight: bold;
-            color: #333;
+            font-weight: 700;
+            color: var(--accent);
         }
-        
+
         .school {
-            color: #bd5d38;
-            font-weight: 500;
+            color: var(--primary-dark);
+            font-weight: 600;
         }
-        
-        .summary {
-            text-align: justify;
-            line-height: 1.5;
-            margin-top: 5px;
-        }
-        
+
         .achievements {
-            margin-top: 5px;
+            margin-top: 6px;
         }
-        
+
         .achievements ul {
             list-style: none;
-            padding: 0;
         }
-        
+
         .achievements li {
-            margin-bottom: 2px;
-            padding-left: 12px;
+            margin-bottom: 3px;
+            padding-left: 14px;
             position: relative;
         }
-        
-        .achievements li:before {
-            content: "★";
-            color: #bd5d38;
-            font-weight: bold;
+
+        .achievements li::before {
+            content: '★';
+            color: #f59e0b;
             position: absolute;
             left: 0;
+            top: 0;
         }
-        
+
+        .private-note {
+            font-size: 10px;
+            color: var(--muted);
+            font-style: italic;
+            margin-top: 4px;
+        }
+
+        a {
+            color: var(--primary-dark);
+        }
+
         @media print {
             body {
-                print-color-adjust: exact;
-                -webkit-print-color-adjust: exact;
+                background: #ffffff;
             }
-            
+
             .container {
+                box-shadow: none;
+                border-radius: 0;
+                border: none;
                 padding: 0;
             }
-            
-            .section {
-                page-break-inside: avoid;
+
+            .section-title::after {
+                background: var(--primary);
             }
         }
     </style>
@@ -221,11 +304,12 @@
             <div class="name">TOMMY HOANG</div>
             <div class="title">Tech Lead Quality Engineer</div>
             <div class="contact">
-                New Orleans, LA (Remote) • (504) 453-8178<br>
-                <a href="mailto:hoangtommyquoc@gmail.com">hoangtommyquoc@gmail.com</a> • 
-                <a href="https://linkedin.com/in/tommyqhoang">linkedin.com/in/tommyqhoang</a> • 
-                <a href="https://github.com/thoangdev">github.com/thoangdev</a><br>
-                Portfolio: <a href="https://thoangdev.github.io">thoangdev.github.io</a>
+                <span>New Orleans, LA (Remote)</span>
+                <span>(504) 453-8178</span>
+                <a href="mailto:hoangtommyquoc@gmail.com">hoangtommyquoc@gmail.com</a>
+                <a href="https://linkedin.com/in/tommyqhoang">linkedin.com/in/tommyqhoang</a>
+                <a href="https://github.com/thoangdev">github.com/thoangdev</a>
+                <a href="https://thoangdev.github.io">Portfolio</a>
             </div>
         </div>
 
@@ -233,6 +317,12 @@
             <div class="section-title">Professional Summary</div>
             <div class="summary">
                 Innovative and results-oriented QA leader with 7+ years of experience in test automation, DevSecOps, API validation, and performance/security testing. Proven success driving automation frameworks, CI/CD pipelines, fraud detection systems, and quality-focused release processes. Passionate about scaling test strategies, integrating AI tools, and delivering secure, seamless user experiences.
+            </div>
+            <div class="summary-highlights">
+                <span>Automation Architect</span>
+                <span>AI-Augmented QA Leadership</span>
+                <span>10K+ Product Downloads</span>
+                <span>Published Author</span>
             </div>
         </div>
 
@@ -253,7 +343,7 @@
                         <li>Automated smoke and regression testing across products (STIG, ABB, DSMD) using Robot Framework + Playwright</li>
                         <li>Integrated OWASP ZAP for security testing with robust data seeding/teardown in PostgreSQL</li>
                         <li>Enabled end-to-end visibility with Tuskr reporting, Slack alerts, and full-stack test coverage</li>
-                        <li>Developed <a href="https://github.com/thoangdev/dispel-uptime" target="_blank">dispel-uptime</a> – open-source uptime monitoring with CI/CD, alerting, and reporting. <a href="https://thoangdev.github.io/dispel-uptime/" target="_blank">Live Demo</a></li>
+                        <li>Delivered Dispel Observability Hub—internal uptime and incident automation platform consolidating CI/CD monitors, alerting, and executive reporting (private repository)</li>
                     </ul>
                 </div>
             </div>

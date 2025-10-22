@@ -54,21 +54,21 @@
         <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon.ico" />
         
         <!-- Performance optimizations -->
-        <meta name="theme-color" content="#bd5d38">
+    <meta name="theme-color" content="#2563eb">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="preconnect" href="https://use.fontawesome.com">
         
         <!-- Critical CSS inline for better performance -->
         <style>
-            body{font-family:'Muli',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;padding-top:54px;color:#868e96}
-            .navbar{background-color:#bd5d38!important}
-            .text-primary{color:#bd5d38!important}
+            body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;padding-top:54px;color:#1f2937;background:#f8fafc}
+            .navbar{background:linear-gradient(145deg,#1e293b,#334155)!important}
+            .text-primary{color:#2563eb!important}
             .img-profile{will-change:transform}
             .navbar-brand img{width:10rem;height:10rem}
             .btn{transition:all .15s ease-in-out}
             .download-resume-btn{text-decoration:none;position:relative}
-            .download-resume-btn:hover{transform:translateY(-2px);box-shadow:0 4px 8px rgba(0,0,0,.1)}
+            .download-resume-btn:hover{transform:translateY(-2px);box-shadow:0 4px 8px rgba(0,0,0,.12)}
         </style>
         
         <!-- Font Awesome icons (free version) - defer loading -->
@@ -204,19 +204,25 @@
                             <a href="mailto:hoangtommyquoc@gmail.com" itemprop="email">hoangtommyquoc@gmail.com</a>
                         </div>
                     </header>
-                    <p class="lead mb-5" itemprop="description">Innovative and results-oriented QA leader with 7+ years of experience in test automation, DevSecOps, API validation, and performance/security testing. Founder of Aperca LLC, developing mobile applications and browser extensions with 10K+ downloads and 4.8★ ratings. Published author with a Hurricane Katrina memoir and two additional books in development. Proven success driving automation frameworks, CI/CD pipelines, fraud detection systems, and quality-focused release processes. Passionate about scaling test strategies, mobile development, entrepreneurship, storytelling, and delivering secure, seamless user experiences.</p>
+                    <p class="lead mb-4" itemprop="description">Innovative and results-oriented QA leader with 7+ years of experience in test automation, DevSecOps, API validation, and performance/security testing. Founder of Aperca LLC, developing mobile applications and browser extensions with 10K+ downloads and 4.8★ ratings. Published author with a Hurricane Katrina memoir and two additional books in development. Proven success driving automation frameworks, CI/CD pipelines, fraud detection systems, and quality-focused release processes. Passionate about scaling test strategies, mobile development, entrepreneurship, storytelling, and delivering secure, seamless user experiences.</p>
+
+                    <ul class="hero-highlights" role="list">
+                        <li><i class="fas fa-robot" aria-hidden="true"></i><span>Automation Architect leading AI-augmented QA</span></li>
+                        <li><i class="fas fa-mobile-alt" aria-hidden="true"></i><span>10K+ users across mobile apps & browser tools</span></li>
+                        <li><i class="fas fa-book-open" aria-hidden="true"></i><span>Published author amplifying real-world resilience</span></li>
+                    </ul>
                     
                     <!-- Call to Action Buttons -->
                     <div class="cta-section">
                         <div class="d-flex flex-wrap justify-content-center">
-                            <a href="#" class="btn btn-primary btn-lg download-resume-btn">
-                                <i class="fas fa-download me-2"></i>Download PDF Resume
+                            <a href="assets/pdf-generator.html?access=resume" class="btn btn-primary btn-lg download-resume-btn" target="_blank" rel="noopener">
+                                <i class="fas fa-download me-2" aria-hidden="true"></i>Download Interactive Resume
                             </a>
                             <a href="mailto:hoangtommyquoc@gmail.com" class="btn btn-primary btn-lg">
-                                <i class="fas fa-envelope me-2"></i>Get In Touch
+                                <i class="fas fa-envelope me-2" aria-hidden="true"></i>Get In Touch
                             </a>
                             <a href="#projects" class="btn btn-primary btn-lg js-scroll-trigger">
-                                <i class="fas fa-code me-2"></i>View Projects
+                                <i class="fas fa-code me-2" aria-hidden="true"></i>View Projects
                             </a>
                         </div>
                     </div>
@@ -233,50 +239,54 @@
             <section class="resume-section bg-light" id="metrics">
                 <div class="resume-section-content">
                     <h2 class="mb-5 text-center">Impact & Results</h2>
-                    <div class="row text-center">
+                    <div class="row text-center metrics-grid">
                         <div class="col-lg-3 col-md-6 mb-4">
-                            <div class="card border-0 h-100 shadow-sm">
+                            <article class="card border-0 h-100 shadow-sm metric-card">
                                 <div class="card-body">
-                                    <div class="achievement-metric">
-                                        <h2 class="text-primary mb-2">70%</h2>
-                                        <p class="card-text">Reduction in Manual Testing Time</p>
-                                        <small class="text-muted">Through automation frameworks</small>
+                                    <div class="metric-icon" aria-hidden="true">
+                                        <i class="fas fa-robot"></i>
                                     </div>
+                                    <h3 class="metric-value text-primary">70%</h3>
+                                    <p class="metric-title">Manual Testing Time</p>
+                                    <p class="metric-caption">Cut with resilient automation frameworks.</p>
                                 </div>
-                            </div>
+                            </article>
                         </div>
                         <div class="col-lg-3 col-md-6 mb-4">
-                            <div class="card border-0 h-100 shadow-sm">
+                            <article class="card border-0 h-100 shadow-sm metric-card">
                                 <div class="card-body">
-                                    <div class="achievement-metric">
-                                        <h2 class="text-success mb-2">Zero</h2>
-                                        <p class="card-text">Production Bugs</p>
-                                        <small class="text-muted">In 5+ major feature launches</small>
+                                    <div class="metric-icon" aria-hidden="true">
+                                        <i class="fas fa-shield-alt"></i>
                                     </div>
+                                    <h3 class="metric-value text-success">0</h3>
+                                    <p class="metric-title">Production Bugs</p>
+                                    <p class="metric-caption">Across 5+ enterprise feature launches.</p>
                                 </div>
-                            </div>
+                            </article>
                         </div>
                         <div class="col-lg-3 col-md-6 mb-4">
-                            <div class="card border-0 h-100 shadow-sm">
+                            <article class="card border-0 h-100 shadow-sm metric-card">
                                 <div class="card-body">
-                                    <div class="achievement-metric">
-                                        <h2 class="text-warning mb-2">7+</h2>
-                                        <p class="card-text">Years Experience</p>
-                                        <small class="text-muted">In QA leadership roles</small>
+                                    <div class="metric-icon" aria-hidden="true">
+                                        <i class="fas fa-users-cog"></i>
                                     </div>
+                                    <h3 class="metric-value text-warning">7+</h3>
+                                    <p class="metric-title">Years Leading QA</p>
+                                    <p class="metric-caption">Building high-trust quality organizations.</p>
                                 </div>
-                            </div>
+                            </article>
                         </div>
                         <div class="col-lg-3 col-md-6 mb-4">
-                            <div class="card border-0 h-100 shadow-sm">
+                            <article class="card border-0 h-100 shadow-sm metric-card">
                                 <div class="card-body">
-                                    <div class="achievement-metric">
-                                        <h2 class="text-info mb-2">Corp</h2>
-                                        <p class="card-text">Scale Testing</p>
-                                        <small class="text-muted">AT&T, IBM, Fortune 500</small>
+                                    <div class="metric-icon" aria-hidden="true">
+                                        <i class="fas fa-cloud-download-alt"></i>
                                     </div>
+                                    <h3 class="metric-value text-info">10K+</h3>
+                                    <p class="metric-title">Product Downloads</p>
+                                    <p class="metric-caption">Mobile apps & extensions rated 4.8★.</p>
                                 </div>
-                            </div>
+                            </article>
                         </div>
                     </div>
                 </div>
@@ -654,7 +664,7 @@
                                         <ul class="list-unstyled mb-2">
                                             <li><i class="fas fa-mobile-alt me-2 text-success"></i><strong>Aperca LLC</strong> - Mobile apps & browser extensions (10K+ downloads, 4.8★)</li>
                                             <li><i class="fab fa-github me-2"></i><strong>testflux</strong> - Enterprise test results dashboard with multi-source ingestion</li>
-                                            <li><i class="fab fa-github me-2"></i><strong>dispel-uptime</strong> - Open-source uptime monitoring platform</li>
+                                            <li><i class="fas fa-bell me-2 text-danger"></i><strong>Dispel Observability Hub</strong> - Internal uptime & incident automation platform (private)</li>
                                             <li><i class="fab fa-github me-2"></i><strong>dispel_robot_framework</strong> - Robot Framework test automation suite</li>
                                             <li><i class="fab fa-github me-2"></i><strong>maplestory_cms_v83</strong> - Full-stack CMS for MapleStory private servers</li>
                                             <li><i class="fab fa-github me-2"></i><strong>thoangdev.github.io</strong> - This portfolio website with modern features</li>
@@ -803,19 +813,20 @@
                         <div class="col-md-6 mb-4">
                             <div class="card h-100 rounded">
                                 <div class="card-body">
-                                    <h5 class="card-title">dispel-uptime</h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">Open-Source Uptime Monitoring</h6>
-                                    <p class="card-text">Open-source uptime monitoring platform with CI/CD integration, alerting, and reporting. Provides real-time status checks, historical uptime analytics, and Slack/email notifications. Built for reliability and easy deployment.</p>
+                                    <div class="d-flex align-items-center mb-3">
+                                        <i class="fas fa-bell text-danger me-2"></i>
+                                        <h5 class="card-title mb-0">Dispel Observability Hub</h5>
+                                        <span class="badge bg-secondary ms-auto">Private</span>
+                                    </div>
+                                    <h6 class="card-subtitle mb-2 text-muted">Internal Uptime & Incident Automation Platform</h6>
+                                    <p class="card-text">Internal observability hub delivering SLA tracking, automated incident routing, and executive reporting. Unifies K6 performance telemetry, infrastructure health data, and customer-impact alerts for Dispel's managed services.</p>
                                     <div class="mb-2">
-                                        <span class="badge bg-primary me-1">Node.js</span>
-                                        <span class="badge bg-primary me-1">CI/CD</span>
-                                        <span class="badge bg-success me-1">Monitoring</span>
-                                        <span class="badge bg-info me-1">Alerting</span>
+                                        <span class="badge bg-primary me-1">Incident Response</span>
+                                        <span class="badge bg-primary me-1">Automation</span>
+                                        <span class="badge bg-success me-1">Service Reliability</span>
+                                        <span class="badge bg-info me-1">Analytics</span>
                                     </div>
-                                    <div class="d-flex gap-2">
-                                        <a href="https://github.com/thoangdev/dispel-uptime" class="btn btn-outline-dark btn-sm" target="_blank">View on GitHub</a>
-                                        <a href="https://thoangdev.github.io/dispel-uptime/" class="btn btn-outline-primary btn-sm" target="_blank">Live Demo</a>
-                                    </div>
+                                    <p class="text-muted small fst-italic mb-0">Access available upon request under NDA.</p>
                                 </div>
                             </div>
                         </div>

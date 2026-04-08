@@ -1,21 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /index-backup.html
 
-# Sitemap
+# Sitemap location (consumed by Google, Bing, and other crawlers)
 Sitemap: https://thoangdev.github.io/sitemap.xml
-
-# Crawl-delay for polite crawling
-Crawl-delay: 1
-
-# Allow specific paths
-Allow: /assets/
-Allow: /css/
-Allow: /js/
-
-# Block unnecessary files
-Disallow: *.json
-Disallow: /README.md
-
-# Allow important files
-Allow: /assets/pdf-generator.html
-Allow: /assets/resume-pdf.html

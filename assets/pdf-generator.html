@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow" />
     <title>Generate PDF Resume</title>
     <style>
         body {
@@ -72,9 +73,9 @@
         </div>
     </div>
     
-    <a href="javascript:void(0)" onclick="openAndPrint()" class="btn">
+    <button class="btn" id="openResumeBtn" type="button">
         📋 View Resume (Ready for PDF)
-    </a>
+    </button>
 
     <div style="margin-top: 30px;">
         <h3>Preview:</h3>
@@ -92,7 +93,7 @@
             
             if (!isIntentional && window.history.length > 1) {
                 // Redirect to main page if accessed accidentally
-                window.location.replace('../index.html');
+                window.location.replace('https://thoangdev.github.io/');
                 return;
             }
             
@@ -106,8 +107,15 @@
         
         function openAndPrint() {
             const printWindow = window.open('resume-pdf.html?print=true', '_blank');
-            printWindow.focus();
+            if (printWindow) {
+                printWindow.focus();
+            } else {
+                // Popup blocked — navigate in current tab as fallback
+                window.location.href = 'resume-pdf.html?print=true';
+            }
         }
+
+        document.getElementById('openResumeBtn').addEventListener('click', openAndPrint);
     </script>
 </body>
 </html>

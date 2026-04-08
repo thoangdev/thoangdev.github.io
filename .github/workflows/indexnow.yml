@@ -1,0 +1,24 @@
+name: IndexNow — Notify Search Engines
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  ping-indexnow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping IndexNow (shared API endpoint — distributes to Google, Bing, Yandex, etc.)
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+            "https://api.indexnow.org/indexnow?url=https://thoangdev.github.io/&key=8f3a7d2c9b4e1056")
+          echo "IndexNow API response: $STATUS"
+          if [ "$STATUS" -ne 200 ] && [ "$STATUS" -ne 202 ]; then
+            echo "Warning: IndexNow returned unexpected status $STATUS"
+          fi
+
+      - name: Ping Bing IndexNow directly
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+            "https://www.bing.com/indexnow?url=https://thoangdev.github.io/&key=8f3a7d2c9b4e1056")
+          echo "Bing IndexNow response: $STATUS"

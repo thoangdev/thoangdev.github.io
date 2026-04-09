@@ -1232,6 +1232,11 @@ button { cursor: pointer; font: inherit; }
   align-items: start;
 }
 
+.books-layout-centered {
+  display: flex;
+  justify-content: center;
+}
+
 .book-card {
   background: var(--clr-surface);
   border: 1px solid var(--clr-border);
@@ -1287,6 +1292,8 @@ button { cursor: pointer; font: inherit; }
 
 .book-coming-soon {
   min-width: 240px;
+  max-width: 480px;
+  width: 100%;
   background: var(--clr-surface);
   border: 1px solid var(--clr-border);
   border-radius: var(--r-xl);

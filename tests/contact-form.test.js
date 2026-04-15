@@ -109,14 +109,23 @@ test('initContactForm blocks unconfigured forms and shows warning state', functi
     assert.equal(status.error.hidden, true);
 });
 
-test('initContactForm blocks submission when Turnstile sitekey is not injected', function () {
+test('initContactForm treats Turnstile as optional when sitekey is not injected', async function () {
     const { doc, form, status } = createContactFormDocument(undefined, { withTurnstile: true });
+    const fetchCalls = [];
 
-    contactForm.initContactForm(doc, {});
+    contactForm.initContactForm(doc, {
+        fetch: function () {
+            fetchCalls.push(true);
+            return Promise.resolve({ ok: true });
+        },
+        FormData: function FakeFormData() {}
+    });
     form.dispatchEvent('submit', createEvent());
+    await flushPromises();
 
-    assert.equal(status.unconfigured.hidden, false);
-    assert.equal(status.success.hidden, true);
+    assert.deepEqual(fetchCalls, [true]);
+    assert.equal(status.unconfigured.hidden, true);
+    assert.equal(status.success.hidden, false);
     assert.equal(status.error.hidden, true);
 });
 

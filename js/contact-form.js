@@ -173,6 +173,17 @@
         return !!sitekey && sitekey.indexOf(TURNSTILE_PLACEHOLDER) === -1;
     }
 
+    function hideTurnstileContainer(container) {
+        if (!container || typeof container.closest !== 'function') {
+            return;
+        }
+
+        var formGroup = container.closest('.form-group--turnstile');
+        if (formGroup) {
+            formGroup.hidden = true;
+        }
+    }
+
     function setTurnstileError(turnstileState, message) {
         if (!turnstileState || !turnstileState.errorNode) {
             return;
@@ -241,7 +252,13 @@
             return turnstileState;
         }
 
-        if (!tokenField || !errorNode || !isTurnstileSitekeyConfigured(sitekey) || !api || typeof api.render !== 'function') {
+        if (!isTurnstileSitekeyConfigured(sitekey)) {
+            turnstileState.isRequired = false;
+            hideTurnstileContainer(container);
+            return turnstileState;
+        }
+
+        if (!tokenField || !errorNode || !api || typeof api.render !== 'function') {
             return turnstileState;
         }
 

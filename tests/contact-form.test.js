@@ -205,6 +205,44 @@ test('initContactForm handles successful submissions and analytics', async funct
     assert.deepEqual(analyticsCalls[0], ['event', 'contact_form_submit', { event_category: 'engagement' }]);
 });
 
+test('initContactForm treats ok responses with captcha errors as failures', async function () {
+    const { doc, form, status, submit } = createContactFormDocument(undefined, {
+        withTurnstile: true,
+        turnstileSitekey: '1x00000000000000000000AA'
+    });
+    const analyticsCalls = [];
+
+    contactForm.initContactForm(doc, {
+        fetch: function () {
+            return Promise.resolve({
+                ok: true,
+                json: function () {
+                    return Promise.resolve({ error: 'Captcha failed' });
+                }
+            });
+        },
+        FormData: function FakeFormData() {},
+        gtag: function () {
+            analyticsCalls.push(Array.from(arguments));
+        },
+        turnstile: {
+            render: function (container, config) {
+                config.callback('verified-token');
+                return 'widget-5';
+            },
+            reset: function () {}
+        }
+    });
+
+    form.dispatchEvent('submit', createEvent());
+    await flushPromises();
+
+    assert.equal(submit.submitButton.disabled, false);
+    assert.equal(status.success.hidden, true);
+    assert.equal(status.error.hidden, false);
+    assert.deepEqual(analyticsCalls, []);
+});
+
 test('initContactForm requires a completed Turnstile token before fetch', async function () {
     const { doc, form, turnstile } = createContactFormDocument(undefined, {
         withTurnstile: true,

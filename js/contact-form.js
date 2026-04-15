@@ -110,10 +110,35 @@
         }
 
         if (typeof payload === 'object') {
+            if (Array.isArray(payload.errors) && payload.errors.length) {
+                return payload.errors
+                    .map(function (entry) {
+                        if (!entry) return '';
+                        if (typeof entry === 'string') return entry;
+                        return entry.message || entry.error || entry.code || '';
+                    })
+                    .filter(Boolean)
+                    .join(' ');
+            }
+
+            if (typeof payload._status === 'string') {
+                return payload._status;
+            }
+
             return payload.error || payload.message || '';
         }
 
         return '';
+    }
+
+    function indicatesFailure(message) {
+        return /(error|fail(?:ed|ure)?|spam|captcha|turnstile|blocked|invalid)/i.test(trimValue(message));
+    }
+
+    function getResponseFailureMessage(response) {
+        return getResponseMessage(response).then(function (message) {
+            return indicatesFailure(message) ? message : '';
+        });
     }
 
     function getResponseMessage(response) {
@@ -308,27 +333,27 @@
                 body: new FormDataCtor(form)
             })
                 .then(function (response) {
-                    if (response && response.ok) {
-                        setSubmitState(button, false);
-                        form.reset();
-                        resetTurnstile(turnstileState);
-                        applyValidationResults(results.map(function (result) {
-                            return { field: result.field, error: '' };
-                        }));
-                        setStatusVisibility(doc, {
-                            'cf-success': true,
-                            'cf-error': false,
-                            'cf-unconfigured': false
-                        });
+                    return getResponseFailureMessage(response).then(function (message) {
+                        if (response && response.ok && !message) {
+                            setSubmitState(button, false);
+                            form.reset();
+                            resetTurnstile(turnstileState);
+                            applyValidationResults(results.map(function (result) {
+                                return { field: result.field, error: '' };
+                            }));
+                            setStatusVisibility(doc, {
+                                'cf-success': true,
+                                'cf-error': false,
+                                'cf-unconfigured': false
+                            });
 
-                        if (typeof gtagImpl === 'function') {
-                            gtagImpl('event', 'contact_form_submit', { event_category: 'engagement' });
+                            if (typeof gtagImpl === 'function') {
+                                gtagImpl('event', 'contact_form_submit', { event_category: 'engagement' });
+                            }
+
+                            return;
                         }
 
-                        return;
-                    }
-
-                    return getResponseMessage(response).then(function (message) {
                         if (requiresTurnstile(message)) {
                             setSubmitState(button, false);
 
@@ -386,10 +411,12 @@
         getResponseMessage: getResponseMessage,
         initContactForm: initContactForm,
         initTurnstile: initTurnstile,
+        indicatesFailure: indicatesFailure,
         isTurnstileSitekeyConfigured: isTurnstileSitekeyConfigured,
         parseResponsePayload: parseResponsePayload,
         requiresTurnstile: requiresTurnstile,
         resetTurnstile: resetTurnstile,
+        getResponseFailureMessage: getResponseFailureMessage,
         setStatusVisibility: setStatusVisibility,
         setSubmitState: setSubmitState,
         setTurnstileError: setTurnstileError,

@@ -1912,11 +1912,6 @@ button { cursor: pointer; font: inherit; }
   transition: color var(--dur-fast) var(--ease);
 }
 
-.input-wrap input,
-.input-wrap select {
-  padding-left: 52px;
-}
-
 .input-wrap:focus-within .input-icon {
   color: var(--clr-accent);
 }
@@ -1939,6 +1934,15 @@ button { cursor: pointer; font: inherit; }
               transform var(--dur-fast) var(--ease);
   appearance: none;
   -webkit-appearance: none;
+}
+
+.form-group .input-wrap input,
+.form-group .input-wrap select {
+  padding-left: 52px;
+}
+
+.form-group .input-wrap--select select {
+  padding-right: 44px;
 }
 
 .form-group input::placeholder,

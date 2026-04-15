@@ -37,17 +37,6 @@ jobs:
             echo "⚠️  GA_MEASUREMENT_ID secret not set — analytics disabled in this build"
           fi
 
-      - name: Inject FORMSPREE_ENDPOINT
-        env:
-          FORMSPREE: ${{ secrets.FORMSPREE_ENDPOINT }}
-        run: |
-          if [ -n "$FORMSPREE" ]; then
-            sed -i "s|__FORMSPREE_ENDPOINT__|${FORMSPREE}|g" index.html
-            echo "✅ Formspree endpoint injected"
-          else
-            echo "⚠️  FORMSPREE_ENDPOINT secret not set — contact form will show fallback message"
-          fi
-
       # ── Upload artifact ───────────────────────────────────────────
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

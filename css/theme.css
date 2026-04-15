@@ -1227,9 +1227,13 @@ button { cursor: pointer; font: inherit; }
    —————————————————————————————————————— */
 .books-layout {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr 1fr auto;
   gap: var(--sp-5);
   align-items: start;
+}
+
+@media (max-width: 860px) {
+  .books-layout { grid-template-columns: 1fr; }
 }
 
 .books-layout-centered {
@@ -1339,6 +1343,92 @@ button { cursor: pointer; font: inherit; }
 }
 .cs-label { font-size: 12px; color: var(--clr-text-muted); font-weight: 500; }
 .book-cs-badges { display: flex; flex-direction: column; gap: 6px; align-items: center; }
+
+/* New book-card layout used by blog + memoir cards */
+.book-card {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color var(--dur-base) var(--ease), box-shadow var(--dur-base) var(--ease), transform var(--dur-base) var(--ease);
+  position: relative;
+}
+.book-card:hover {
+  border-color: var(--clr-accent);
+  box-shadow: 0 8px 32px rgba(37,99,235,0.1);
+  transform: translateY(-2px);
+}
+
+.book-badge {
+  position: absolute;
+  top: var(--sp-4);
+  left: var(--sp-4);
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  padding: 3px 10px;
+  border-radius: var(--r-full);
+  z-index: 1;
+}
+.book-badge--blog      { color: #1d4ed8; background: #dbeafe; }
+.book-badge--published { color: #15803d; background: #dcfce7; }
+
+.book-cover {
+  display: grid;
+  place-items: center;
+  height: 120px;
+  font-size: 2.5rem;
+  flex-shrink: 0;
+}
+.book-cover--blog   { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); color: #2563eb; }
+.book-cover--memoir { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); color: #16a34a; }
+
+.book-info {
+  padding: var(--sp-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  flex: 1;
+}
+.book-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--clr-text);
+  letter-spacing: -.3px;
+  margin: 0;
+}
+.book-subtitle {
+  font-size: 12px;
+  color: var(--clr-accent);
+  font-weight: 600;
+  margin: 0;
+}
+.book-desc {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--clr-text-2);
+  flex: 1;
+}
+.book-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: var(--sp-1);
+}
+.book-cta {
+  margin-top: var(--sp-3);
+  font-size: 13px;
+  padding: 8px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+}
 
 /* ——————————————————————————————————————
    12. TESTIMONIALS

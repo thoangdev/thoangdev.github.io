@@ -5,6 +5,7 @@
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-tommyqhoang-blue)](https://linkedin.com/in/tommyqhoang)
 [![GitHub](https://img.shields.io/badge/GitHub-thoangdev-black)](https://github.com/thoangdev)
 [![Aperca LLC](https://img.shields.io/badge/Company-Aperca%20LLC-green)](https://apercallc.com)
+[![QA Vibe App](https://img.shields.io/badge/Blog-QA%20Vibe%20App-orange)](https://www.qavibeapp.com)
 [![Deploy](https://github.com/thoangdev/thoangdev.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/thoangdev/thoangdev.github.io/actions/workflows/deploy.yml)
 [![IndexNow](https://github.com/thoangdev/thoangdev.github.io/actions/workflows/indexnow.yml/badge.svg)](https://github.com/thoangdev/thoangdev.github.io/actions/workflows/indexnow.yml)
 
@@ -22,6 +23,7 @@ Professional portfolio showcasing **9+ years** of experience in quality engineer
 - **API Quality** — lifted API test coverage from 65% → **92%** at Cognizant; automated RCA reduced root-cause time by **40%**
 - **Founder of Aperca LLC** — mobile apps and browser extensions with **10K+ downloads** and **4.8★ average rating**
 - **Published Author** — *We Will Find a Place to Sleep Tonight* (Hurricane Katrina memoir)
+- **Founder of QA Vibe App** — [qavibeapp.com](https://www.qavibeapp.com) — QA engineering blog covering AI-powered testing, Playwright/K6/Robot Framework tutorials, and developer gear reviews
 - **Current Role**: QA Tech Lead at Aperca LLC (2023 – Present) | Senior QA Engineer at Dispel (Jun 2025 – Present)
 
 ### 📁 Repository Structure
@@ -72,6 +74,15 @@ Aperca LLC · Dispel · Cognizant · DXC Technology · insightsoftware · Dialex
 **Mobile Applications:** WealthTrackr · Oz and Inches · Date Night Decider · Fastcarb
 
 **Browser Extensions:** PinNote · Tab Resource Monitor · MarkUpShot · Clipboard+ · DailySync
+
+### ✍️ QA Vibe App — Blog
+
+**[qavibeapp.com](https://www.qavibeapp.com)** — A modern learning hub for QA engineers and automation testers who want to level up with AI-powered testing workflows.
+
+- Real-world, step-by-step tutorials: Playwright, K6, Robot Framework, OWASP ZAP
+- AI-powered QA workflows: Claude, OpenAI Codex, LLM-generated test cases
+- Career growth content for breaking into QA or advancing in tech
+- Tech unboxings and honest reviews of developer tools and gear
 
 ### 🏆 Key Metrics
 

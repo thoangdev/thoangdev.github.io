@@ -9,17 +9,25 @@ const { FakeDocument, FakeElement, createEvent } = require('./helpers/dom-fakes.
 test('applyActiveSectionState keeps more button active only for overflow sections', function () {
     const aboutLink = new FakeElement({ attributes: { href: '#about' }, classes: ['active'] });
     const booksLink = new FakeElement({ attributes: { href: '#books' } });
+    const contactLink = new FakeElement({ attributes: { href: '#contact-form' } });
     const aboutTab = new FakeElement({ dataset: { section: 'about' }, classes: ['active'] });
     const booksTab = new FakeElement({ dataset: { section: 'books' } });
+    const contactTab = new FakeElement({ dataset: { section: 'contact-form' } });
     const moreButton = new FakeElement();
     const moreIds = new Set(themeScripts.MORE_SECTION_IDS);
 
-    themeScripts.applyActiveSectionState('books', [aboutLink, booksLink], [aboutTab, booksTab], moreButton, moreIds);
+    themeScripts.applyActiveSectionState('books', [aboutLink, booksLink, contactLink], [aboutTab, booksTab, contactTab], moreButton, moreIds);
 
     assert.equal(aboutLink.classList.contains('active'), false);
     assert.equal(booksLink.classList.contains('active'), true);
     assert.equal(aboutTab.classList.contains('active'), false);
     assert.equal(booksTab.classList.contains('active'), true);
+    assert.equal(moreButton.classList.contains('active'), true);
+
+    themeScripts.applyActiveSectionState('contact-form', [aboutLink, booksLink, contactLink], [aboutTab, booksTab, contactTab], moreButton, moreIds);
+
+    assert.equal(contactLink.classList.contains('active'), true);
+    assert.equal(contactTab.classList.contains('active'), true);
     assert.equal(moreButton.classList.contains('active'), true);
 });
 

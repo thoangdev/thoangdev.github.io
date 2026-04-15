@@ -43,7 +43,8 @@ thoangdev.github.io/
 ├── js/
 │   ├── scripts-optimized.js    # Navigation, drawer, smooth scroll, reveal logic
 │   ├── contact-form.js         # Contact form validation and submit handling
-│   └── pdf-generator.js        # Resume PDF access and print helper
+│   ├── pdf-generator.js        # Resume PDF access and print helper
+│   └── resume-print.js         # Resume auto-print behavior for printable HTML
 ├── tests/
 │   ├── *.test.js               # Node-based unit, integration, and smoke tests
 │   └── helpers/                # Lightweight DOM test fakes
@@ -54,7 +55,7 @@ thoangdev.github.io/
 ├── 404.html                    # Custom error page
 └── .github/
     └── workflows/
-    ├── test.yml            # CI test runner for push / PR / manual
+        ├── test.yml            # CI test runner for push / PR / manual
         ├── deploy.yml          # Build → inject secrets → deploy to Pages
         └── indexnow.yml        # Ping Google/Bing/Yandex via IndexNow API
 ```
@@ -62,8 +63,8 @@ thoangdev.github.io/
 ### Test Strategy
 
 - **Unit tests** cover pure client-side helpers such as email validation, active nav state mapping, swipe thresholds, and PDF filename generation.
-- **Integration-style tests** cover DOM-driven behavior such as contact form submit states, analytics calls, drawer open/close flows, smooth scrolling, and reveal observers.
-- **Smoke tests** start a local static HTTP server and verify the real HTML pages and extracted runtime scripts are served with the expected critical elements.
+- **Integration-style tests** cover DOM-driven behavior such as contact form submit states, analytics calls, drawer open/close flows, smooth scrolling, reveal observers, and resume print behavior.
+- **Smoke tests** start a local static HTTP server and verify the real HTML pages, 404 fallback, and extracted runtime scripts are served with the expected critical elements.
 
 ### Running Tests
 

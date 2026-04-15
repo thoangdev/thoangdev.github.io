@@ -33,7 +33,8 @@ thoangdev.github.io/
 ├── js/
 │   ├── scripts-optimized.js    # Nav spy, smooth scrolling, drawer, reveal effects
 │   ├── contact-form.js         # Contact form validation + Formspree submit flow
-│   └── pdf-generator.js        # Resume access guard + popup/print helper
+│   ├── pdf-generator.js        # Resume access guard + popup/print helper
+│   └── resume-print.js         # Printable resume auto-print behavior
 ├── tests/
 │   ├── *.test.js               # Node built-in unit, integration, and smoke tests
 │   └── helpers/                # DOM fakes for browserless tests
@@ -81,7 +82,7 @@ Three GitHub Actions workflows support the site:
 - Scope: unit tests for pure helpers, integration-style tests for DOM-driven behavior, and smoke tests served over a local static HTTP server.
 - Main test command (PowerShell): `$files = Get-ChildItem "tests" -Recurse -Filter *.test.js | ForEach-Object { $_.FullName }; node --test $files`
 - Main test command (bash / CI): `mapfile -t files < <(find tests -type f -name '*.test.js' | sort); node --test "${files[@]}"`
-- Current critical-path coverage includes navigation state, bottom drawer behavior, smooth scrolling, reveal observers, contact form validation/submission, and PDF generator access / print logic.
+- Current critical-path coverage includes navigation state, bottom drawer behavior, smooth scrolling, reveal observers, contact form validation/submission, PDF generator access logic, and printable resume auto-print behavior.
 
 ### Analytics
 Google Analytics ID is stored as a GitHub Actions secret (`GA_MEASUREMENT_ID`). The placeholder `__GA_MEASUREMENT_ID__` in `index.html` is replaced at deploy time. It is **never** hardcoded in source.
@@ -114,7 +115,7 @@ Powered by Formspree (`https://formspree.io/f/xnjljodd`). Endpoint is hardcoded 
 
 ### JavaScript
 - Vanilla JS only — no frameworks or npm dependencies
-- Runtime JS is split across `scripts-optimized.js`, `contact-form.js`, and `pdf-generator.js`; analytics remains inline in `index.html`
+- Runtime JS is split across `scripts-optimized.js`, `contact-form.js`, `pdf-generator.js`, and `resume-print.js`; analytics remains inline in `index.html`
 - Prefer `document.getElementById` over `querySelector` for perf-critical paths
 - No `console.log` left in production code
 - Browser modules may expose CommonJS exports for Node-based tests, but must still auto-initialize in the browser without bundling

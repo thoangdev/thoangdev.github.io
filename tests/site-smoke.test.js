@@ -95,9 +95,11 @@ test('homepage smoke check serves core interactive elements and scripts', async 
     assert.match(html, /<form id="contactForm"/);
     assert.match(html, /id="cf-success"/);
     assert.match(html, /id="moreDrawer"/);
+    assert.match(html, /href="#contact-form" class="drawer-link"/);
     assert.match(html, /src="js\/scripts-optimized\.js"/);
     assert.match(html, /src="js\/contact-form\.js"/);
     assert.match(html, /action="https:\/\/formspree\.io\/f\/xnjljodd"/);
+    assert.match(html, /<noscript><link rel="stylesheet" href="https:\/\/cdn\.jsdelivr\.net\/npm\/bootstrap@5\.2\.3\/dist\/css\/bootstrap\.min\.css"/);
 });
 
 test('pdf generator smoke check serves the resume launcher and module script', async function () {
@@ -110,11 +112,25 @@ test('pdf generator smoke check serves the resume launcher and module script', a
     assert.match(html, /src="\.\.\/js\/pdf-generator\.js"/);
 });
 
+test('resume pdf and 404 pages serve their direct-entry scripts and landmarks', async function () {
+    const resumeResponse = await fetch(staticServer.origin + '/assets/resume-pdf.html?print=true');
+    const resumeHtml = await resumeResponse.text();
+    const notFoundResponse = await fetch(staticServer.origin + '/404.html');
+    const notFoundHtml = await notFoundResponse.text();
+
+    assert.equal(resumeResponse.status, 200);
+    assert.match(resumeHtml, /src="\.\.\/js\/resume-print\.js"/);
+    assert.equal(notFoundResponse.status, 200);
+    assert.match(notFoundHtml, /<main class="container" id="main-content">/);
+    assert.match(notFoundHtml, /href="assets\/favicon\.ico"/);
+});
+
 test('script smoke check serves the extracted runtime modules', async function () {
     const urls = [
         '/js/scripts-optimized.js',
         '/js/contact-form.js',
-        '/js/pdf-generator.js'
+        '/js/pdf-generator.js',
+        '/js/resume-print.js'
     ];
 
     await Promise.all(urls.map(async function (url) {

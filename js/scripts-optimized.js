@@ -15,7 +15,7 @@
 
     var globalRoot = typeof globalThis !== 'undefined' ? globalThis : this;
 
-    var MORE_SECTION_IDS = ['books', 'testimonials', 'interests', 'awards', 'contact'];
+    var MORE_SECTION_IDS = ['books', 'testimonials', 'interests', 'awards', 'contact-form'];
 
     function getNavHeight(nav) {
         return nav ? nav.getBoundingClientRect().height : 64;

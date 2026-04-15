@@ -82,40 +82,6 @@
         <iframe src="resume-pdf.html" frameborder="0"></iframe>
     </div>
 
-    <script>
-        // Only show content if accessed intentionally
-        document.addEventListener('DOMContentLoaded', function() {
-            // Check if accessed directly without proper referrer or parameter
-            const urlParams = new URLSearchParams(window.location.search);
-            const isIntentional = urlParams.get('access') === 'resume' || 
-                                document.referrer.includes('thoangdev.github.io') ||
-                                window.location.hash === '#resume-pdf';
-            
-            if (!isIntentional && window.history.length > 1) {
-                // Redirect to main page if accessed accidentally
-                window.location.replace('https://thoangdev.github.io/');
-                return;
-            }
-            
-            // Auto-generate filename with current date
-            const today = new Date();
-            const dateStr = today.getFullYear() + '-' + 
-                          String(today.getMonth() + 1).padStart(2, '0') + '-' + 
-                          String(today.getDate()).padStart(2, '0');
-            document.title = `Tommy_Hoang_Resume_${dateStr}`;
-        });
-        
-        function openAndPrint() {
-            const printWindow = window.open('resume-pdf.html?print=true', '_blank');
-            if (printWindow) {
-                printWindow.focus();
-            } else {
-                // Popup blocked — navigate in current tab as fallback
-                window.location.href = 'resume-pdf.html?print=true';
-            }
-        }
-
-        document.getElementById('openResumeBtn').addEventListener('click', openAndPrint);
-    </script>
+    <script src="../js/pdf-generator.js"></script>
 </body>
 </html>

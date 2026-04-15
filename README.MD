@@ -6,6 +6,7 @@
 [![GitHub](https://img.shields.io/badge/GitHub-thoangdev-black)](https://github.com/thoangdev)
 [![Aperca LLC](https://img.shields.io/badge/Company-Aperca%20LLC-green)](https://apercallc.com)
 [![QA Vibe App](https://img.shields.io/badge/Blog-QA%20Vibe%20App-orange)](https://www.qavibeapp.com)
+[![Tests](https://github.com/thoangdev/thoangdev.github.io/actions/workflows/test.yml/badge.svg)](https://github.com/thoangdev/thoangdev.github.io/actions/workflows/test.yml)
 [![Deploy](https://github.com/thoangdev/thoangdev.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/thoangdev/thoangdev.github.io/actions/workflows/deploy.yml)
 [![IndexNow](https://github.com/thoangdev/thoangdev.github.io/actions/workflows/indexnow.yml/badge.svg)](https://github.com/thoangdev/thoangdev.github.io/actions/workflows/indexnow.yml)
 
@@ -40,7 +41,12 @@ thoangdev.github.io/
 │   ├── styles.css              # Main stylesheet
 │   └── theme.css               # Theme overrides
 ├── js/
-│   └── scripts-optimized.js    # Minified site scripts
+│   ├── scripts-optimized.js    # Navigation, drawer, smooth scroll, reveal logic
+│   ├── contact-form.js         # Contact form validation and submit handling
+│   └── pdf-generator.js        # Resume PDF access and print helper
+├── tests/
+│   ├── *.test.js               # Node-based unit, integration, and smoke tests
+│   └── helpers/                # Lightweight DOM test fakes
 ├── 8f3a7d2c9b4e1056.txt        # IndexNow key verification file
 ├── google5e85760eebc133b5.html # Google Search Console verification
 ├── sitemap.xml                 # XML sitemap (homepage + resume-pdf)
@@ -48,8 +54,31 @@ thoangdev.github.io/
 ├── 404.html                    # Custom error page
 └── .github/
     └── workflows/
+    ├── test.yml            # CI test runner for push / PR / manual
         ├── deploy.yml          # Build → inject secrets → deploy to Pages
         └── indexnow.yml        # Ping Google/Bing/Yandex via IndexNow API
+```
+
+### Test Strategy
+
+- **Unit tests** cover pure client-side helpers such as email validation, active nav state mapping, swipe thresholds, and PDF filename generation.
+- **Integration-style tests** cover DOM-driven behavior such as contact form submit states, analytics calls, drawer open/close flows, smooth scrolling, and reveal observers.
+- **Smoke tests** start a local static HTTP server and verify the real HTML pages and extracted runtime scripts are served with the expected critical elements.
+
+### Running Tests
+
+**PowerShell (Windows):**
+
+```powershell
+$files = Get-ChildItem "tests" -Recurse -Filter *.test.js | ForEach-Object { $_.FullName }
+node --test $files
+```
+
+**Bash (macOS / Linux / GitHub Actions):**
+
+```bash
+mapfile -t files < <(find tests -type f -name '*.test.js' | sort)
+node --test "${files[@]}"
 ```
 
 ### 🛠 Technical Expertise
@@ -97,11 +126,17 @@ Aperca LLC · Dispel · Cognizant · DXC Technology · insightsoftware · Dialex
 
 ### ⚙️ CI/CD & SEO Infrastructure
 
+#### Test Workflow (`.github/workflows/test.yml`)
+- Triggers on push to `main`, every pull request, and `workflow_dispatch`
+- Uses Node's built-in test runner; no npm install or package.json required
+- Runs unit, integration-style, and local static smoke tests from the `tests/` directory
+
 #### Deploy Workflow (`.github/workflows/deploy.yml`)
-- Triggers on push to `main` and `workflow_dispatch`
+- Triggers after the `CI Tests` workflow succeeds on pushes to `main`, plus `workflow_dispatch`
 - Injects `GA_MEASUREMENT_ID` secret at build time via `sed` substitution (replaces `__GA_MEASUREMENT_ID__` placeholder in `index.html`)
 - Deploys via official `actions/deploy-pages` to GitHub Pages
 - Concurrency guard prevents overlapping deployments
+- Checks out the tested commit SHA so the deployed artifact matches the validated revision
 
 **Required secret:** `GA_MEASUREMENT_ID` → your Google Analytics 4 Measurement ID (e.g. `G-XXXXXXXXXX`)
 

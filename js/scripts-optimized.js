@@ -3,189 +3,226 @@
  * Mobile-first: bottom tab bar + More drawer + section spy
  */
 
-(function () {
+(function (root, factory) {
+    if (typeof module === 'object' && module.exports) {
+        module.exports = factory();
+        return;
+    }
+
+    root.TommyPortfolioThemeScripts = factory();
+})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
     'use strict';
 
-    /* -------------------------------------------------------
-       NAV: scroll class + active section spy
-       (Drives both top nav links AND bottom tab items)
-    ------------------------------------------------------- */
-    function initNav() {
-        const nav      = document.getElementById('topNav');
-        const links    = document.querySelectorAll('.nav-menu .nav-link');
-        const tabItems = document.querySelectorAll('.bottom-tab-bar .tab-item[data-section]');
-        const moreBtn  = document.querySelector('.tab-more-btn');
+    var globalRoot = typeof globalThis !== 'undefined' ? globalThis : this;
 
-        // Scroll: add .scrolled class for glass elevation
+    var MORE_SECTION_IDS = ['books', 'testimonials', 'interests', 'awards', 'contact'];
+
+    function getNavHeight(nav) {
+        return nav ? nav.getBoundingClientRect().height : 64;
+    }
+
+    function applyActiveSectionState(id, links, tabItems, moreButton, moreSectionIds) {
+        links.forEach(function (link) {
+            var href = link.getAttribute('href');
+            link.classList.toggle('active', href === '#' + id);
+        });
+
+        tabItems.forEach(function (tab) {
+            tab.classList.toggle('active', tab.dataset.section === id);
+        });
+
+        if (moreButton) {
+            moreButton.classList.toggle('active', moreSectionIds.has(id));
+        }
+    }
+
+    function shouldCloseDrawerOnSwipe(deltaY) {
+        return deltaY > 60;
+    }
+
+    function computeScrollTarget(target, scrollY, navHeight) {
+        return target.getBoundingClientRect().top + scrollY - navHeight - 8;
+    }
+
+    function initNav(doc, win, ObserverCtor) {
+        var nav = doc.getElementById('topNav');
+        var links = Array.prototype.slice.call(doc.querySelectorAll('.nav-menu .nav-link'));
+        var tabItems = Array.prototype.slice.call(doc.querySelectorAll('.bottom-tab-bar .tab-item[data-section]'));
+        var moreButton = doc.querySelector('.tab-more-btn');
+
         if (nav) {
-            const onScroll = () => {
-                nav.classList.toggle('scrolled', window.scrollY > 20);
+            var onScroll = function () {
+                nav.classList.toggle('scrolled', win.scrollY > 20);
             };
-            window.addEventListener('scroll', onScroll, { passive: true });
+
+            win.addEventListener('scroll', onScroll, { passive: true });
             onScroll();
         }
 
-        // Section spy — highlight nav links and bottom tab items
-        const sections = Array.from(document.querySelectorAll('section[id], footer[id]'));
-        if (!sections.length) return;
+        var sections = Array.prototype.slice.call(doc.querySelectorAll('section[id], footer[id]'));
+        if (!sections.length) return null;
 
-        // Use the actual rendered nav height (accounts for safe-area-inset-top on iOS notch)
-        const navHeight = nav ? nav.getBoundingClientRect().height : 64;
+        var Observer = ObserverCtor || win.IntersectionObserver;
+        if (typeof Observer !== 'function') return null;
 
-        // Sections that map to the "More" tab
-        const moreSectionIds = new Set(['books', 'testimonials', 'interests', 'awards', 'contact']);
+        var moreSectionIds = new Set(MORE_SECTION_IDS);
+        var navHeight = getNavHeight(nav);
+        var observer = new Observer(function (entries) {
+            entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                applyActiveSectionState(entry.target.id, links, tabItems, moreButton, moreSectionIds);
+            });
+        }, {
+            rootMargin: '-' + navHeight + 'px 0px -60% 0px',
+            threshold: 0
+        });
 
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach(entry => {
-                    if (!entry.isIntersecting) return;
+        sections.forEach(function (section) {
+            observer.observe(section);
+        });
 
-                    const id = entry.target.id;
-
-                    // Update top nav links
-                    links.forEach(link => {
-                        const href = link.getAttribute('href');
-                        link.classList.toggle('active', href === `#${id}`);
-                    });
-
-                    // Update bottom tab items (direct section match)
-                    tabItems.forEach(tab => {
-                        tab.classList.toggle('active', tab.dataset.section === id);
-                    });
-
-                    // Update "More" button for overflow sections
-                    if (moreBtn) {
-                        moreBtn.classList.toggle('active', moreSectionIds.has(id));
-                    }
-                });
-            },
-            {
-                rootMargin: `-${navHeight}px 0px -60% 0px`,
-                threshold: 0,
-            }
-        );
-
-        sections.forEach(s => observer.observe(s));
+        return observer;
     }
 
-    /* -------------------------------------------------------
-       BOTTOM TAB BAR: More drawer open / close
-    ------------------------------------------------------- */
-    function initBottomTabs() {
-        const moreBtn   = document.querySelector('.tab-more-btn');
-        const drawer    = document.getElementById('moreDrawer');
-        const backdrop  = document.getElementById('moreDrawerBackdrop');
+    function initBottomTabs(doc) {
+        var moreButton = doc.querySelector('.tab-more-btn');
+        var drawer = doc.getElementById('moreDrawer');
+        var backdrop = doc.getElementById('moreDrawerBackdrop');
 
-        if (!moreBtn || !drawer || !backdrop) return;
+        if (!moreButton || !drawer || !backdrop) return null;
 
-        let isOpen = false;
+        var touchStartY = 0;
+        var isOpen = false;
 
         function openDrawer() {
             isOpen = true;
             drawer.classList.add('open');
             backdrop.classList.add('open');
-            moreBtn.setAttribute('aria-expanded', 'true');
+            moreButton.setAttribute('aria-expanded', 'true');
             drawer.setAttribute('aria-hidden', 'false');
-            document.body.style.overflow = 'hidden';
+            doc.body.style.overflow = 'hidden';
         }
 
         function closeDrawer() {
             isOpen = false;
             drawer.classList.remove('open');
             backdrop.classList.remove('open');
-            moreBtn.setAttribute('aria-expanded', 'false');
+            moreButton.setAttribute('aria-expanded', 'false');
             drawer.setAttribute('aria-hidden', 'true');
-            document.body.style.overflow = '';
+            doc.body.style.overflow = '';
         }
 
-        moreBtn.addEventListener('click', () => {
-            isOpen ? closeDrawer() : openDrawer();
+        moreButton.addEventListener('click', function () {
+            if (isOpen) {
+                closeDrawer();
+                return;
+            }
+
+            openDrawer();
         });
 
-        // Tap backdrop to close
         backdrop.addEventListener('click', closeDrawer);
-
-        // Close on any link/CTA click inside drawer
-        drawer.querySelectorAll('.drawer-link, .drawer-resume-btn, .drawer-contact-link').forEach(el => {
-            el.addEventListener('click', closeDrawer);
+        Array.prototype.slice.call(drawer.querySelectorAll('.drawer-link, .drawer-resume-btn, .drawer-contact-link')).forEach(function (element) {
+            element.addEventListener('click', closeDrawer);
         });
 
-        // Swipe down to close (touch)
-        let touchStartY = 0;
-        drawer.addEventListener('touchstart', e => {
-            touchStartY = e.touches[0].clientY;
+        drawer.addEventListener('touchstart', function (event) {
+            touchStartY = event.touches[0].clientY;
         }, { passive: true });
-        drawer.addEventListener('touchend', e => {
-            const delta = e.changedTouches[0].clientY - touchStartY;
-            if (delta > 60) closeDrawer();
+        drawer.addEventListener('touchend', function (event) {
+            var delta = event.changedTouches[0].clientY - touchStartY;
+            if (shouldCloseDrawerOnSwipe(delta)) {
+                closeDrawer();
+            }
         }, { passive: true });
 
-        // Escape key to close
-        document.addEventListener('keydown', e => {
-            if (e.key === 'Escape' && isOpen) closeDrawer();
+        doc.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && isOpen) {
+                closeDrawer();
+            }
         });
+
+        return {
+            closeDrawer: closeDrawer,
+            isOpen: function () { return isOpen; },
+            openDrawer: openDrawer
+        };
     }
 
-    /* -------------------------------------------------------
-       SMOOTH SCROLL (offset-aware anchor links)
-       Reads the actual rendered nav height (includes safe-area-inset-top
-       on notched iOS devices) instead of a fixed CSS variable.
-    ------------------------------------------------------- */
-    function initSmoothScroll() {
-        const topNav = document.getElementById('topNav');
-        const NAV_H  = () => topNav ? topNav.getBoundingClientRect().height : 64;
+    function initSmoothScroll(doc, win) {
+        var topNav = doc.getElementById('topNav');
 
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (href && href.length > 1 && href !== '#') {
-                    const target = document.querySelector(href);
-                    if (target) {
-                        e.preventDefault();
-                        const top = target.getBoundingClientRect().top + window.scrollY - NAV_H() - 8;
-                        window.scrollTo({ top, behavior: 'smooth' });
-                    }
-                }
+        Array.prototype.slice.call(doc.querySelectorAll('a[href^="#"]')).forEach(function (anchor) {
+            anchor.addEventListener('click', function (event) {
+                var href = this.getAttribute('href');
+                if (!href || href.length <= 1 || href === '#') return;
+
+                var target = doc.querySelector(href);
+                if (!target) return;
+
+                event.preventDefault();
+                win.scrollTo({
+                    top: computeScrollTarget(target, win.scrollY, getNavHeight(topNav)),
+                    behavior: 'smooth'
+                });
             });
         });
     }
 
-    /* -------------------------------------------------------
-       SCROLL REVEAL (.reveal elements)
-    ------------------------------------------------------- */
-    function initReveal() {
-        const elements = document.querySelectorAll('.reveal');
-        if (!elements.length) return;
+    function initReveal(doc, ObserverCtor) {
+        var elements = Array.prototype.slice.call(doc.querySelectorAll('.reveal'));
+        if (!elements.length) return null;
 
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            },
-            { threshold: 0.08 }
-        );
+        var Observer = ObserverCtor || (globalRoot.window && globalRoot.window.IntersectionObserver);
+        if (typeof Observer !== 'function') return null;
 
-        elements.forEach(el => observer.observe(el));
+        var observer = new Observer(function (entries) {
+            entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            });
+        }, { threshold: 0.08 });
+
+        elements.forEach(function (element) {
+            observer.observe(element);
+        });
+
+        return observer;
     }
 
-    /* -------------------------------------------------------
-       BOOT
-    ------------------------------------------------------- */
-    function boot() {
-        initNav();
-        initBottomTabs();
-        initSmoothScroll();
-        initReveal();
+    function boot(win, doc) {
+        initNav(doc, win);
+        initBottomTabs(doc);
+        initSmoothScroll(doc, win);
+        initReveal(doc);
     }
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', boot);
-    } else {
-        boot();
+    function autoBoot() {
+        if (!globalRoot.document || !globalRoot.window) return;
+
+        if (globalRoot.document.readyState === 'loading') {
+            globalRoot.document.addEventListener('DOMContentLoaded', function () {
+                boot(globalRoot.window, globalRoot.document);
+            });
+            return;
+        }
+
+        boot(globalRoot.window, globalRoot.document);
     }
 
-})();
+    autoBoot();
+
+    return {
+        MORE_SECTION_IDS: MORE_SECTION_IDS,
+        applyActiveSectionState: applyActiveSectionState,
+        boot: boot,
+        computeScrollTarget: computeScrollTarget,
+        getNavHeight: getNavHeight,
+        initBottomTabs: initBottomTabs,
+        initNav: initNav,
+        initReveal: initReveal,
+        initSmoothScroll: initSmoothScroll,
+        shouldCloseDrawerOnSwipe: shouldCloseDrawerOnSwipe
+    };
+});

@@ -31,9 +31,15 @@ thoangdev.github.io/
 │   ├── styles.css              # Main stylesheet (~12 500 lines, includes Bootstrap)
 │   └── theme.css               # Custom design tokens and component overrides
 ├── js/
-│   └── scripts-optimized.js   # Nav spy, scroll animations, contact form handler
+│   ├── scripts-optimized.js    # Nav spy, smooth scrolling, drawer, reveal effects
+│   ├── contact-form.js         # Contact form validation + Formspree submit flow
+│   └── pdf-generator.js        # Resume access guard + popup/print helper
+├── tests/
+│   ├── *.test.js               # Node built-in unit, integration, and smoke tests
+│   └── helpers/                # DOM fakes for browserless tests
 ├── .github/
 │   └── workflows/
+│       ├── test.yml            # Run test suite on push, PR, and manual dispatch
 │       ├── deploy.yml          # Build + secret injection + GitHub Pages deploy
 │       └── indexnow.yml        # Ping IndexNow/Bing after every push to main
 ├── CLAUDE.md                   # ← you are here
@@ -65,9 +71,17 @@ All user-facing content lives in **`index.html`** as semantic HTML. There is no 
 `assets/resume-pdf.html` is a **standalone** print-optimised HTML file. It mirrors `index.html` content but is formatted for Letter-size PDF output. Changes to career facts must be applied to **both** files.
 
 ### CI/CD
-Two GitHub Actions workflows run on push to `main`:
-1. **`deploy.yml`** — injects the `GA_MEASUREMENT_ID` secret (replaces `__GA_MEASUREMENT_ID__` placeholder), then deploys to GitHub Pages.
-2. **`indexnow.yml`** — bulk-submits all section URLs to `api.indexnow.org` and `www.bing.com/indexnow`.
+Three GitHub Actions workflows support the site:
+1. **`test.yml`** — runs the Node built-in test suite on push, pull request, and manual dispatch.
+2. **`deploy.yml`** — waits for successful `CI Tests` runs on `main`, injects the `GA_MEASUREMENT_ID` secret (replaces `__GA_MEASUREMENT_ID__` placeholder), then deploys to GitHub Pages.
+3. **`indexnow.yml`** — bulk-submits all section URLs to `api.indexnow.org` and `www.bing.com/indexnow`.
+
+### Testing
+- Test runner: Node's built-in `node:test`; no npm dependencies or package manifest.
+- Scope: unit tests for pure helpers, integration-style tests for DOM-driven behavior, and smoke tests served over a local static HTTP server.
+- Main test command (PowerShell): `$files = Get-ChildItem "tests" -Recurse -Filter *.test.js | ForEach-Object { $_.FullName }; node --test $files`
+- Main test command (bash / CI): `mapfile -t files < <(find tests -type f -name '*.test.js' | sort); node --test "${files[@]}"`
+- Current critical-path coverage includes navigation state, bottom drawer behavior, smooth scrolling, reveal observers, contact form validation/submission, and PDF generator access / print logic.
 
 ### Analytics
 Google Analytics ID is stored as a GitHub Actions secret (`GA_MEASUREMENT_ID`). The placeholder `__GA_MEASUREMENT_ID__` in `index.html` is replaced at deploy time. It is **never** hardcoded in source.
@@ -100,9 +114,10 @@ Powered by Formspree (`https://formspree.io/f/xnjljodd`). Endpoint is hardcoded 
 
 ### JavaScript
 - Vanilla JS only — no frameworks or npm dependencies
-- All JS is in `scripts-optimized.js` except the inline contact form handler and analytics loader in `index.html`
+- Runtime JS is split across `scripts-optimized.js`, `contact-form.js`, and `pdf-generator.js`; analytics remains inline in `index.html`
 - Prefer `document.getElementById` over `querySelector` for perf-critical paths
 - No `console.log` left in production code
+- Browser modules may expose CommonJS exports for Node-based tests, but must still auto-initialize in the browser without bundling
 
 ### Naming Conventions
 - CSS classes: kebab-case (`contact-form-wrap`, `book-cover--blog`)
@@ -121,6 +136,7 @@ Powered by Formspree (`https://formspree.io/f/xnjljodd`). Endpoint is hardcoded 
 6. **No hardcoded GA ID.** The `GA_MEASUREMENT_ID` stays as a placeholder; the secret is injected by CI.
 7. **Minimal diffs.** Change only what is necessary. Do not reformat unchanged code.
 8. **IndexNow key.** If new pages are added, include their URLs in both URL lists in `indexnow.yml`.
+9. **Run tests after JS changes.** For changes to `js/`, `assets/pdf-generator.html`, or interaction-heavy HTML, run the Node test suite before finishing.
 
 ---
 
@@ -132,6 +148,7 @@ Powered by Formspree (`https://formspree.io/f/xnjljodd`). Endpoint is hardcoded 
 | Add new section | `content-edit` + `seo-audit` to verify meta and JSON-LD |
 | SEO improvements | `seo-audit` skill |
 | Submit URLs to search engines | `indexnow-submit` skill or trigger `indexnow.yml` |
+| Validate JS / interaction changes | Run the Node test suite from `tests/` |
 | Deploy to production | `deploy` command (push to `main` triggers `deploy.yml`) |
 | Validate HTML structure | `validate-seo` command |
 | Update sitemap | Edit `sitemap.xml` directly; update `<lastmod>` |

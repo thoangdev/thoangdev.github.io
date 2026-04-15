@@ -109,23 +109,14 @@ test('initContactForm blocks unconfigured forms and shows warning state', functi
     assert.equal(status.error.hidden, true);
 });
 
-test('initContactForm treats Turnstile as optional when sitekey is not injected', async function () {
+test('initContactForm blocks submission when Turnstile sitekey is not injected', function () {
     const { doc, form, status } = createContactFormDocument(undefined, { withTurnstile: true });
-    const fetchCalls = [];
 
-    contactForm.initContactForm(doc, {
-        fetch: function () {
-            fetchCalls.push(true);
-            return Promise.resolve({ ok: true });
-        },
-        FormData: function FakeFormData() {}
-    });
+    contactForm.initContactForm(doc, {});
     form.dispatchEvent('submit', createEvent());
-    await flushPromises();
 
-    assert.deepEqual(fetchCalls, [true]);
-    assert.equal(status.unconfigured.hidden, true);
-    assert.equal(status.success.hidden, false);
+    assert.equal(status.unconfigured.hidden, false);
+    assert.equal(status.success.hidden, true);
     assert.equal(status.error.hidden, true);
 });
 
@@ -288,13 +279,8 @@ test('initContactForm requires a completed Turnstile token before fetch', async 
     assert.equal(fetchCalls.length, 1);
 });
 
-test('initContactForm falls back to native submit when Formspree requires Turnstile', async function () {
+test('initContactForm shows unconfigured warning when Formspree requires Turnstile without a local widget', async function () {
     const { doc, form, status } = createContactFormDocument();
-
-    form.submitCalled = false;
-    form.submit = function () {
-        this.submitCalled = true;
-    };
 
     contactForm.initContactForm(doc, {
         fetch: function () {
@@ -311,7 +297,7 @@ test('initContactForm falls back to native submit when Formspree requires Turnst
     form.dispatchEvent('submit', createEvent());
     await flushPromises();
 
-    assert.equal(form.submitCalled, true);
+    assert.equal(status.unconfigured.hidden, false);
     assert.equal(status.success.hidden, true);
     assert.equal(status.error.hidden, true);
 });

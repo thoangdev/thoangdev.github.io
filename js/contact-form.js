@@ -173,17 +173,6 @@
         return !!sitekey && sitekey.indexOf(TURNSTILE_PLACEHOLDER) === -1;
     }
 
-    function hideTurnstileContainer(container) {
-        if (!container || typeof container.closest !== 'function') {
-            return;
-        }
-
-        var formGroup = container.closest('.form-group--turnstile');
-        if (formGroup) {
-            formGroup.hidden = true;
-        }
-    }
-
     function setTurnstileError(turnstileState, message) {
         if (!turnstileState || !turnstileState.errorNode) {
             return;
@@ -252,13 +241,7 @@
             return turnstileState;
         }
 
-        if (!isTurnstileSitekeyConfigured(sitekey)) {
-            turnstileState.isRequired = false;
-            hideTurnstileContainer(container);
-            return turnstileState;
-        }
-
-        if (!tokenField || !errorNode || !api || typeof api.render !== 'function') {
+        if (!tokenField || !errorNode || !isTurnstileSitekeyConfigured(sitekey) || !api || typeof api.render !== 'function') {
             return turnstileState;
         }
 
@@ -286,15 +269,6 @@
         }
 
         return turnstileState;
-    }
-
-    function submitFormNatively(form) {
-        if (!form || typeof form.submit !== 'function') {
-            return false;
-        }
-
-        form.submit();
-        return true;
     }
 
     function initContactForm(doc, options) {
@@ -380,9 +354,12 @@
                                 return;
                             }
 
-                            if (submitFormNatively(form)) {
-                                return;
-                            }
+                            setStatusVisibility(doc, {
+                                'cf-success': false,
+                                'cf-error': false,
+                                'cf-unconfigured': true
+                            });
+                            return;
                         }
 
                         setSubmitState(button, false);
@@ -437,7 +414,6 @@
         setStatusVisibility: setStatusVisibility,
         setSubmitState: setSubmitState,
         setTurnstileError: setTurnstileError,
-        submitFormNatively: submitFormNatively,
         validateTurnstile: validateTurnstile,
         validateContactField: validateContactField,
         validateRequiredFields: validateRequiredFields

@@ -4,3 +4,6 @@ Disallow: /index-backup.html
 
 # Sitemap location (consumed by Google, Bing, and other crawlers)
 Sitemap: https://thoangdev.github.io/sitemap.xml
+
+# IndexNow key verification file
+# https://thoangdev.github.io/8f3a7d2c9b4e1056.txt

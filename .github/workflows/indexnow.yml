@@ -3,22 +3,82 @@ name: IndexNow — Notify Search Engines
 on:
   push:
     branches: [main]
+  # Re-submit weekly to keep freshness signals strong
+  schedule:
+    - cron: '0 6 * * 1'   # Every Monday at 06:00 UTC
+  workflow_dispatch:
+
+env:
+  SITE_URL: https://thoangdev.github.io
+  INDEXNOW_KEY: 8f3a7d2c9b4e1056
 
 jobs:
   ping-indexnow:
     runs-on: ubuntu-latest
     steps:
-      - name: Ping IndexNow (shared API endpoint — distributes to Google, Bing, Yandex, etc.)
+      # ── Bulk submission via IndexNow JSON API ─────────────────────
+      # Distributes to Google, Bing, Yandex, Seznam, Naver, and more
+      - name: Submit URL list to IndexNow (api.indexnow.org)
         run: |
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
-            "https://api.indexnow.org/indexnow?url=https://thoangdev.github.io/&key=8f3a7d2c9b4e1056")
-          echo "IndexNow API response: $STATUS"
+          PAYLOAD=$(cat <<'JSON'
+          {
+            "host": "thoangdev.github.io",
+            "key": "8f3a7d2c9b4e1056",
+            "keyLocation": "https://thoangdev.github.io/8f3a7d2c9b4e1056.txt",
+            "urlList": [
+              "https://thoangdev.github.io/",
+              "https://thoangdev.github.io/#about",
+              "https://thoangdev.github.io/#experience",
+              "https://thoangdev.github.io/#skills",
+              "https://thoangdev.github.io/#projects",
+              "https://thoangdev.github.io/#books",
+              "https://thoangdev.github.io/#awards",
+              "https://thoangdev.github.io/#contact-form",
+              "https://thoangdev.github.io/assets/resume-pdf.html"
+            ]
+          }
+          JSON
+          )
+          STATUS=$(curl -s -o /tmp/indexnow_response.txt -w "%{http_code}" \
+            -X POST "https://api.indexnow.org/indexnow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d "$PAYLOAD")
+          echo "IndexNow (api.indexnow.org) status: $STATUS"
+          cat /tmp/indexnow_response.txt || true
           if [ "$STATUS" -ne 200 ] && [ "$STATUS" -ne 202 ]; then
-            echo "Warning: IndexNow returned unexpected status $STATUS"
+            echo "::warning::IndexNow api.indexnow.org returned $STATUS"
           fi
 
-      - name: Ping Bing IndexNow directly
+      # ── Bing direct submission ────────────────────────────────────
+      - name: Submit URL list to Bing IndexNow directly
         run: |
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
-            "https://www.bing.com/indexnow?url=https://thoangdev.github.io/&key=8f3a7d2c9b4e1056")
-          echo "Bing IndexNow response: $STATUS"
+          PAYLOAD=$(cat <<'JSON'
+          {
+            "host": "thoangdev.github.io",
+            "key": "8f3a7d2c9b4e1056",
+            "keyLocation": "https://thoangdev.github.io/8f3a7d2c9b4e1056.txt",
+            "urlList": [
+              "https://thoangdev.github.io/",
+              "https://thoangdev.github.io/#about",
+              "https://thoangdev.github.io/#experience",
+              "https://thoangdev.github.io/#skills",
+              "https://thoangdev.github.io/#projects",
+              "https://thoangdev.github.io/#awards",
+              "https://thoangdev.github.io/#contact-form"
+            ]
+          }
+          JSON
+          )
+          STATUS=$(curl -s -o /tmp/bing_response.txt -w "%{http_code}" \
+            -X POST "https://www.bing.com/indexnow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d "$PAYLOAD")
+          echo "Bing IndexNow status: $STATUS"
+          cat /tmp/bing_response.txt || true
+          if [ "$STATUS" -ne 200 ] && [ "$STATUS" -ne 202 ]; then
+            echo "::warning::Bing IndexNow returned $STATUS"
+          fi
+
+      # ── Google IndexNow (via api.indexnow.org already covers Google)
+      # Explicit Google submission via Search Console API requires OAuth;
+      # api.indexnow.org relay handles Google automatically since 2023.

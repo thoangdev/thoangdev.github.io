@@ -8,14 +8,22 @@
     <!-- Homepage (canonical SPA entry point) -->
     <url>
         <loc>https://thoangdev.github.io/</loc>
-        <lastmod>2026-04-08</lastmod>
+        <lastmod>2026-04-15</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
         <image:image>
             <image:loc>https://thoangdev.github.io/assets/profile.jpg</image:loc>
-            <image:title>Tommy Hoang — Tech Lead QA Engineer &amp; Mobile Developer</image:title>
-            <image:caption>Professional headshot of Tommy Hoang, Tech Lead Quality Engineer and Mobile Developer based in New Orleans, LA.</image:caption>
+            <image:title>Tommy Hoang — QA Tech Lead | Agentic AI QA Engineer | Senior Quality Engineer</image:title>
+            <image:caption>Professional headshot of Tommy Hoang, QA Tech Lead and Agentic AI Quality Engineer with 9+ years experience. Based in New Orleans, LA. Open to remote.</image:caption>
         </image:image>
+    </url>
+
+    <!-- Resume PDF (indexable asset) -->
+    <url>
+        <loc>https://thoangdev.github.io/assets/resume-pdf.html</loc>
+        <lastmod>2026-04-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
     </url>
 
 </urlset>

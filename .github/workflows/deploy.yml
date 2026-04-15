@@ -1,0 +1,66 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Allow only one concurrent deployment
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # ── Inject environment variables ──────────────────────────────
+      - name: Inject GA_MEASUREMENT_ID
+        env:
+          GA_ID: ${{ secrets.GA_MEASUREMENT_ID }}
+        run: |
+          if [ -n "$GA_ID" ]; then
+            sed -i "s|__GA_MEASUREMENT_ID__|${GA_ID}|g" index.html
+            echo "✅ GA measurement ID injected"
+          else
+            echo "⚠️  GA_MEASUREMENT_ID secret not set — analytics disabled in this build"
+          fi
+
+      - name: Inject FORMSPREE_ENDPOINT
+        env:
+          FORMSPREE: ${{ secrets.FORMSPREE_ENDPOINT }}
+        run: |
+          if [ -n "$FORMSPREE" ]; then
+            sed -i "s|__FORMSPREE_ENDPOINT__|${FORMSPREE}|g" index.html
+            echo "✅ Formspree endpoint injected"
+          else
+            echo "⚠️  FORMSPREE_ENDPOINT secret not set — contact form will show fallback message"
+          fi
+
+      # ── Upload artifact ───────────────────────────────────────────
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

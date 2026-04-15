@@ -94,10 +94,12 @@ test('homepage smoke check serves core interactive elements and scripts', async 
     assert.equal(response.status, 200);
     assert.match(html, /<form id="contactForm"/);
     assert.match(html, /id="cf-success"/);
+    assert.match(html, /id="cf-turnstile-widget"/);
     assert.match(html, /id="moreDrawer"/);
     assert.match(html, /href="#contact-form" class="drawer-link"/);
     assert.match(html, /src="js\/scripts-optimized\.js"/);
     assert.match(html, /src="js\/contact-form\.js"/);
+    assert.match(html, /src="https:\/\/challenges\.cloudflare\.com\/turnstile\/v0\/api\.js\?render=explicit"/);
     assert.match(html, /action="https:\/\/formspree\.io\/f\/xnjljodd"/);
     assert.match(html, /<noscript><link rel="stylesheet" href="https:\/\/cdn\.jsdelivr\.net\/npm\/bootstrap@5\.2\.3\/dist\/css\/bootstrap\.min\.css"/);
 });

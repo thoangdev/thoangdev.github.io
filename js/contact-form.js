@@ -11,6 +11,7 @@
     var globalRoot = typeof globalThis !== 'undefined' ? globalThis : this;
 
     var EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    var TURNSTILE_PLACEHOLDER = '__TURNSTILE_SITE_KEY__';
 
     function trimValue(value) {
         return typeof value === 'string' ? value.trim() : '';
@@ -97,6 +98,163 @@
         });
     }
 
+    function parseResponsePayload(payload) {
+        if (!payload) return '';
+
+        if (typeof payload === 'string') {
+            try {
+                return parseResponsePayload(JSON.parse(payload));
+            } catch (error) {
+                return payload;
+            }
+        }
+
+        if (typeof payload === 'object') {
+            return payload.error || payload.message || '';
+        }
+
+        return '';
+    }
+
+    function getResponseMessage(response) {
+        if (!response) {
+            return Promise.resolve('');
+        }
+
+        if (typeof response.json === 'function') {
+            return response.json()
+                .then(parseResponsePayload)
+                .catch(function () {
+                    return '';
+                });
+        }
+
+        if (typeof response.text === 'function') {
+            return response.text()
+                .then(parseResponsePayload)
+                .catch(function () {
+                    return '';
+                });
+        }
+
+        return Promise.resolve('');
+    }
+
+    function requiresTurnstile(message) {
+        return /turnstile/i.test(trimValue(message));
+    }
+
+    function isTurnstileSitekeyConfigured(sitekey) {
+        return !!sitekey && sitekey.indexOf(TURNSTILE_PLACEHOLDER) === -1;
+    }
+
+    function setTurnstileError(turnstileState, message) {
+        if (!turnstileState || !turnstileState.errorNode) {
+            return;
+        }
+
+        turnstileState.errorNode.textContent = trimValue(message);
+    }
+
+    function clearTurnstileToken(turnstileState) {
+        if (!turnstileState || !turnstileState.tokenField) {
+            return;
+        }
+
+        turnstileState.tokenField.value = '';
+        turnstileState.tokenField.removeAttribute('aria-invalid');
+    }
+
+    function resetTurnstile(turnstileState) {
+        if (!turnstileState) {
+            return;
+        }
+
+        clearTurnstileToken(turnstileState);
+        setTurnstileError(turnstileState, '');
+
+        if (turnstileState.api && typeof turnstileState.api.reset === 'function' && turnstileState.widgetId !== null) {
+            turnstileState.api.reset(turnstileState.widgetId);
+        }
+    }
+
+    function validateTurnstile(turnstileState) {
+        if (!turnstileState || !turnstileState.isRequired) {
+            return true;
+        }
+
+        if (trimValue(turnstileState.tokenField && turnstileState.tokenField.value)) {
+            setTurnstileError(turnstileState, '');
+            turnstileState.tokenField.removeAttribute('aria-invalid');
+            return true;
+        }
+
+        if (turnstileState.tokenField) {
+            turnstileState.tokenField.setAttribute('aria-invalid', 'true');
+        }
+        setTurnstileError(turnstileState, 'Please complete the verification.');
+        return false;
+    }
+
+    function initTurnstile(doc, options) {
+        var container = doc.getElementById('cf-turnstile-widget');
+        var tokenField = doc.getElementById('cf-turnstile-response');
+        var errorNode = doc.getElementById('cf-turnstile-error');
+        var api = options.turnstile || globalRoot.turnstile;
+        var sitekey = trimValue(container && container.getAttribute('data-sitekey'));
+        var turnstileState = {
+            api: api,
+            container: container,
+            errorNode: errorNode,
+            isConfigured: false,
+            isRequired: !!container,
+            tokenField: tokenField,
+            widgetId: null
+        };
+
+        if (!container) {
+            return turnstileState;
+        }
+
+        if (!tokenField || !errorNode || !isTurnstileSitekeyConfigured(sitekey) || !api || typeof api.render !== 'function') {
+            return turnstileState;
+        }
+
+        try {
+            turnstileState.widgetId = api.render(container, {
+                sitekey: sitekey,
+                theme: trimValue(container.getAttribute('data-theme')) || 'light',
+                callback: function (token) {
+                    tokenField.value = token || '';
+                    tokenField.removeAttribute('aria-invalid');
+                    setTurnstileError(turnstileState, '');
+                },
+                'expired-callback': function () {
+                    clearTurnstileToken(turnstileState);
+                    setTurnstileError(turnstileState, 'Please complete the verification again.');
+                },
+                'error-callback': function () {
+                    clearTurnstileToken(turnstileState);
+                    setTurnstileError(turnstileState, 'Verification failed. Please try again.');
+                }
+            });
+            turnstileState.isConfigured = true;
+        } catch (error) {
+            turnstileState.isConfigured = false;
+        }
+
+        return turnstileState;
+    }
+
+    function submitFormNatively(form) {
+        if (!form || typeof form.submit !== 'function') {
+            return false;
+        }
+
+        form.submit();
+        return true;
+    }
+
     function initContactForm(doc, options) {
         options = options || {};
 
@@ -108,8 +266,9 @@
         var gtagImpl = options.gtag || globalRoot.gtag;
         var button = doc.getElementById('cf-submit');
         var action = form.getAttribute('action') || '';
+        var turnstileState = initTurnstile(doc, options);
 
-        if (!action || action.indexOf('__FORMSPREE') !== -1) {
+        if (!action || action.indexOf('__FORMSPREE') !== -1 || (turnstileState.isRequired && !turnstileState.isConfigured)) {
             setStatusVisibility(doc, {
                 'cf-success': false,
                 'cf-error': false,
@@ -137,6 +296,10 @@
                 return;
             }
 
+            if (!validateTurnstile(turnstileState)) {
+                return;
+            }
+
             setSubmitState(button, true);
 
             fetchImpl(action, {
@@ -145,10 +308,10 @@
                 body: new FormDataCtor(form)
             })
                 .then(function (response) {
-                    setSubmitState(button, false);
-
                     if (response && response.ok) {
+                        setSubmitState(button, false);
                         form.reset();
+                        resetTurnstile(turnstileState);
                         applyValidationResults(results.map(function (result) {
                             return { field: result.field, error: '' };
                         }));
@@ -165,10 +328,27 @@
                         return;
                     }
 
-                    setStatusVisibility(doc, {
-                        'cf-success': false,
-                        'cf-error': true,
-                        'cf-unconfigured': false
+                    return getResponseMessage(response).then(function (message) {
+                        if (requiresTurnstile(message)) {
+                            setSubmitState(button, false);
+
+                            if (turnstileState && turnstileState.isConfigured) {
+                                resetTurnstile(turnstileState);
+                                setTurnstileError(turnstileState, 'Please complete the verification and try again.');
+                                return;
+                            }
+
+                            if (submitFormNatively(form)) {
+                                return;
+                            }
+                        }
+
+                        setSubmitState(button, false);
+                        setStatusVisibility(doc, {
+                            'cf-success': false,
+                            'cf-error': true,
+                            'cf-unconfigured': false
+                        });
                     });
                 })
                 .catch(function () {
@@ -203,9 +383,18 @@
         EMAIL_PATTERN: EMAIL_PATTERN,
         applyValidationResults: applyValidationResults,
         getFieldErrorElement: getFieldErrorElement,
+        getResponseMessage: getResponseMessage,
         initContactForm: initContactForm,
+        initTurnstile: initTurnstile,
+        isTurnstileSitekeyConfigured: isTurnstileSitekeyConfigured,
+        parseResponsePayload: parseResponsePayload,
+        requiresTurnstile: requiresTurnstile,
+        resetTurnstile: resetTurnstile,
         setStatusVisibility: setStatusVisibility,
         setSubmitState: setSubmitState,
+        setTurnstileError: setTurnstileError,
+        submitFormNatively: submitFormNatively,
+        validateTurnstile: validateTurnstile,
         validateContactField: validateContactField,
         validateRequiredFields: validateRequiredFields
     };

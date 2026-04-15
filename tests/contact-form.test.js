@@ -19,6 +19,8 @@ function createField(options) {
 }
 
 function createContactFormDocument(action) {
+    var options = arguments.length > 1 && arguments[1] ? arguments[1] : {};
+    const withTurnstile = !!options.withTurnstile;
     const nameField = createField({ type: 'text', value: 'Jane Doe' });
     const emailField = createField({ type: 'email', value: 'jane@example.com' });
     const selectField = createField({ type: 'select-one', value: 'Job Opportunity' });
@@ -36,6 +38,13 @@ function createContactFormDocument(action) {
     const success = new FakeElement({ hidden: true });
     const error = new FakeElement({ hidden: true });
     const unconfigured = new FakeElement({ hidden: true });
+    const turnstileWidget = withTurnstile
+        ? new FakeElement({
+            attributes: { 'data-sitekey': options.turnstileSitekey || '__TURNSTILE_SITE_KEY__', 'data-theme': 'light' }
+        })
+        : null;
+    const turnstileToken = withTurnstile ? new FakeElement({ type: 'hidden', value: '' }) : null;
+    const turnstileError = withTurnstile ? new FakeElement({ textContent: '' }) : null;
 
     const form = new FakeElement({ attributes: { action: action || 'https://formspree.io/f/xnjljodd' } });
     form.querySelectorAllMap = {
@@ -46,15 +55,21 @@ function createContactFormDocument(action) {
         this.resetCalled = true;
     };
 
-    const doc = new FakeDocument({
-        elementsById: {
-            contactForm: form,
-            'cf-submit': submitButton,
-            'cf-success': success,
-            'cf-error': error,
-            'cf-unconfigured': unconfigured
-        }
-    });
+    const elementsById = {
+        contactForm: form,
+        'cf-submit': submitButton,
+        'cf-success': success,
+        'cf-error': error,
+        'cf-unconfigured': unconfigured
+    };
+
+    if (withTurnstile) {
+        elementsById['cf-turnstile-widget'] = turnstileWidget;
+        elementsById['cf-turnstile-response'] = turnstileToken;
+        elementsById['cf-turnstile-error'] = turnstileError;
+    }
+
+    const doc = new FakeDocument({ elementsById: elementsById });
 
     return {
         doc,
@@ -66,7 +81,8 @@ function createContactFormDocument(action) {
             messageField
         },
         status: { success, error, unconfigured },
-        submit: { submitButton, submitLabel, submitSpinner }
+        submit: { submitButton, submitLabel, submitSpinner },
+        turnstile: { turnstileWidget, turnstileToken, turnstileError }
     };
 }
 
@@ -84,6 +100,17 @@ test('validateRequiredFields returns required and email errors', function () {
 
 test('initContactForm blocks unconfigured forms and shows warning state', function () {
     const { doc, form, status } = createContactFormDocument('__FORMSPREE__');
+
+    contactForm.initContactForm(doc, {});
+    form.dispatchEvent('submit', createEvent());
+
+    assert.equal(status.unconfigured.hidden, false);
+    assert.equal(status.success.hidden, true);
+    assert.equal(status.error.hidden, true);
+});
+
+test('initContactForm blocks submission when Turnstile sitekey is not injected', function () {
+    const { doc, form, status } = createContactFormDocument(undefined, { withTurnstile: true });
 
     contactForm.initContactForm(doc, {});
     form.dispatchEvent('submit', createEvent());
@@ -124,9 +151,23 @@ test('initContactForm applies validation errors to wrapped fields and skips fetc
 });
 
 test('initContactForm handles successful submissions and analytics', async function () {
-    const { doc, form, fields, status, submit } = createContactFormDocument();
+    const { doc, form, fields, status, submit, turnstile } = createContactFormDocument(undefined, {
+        withTurnstile: true,
+        turnstileSitekey: '1x00000000000000000000AA'
+    });
     const analyticsCalls = [];
     const formDataCalls = [];
+    const turnstileApi = {
+        render: function (container, config) {
+            config.callback('verified-token');
+            this.widgetContainer = container;
+            this.config = config;
+            return 'widget-1';
+        },
+        reset: function (widgetId) {
+            this.resetWidgetId = widgetId;
+        }
+    };
 
     contactForm.initContactForm(doc, {
         fetch: function () {
@@ -137,7 +178,8 @@ test('initContactForm handles successful submissions and analytics', async funct
         },
         gtag: function () {
             analyticsCalls.push(Array.from(arguments));
-        }
+        },
+        turnstile: turnstileApi
     });
 
     form.dispatchEvent('submit', createEvent());
@@ -157,17 +199,95 @@ test('initContactForm handles successful submissions and analytics', async funct
     assert.equal(status.error.hidden, true);
     assert.equal(fields.emailField.errorNode.textContent, '');
     assert.equal(fields.emailField.field.getAttribute('aria-invalid'), null);
+    assert.equal(turnstileApi.widgetContainer, turnstile.turnstileWidget);
+    assert.equal(turnstileApi.resetWidgetId, 'widget-1');
+    assert.equal(turnstile.turnstileToken.value, '');
     assert.deepEqual(analyticsCalls[0], ['event', 'contact_form_submit', { event_category: 'engagement' }]);
 });
 
+test('initContactForm requires a completed Turnstile token before fetch', async function () {
+    const { doc, form, turnstile } = createContactFormDocument(undefined, {
+        withTurnstile: true,
+        turnstileSitekey: '1x00000000000000000000AA'
+    });
+    const fetchCalls = [];
+    let turnstileConfig;
+
+    contactForm.initContactForm(doc, {
+        fetch: function () {
+            fetchCalls.push(true);
+            return Promise.resolve({ ok: true });
+        },
+        FormData: function FakeFormData() {},
+        turnstile: {
+            render: function (container, config) {
+                turnstileConfig = config;
+                return 'widget-2';
+            },
+            reset: function () {}
+        }
+    });
+
+    form.dispatchEvent('submit', createEvent());
+    await flushPromises();
+
+    assert.deepEqual(fetchCalls, []);
+    assert.equal(turnstile.turnstileError.textContent, 'Please complete the verification.');
+
+    turnstileConfig.callback('verified-token');
+    form.dispatchEvent('submit', createEvent());
+    await flushPromises();
+
+    assert.equal(fetchCalls.length, 1);
+});
+
+test('initContactForm falls back to native submit when Formspree requires Turnstile', async function () {
+    const { doc, form, status } = createContactFormDocument();
+
+    form.submitCalled = false;
+    form.submit = function () {
+        this.submitCalled = true;
+    };
+
+    contactForm.initContactForm(doc, {
+        fetch: function () {
+            return Promise.resolve({
+                ok: false,
+                json: function () {
+                    return Promise.resolve({ error: 'Please complete the Turnstile' });
+                }
+            });
+        },
+        FormData: function FakeFormData() {}
+    });
+
+    form.dispatchEvent('submit', createEvent());
+    await flushPromises();
+
+    assert.equal(form.submitCalled, true);
+    assert.equal(status.success.hidden, true);
+    assert.equal(status.error.hidden, true);
+});
+
 test('initContactForm restores button state on server and network failures', async function () {
-    const serverCase = createContactFormDocument();
+    const serverCase = createContactFormDocument(undefined, {
+        withTurnstile: true,
+        turnstileSitekey: '1x00000000000000000000AA'
+    });
+    const serverTurnstile = {
+        render: function (container, config) {
+            config.callback('verified-token');
+            return 'widget-3';
+        },
+        reset: function () {}
+    };
 
     contactForm.initContactForm(serverCase.doc, {
         fetch: function () {
             return Promise.resolve({ ok: false });
         },
-        FormData: function FakeFormData() {}
+        FormData: function FakeFormData() {},
+        turnstile: serverTurnstile
     });
 
     serverCase.form.dispatchEvent('submit', createEvent());
@@ -177,13 +297,24 @@ test('initContactForm restores button state on server and network failures', asy
     assert.equal(serverCase.status.success.hidden, true);
     assert.equal(serverCase.status.error.hidden, false);
 
-    const networkCase = createContactFormDocument();
+    const networkCase = createContactFormDocument(undefined, {
+        withTurnstile: true,
+        turnstileSitekey: '1x00000000000000000000AA'
+    });
+    const networkTurnstile = {
+        render: function (container, config) {
+            config.callback('verified-token');
+            return 'widget-4';
+        },
+        reset: function () {}
+    };
 
     contactForm.initContactForm(networkCase.doc, {
         fetch: function () {
             return Promise.reject(new Error('network error'));
         },
-        FormData: function FakeFormData() {}
+        FormData: function FakeFormData() {},
+        turnstile: networkTurnstile
     });
 
     networkCase.form.dispatchEvent('submit', createEvent());

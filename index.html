@@ -62,9 +62,11 @@
         <meta name="theme-color" content="#2563eb" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="preconnect" href="https://challenges.cloudflare.com" />
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />
         <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
         <link rel="dns-prefetch" href="//cdn.jsdelivr.net" />
+        <link rel="dns-prefetch" href="//challenges.cloudflare.com" />
         <!-- Preload LCP hero image -->
         <link rel="preload" as="image" href="assets/profile.jpg" fetchpriority="high" />
 
@@ -1473,6 +1475,16 @@
                                     <span class="field-error" role="alert" aria-live="polite"></span>
                                 </div>
 
+                                <div class="form-group form-group--turnstile">
+                                    <input type="hidden" id="cf-turnstile-response" name="cf-turnstile-response" value="" />
+                                    <div id="cf-turnstile-widget"
+                                         class="turnstile-widget"
+                                         data-sitekey="__TURNSTILE_SITE_KEY__"
+                                         data-theme="light"
+                                         aria-live="polite"></div>
+                                    <span class="field-error" id="cf-turnstile-error" role="alert" aria-live="polite"></span>
+                                </div>
+
                                 <button type="submit" class="btn contact-submit" id="cf-submit">
                                     <span class="submit-label">
                                         <i class="fas fa-paper-plane" aria-hidden="true"></i>
@@ -1493,7 +1505,7 @@
                                 </div>
                                 <div id="cf-unconfigured" class="form-status form-status--warning" role="alert" aria-live="polite" hidden>
                                     <i class="fas fa-info-circle" aria-hidden="true"></i>
-                                    <span>Form not yet configured. Reach out via <a href="mailto:hoangtommyquoc@gmail.com">email</a> or <a href="https://linkedin.com/in/tommyqhoang" target="_blank" rel="noopener noreferrer">LinkedIn</a>.</span>
+                                    <span>Form verification is not configured in this build. Reach out via <a href="mailto:hoangtommyquoc@gmail.com">email</a> or <a href="https://linkedin.com/in/tommyqhoang" target="_blank" rel="noopener noreferrer">LinkedIn</a>.</span>
                                 </div>
                             </form>
                         </div>
@@ -1656,6 +1668,7 @@
                 crossorigin="anonymous" defer></script>
         <!-- Theme scripts -->
         <script src="js/scripts-optimized.js" defer></script>
+        <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" defer></script>
         <script src="js/contact-form.js" defer></script>
     </body>
 </html>

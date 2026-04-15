@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
 
@@ -31,15 +31,23 @@ jobs:
         uses: actions/configure-pages@v5
 
       # ── Inject environment variables ──────────────────────────────
-      - name: Inject GA_MEASUREMENT_ID
+      - name: Inject GA_MEASUREMENT_ID and TURNSTILE_SITE_KEY
         env:
           GA_ID: ${{ secrets.GA_MEASUREMENT_ID }}
+          TURNSTILE_SITE_KEY: ${{ secrets['TURNSTILE_SITE_KEY'] }}
         run: |
           if [ -n "$GA_ID" ]; then
             sed -i "s|__GA_MEASUREMENT_ID__|${GA_ID}|g" index.html
             echo "✅ GA measurement ID injected"
           else
             echo "⚠️  GA_MEASUREMENT_ID secret not set — analytics disabled in this build"
+          fi
+
+          if [ -n "$TURNSTILE_SITE_KEY" ]; then
+            sed -i "s|__TURNSTILE_SITE_KEY__|${TURNSTILE_SITE_KEY}|g" index.html
+            echo "✅ Turnstile site key injected"
+          else
+            echo "⚠️  TURNSTILE_SITE_KEY secret not set — contact form verification disabled in this build"
           fi
 
       # ── Upload artifact ───────────────────────────────────────────

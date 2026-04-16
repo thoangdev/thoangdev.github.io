@@ -5,618 +5,299 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow" />
     <title>Tommy Hoang - Senior Lead QA Engineer Resume</title>
-    <!-- Google Fonts must be a <link> element; @import inside <style> is ignored after @page rules -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
     <style>
         @page {
             size: letter;
-            margin: 0;
-        }
-
-        :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --accent: #0f172a;
-            --muted: #64748b;
-            --chip-bg: rgba(37, 99, 235, 0.12);
-            --chip-text: #1d4ed8;
-            --border: rgba(15, 23, 42, 0.12);
-            --shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+            margin: 0.5in;
         }
 
         * {
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
         }
 
         body {
-            font-family: 'Inter', Arial, sans-serif;
-            font-size: 10px;
-            line-height: 1.4;
-            color: #0f172a;
-            background: #f1f5f9;
             margin: 0;
-            padding: 0;
+            background: #ffffff;
+            color: #111827;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 11px;
+            line-height: 1.4;
         }
 
         .container {
             width: 100%;
             max-width: 7.5in;
             margin: 0 auto;
-            padding: 16px 20px;
-            background: #ffffff;
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border);
+            padding: 0.35in 0.4in;
         }
 
         .header {
-            text-align: center;
-            margin-bottom: 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
+            border-bottom: 2px solid #d1d5db;
+            padding-bottom: 10px;
         }
 
         .name {
-            font-family: 'Poppins', 'Inter', sans-serif;
-            font-size: 24px;
-            letter-spacing: 1.2px;
+            margin: 0;
+            font-size: 26px;
+            line-height: 1.1;
             font-weight: 700;
-            color: var(--accent);
+            letter-spacing: 0.5px;
         }
 
-        .title {
+        .headline {
+            margin: 6px 0 0;
             font-size: 12px;
-            font-weight: 600;
-            color: var(--primary-dark);
-            letter-spacing: 0.6px;
+            font-weight: 700;
         }
 
-        .contact {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 6px 10px;
-            font-size: 9px;
-            color: var(--muted);
+        .contact-line {
+            margin: 5px 0 0;
+            color: #374151;
         }
 
-        .contact > * {
-            position: relative;
-        }
-
-        .contact > *:not(:last-child)::after {
-            content: '•';
-            margin-left: 10px;
-            color: var(--border);
-        }
-
-        .contact a {
-            color: var(--primary-dark);
+        .contact-line a {
+            color: #111827;
             text-decoration: none;
-            font-weight: 600;
-        }
-
-        .contact a:hover {
-            text-decoration: underline;
         }
 
         .section {
-            margin-bottom: 12px;
-            page-break-inside: auto;
-            break-inside: auto;
+            margin-top: 14px;
+            page-break-inside: avoid;
+            break-inside: avoid;
         }
 
         .section-title {
-            font-size: 11px;
+            margin: 0 0 6px;
+            padding-bottom: 3px;
+            border-bottom: 1px solid #d1d5db;
+            font-size: 12px;
             font-weight: 700;
+            letter-spacing: 0.4px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--accent);
-            margin-bottom: 8px;
-            position: relative;
-            padding-bottom: 4px;
         }
 
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 56px;
-            height: 3px;
-            border-radius: 999px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        .summary,
+        .competency-list,
+        .plain-list,
+        .job-list {
+            margin: 0;
         }
 
-        .summary {
-            text-align: justify;
-            color: #1f2937;
+        .summary-note {
+            margin-top: 5px;
         }
 
-        .summary-highlights {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px 8px;
-            margin-top: 8px;
+        .competency-list,
+        .plain-list,
+        .job-list {
+            padding-left: 18px;
         }
 
-        .summary-highlights span {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 4px 10px;
-            border-radius: 999px;
-            background: var(--chip-bg);
-            color: var(--chip-text);
-            font-size: 9px;
-            font-weight: 600;
-        }
-
-        .summary-highlights span::before {
-            content: '•';
-            font-size: 14px;
-        }
-
-        .job {
-            margin-bottom: 8px;
-            page-break-inside: avoid;
-            break-inside: avoid;
-        }
-
-        .job-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
+        .plain-list li,
+        .job-list li,
+        .competency-list li {
             margin-bottom: 4px;
         }
 
-        .job-title {
-            font-weight: 700;
-            font-size: 10.5px;
-            color: var(--accent);
-        }
-
-        .company {
-            color: var(--primary-dark);
-            font-weight: 600;
-            font-size: 10px;
-        }
-
-        .duration {
-            color: var(--muted);
-            font-size: 9px;
-            font-style: italic;
-        }
-
-        .description {
-            margin-top: 3px;
-            margin-left: 10px;
-        }
-
-        .description ul {
-            list-style: none;
-        }
-
-        .description li {
-            margin-bottom: 1px;
-            padding-left: 10px;
-            position: relative;
-        }
-
-        .description li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 6px;
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background: var(--primary);
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 8px;
-            margin-top: 4px;
-        }
-
-        .skills-category {
-            margin-bottom: 3px;
-        }
-
-        .skills-category-title {
-            font-weight: 600;
-            color: var(--accent);
-            margin-bottom: 2px;
-            font-size: 9.5px;
-        }
-
-        .skills-list {
-            font-size: 9px;
-            color: #1f2937;
-            line-height: 1.3;
-        }
-
-        .education-item {
-            margin-bottom: 10px;
+        .job {
+            margin-top: 10px;
             page-break-inside: avoid;
             break-inside: avoid;
         }
 
-        .degree {
+        .job:first-of-type {
+            margin-top: 0;
+        }
+
+        .job-title {
+            margin: 0;
+            font-size: 12px;
             font-weight: 700;
-            color: var(--accent);
         }
 
-        .school {
-            color: var(--primary-dark);
-            font-weight: 600;
+        .job-meta {
+            margin: 2px 0 4px;
+            color: #374151;
+            font-weight: 700;
         }
 
-        .achievements {
-            margin-top: 6px;
+        .education-item {
+            margin-bottom: 8px;
+            page-break-inside: avoid;
+            break-inside: avoid;
         }
 
-        .achievements ul {
-            list-style: none;
+        .education-line {
+            margin: 0;
+            font-weight: 700;
         }
 
-        .achievements li {
-            margin-bottom: 3px;
-            padding-left: 14px;
-            position: relative;
-        }
-
-        .achievements li::before {
-            content: '★';
-            color: #f59e0b;
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
-
-        .private-note {
-            font-size: 10px;
-            color: var(--muted);
-            font-style: italic;
-            margin-top: 4px;
-        }
-
-        a {
-            color: var(--primary-dark);
+        .education-meta {
+            margin: 2px 0 0;
+            color: #374151;
         }
 
         @media print {
-            * {
-                print-color-adjust: exact;
-                -webkit-print-color-adjust: exact;
-            }
-
             body {
-                background: #ffffff;
-                margin: 0;
-                padding: 0;
+                font-size: 10.5px;
             }
 
             .container {
-                box-shadow: none;
-                border-radius: 0;
-                border: none;
-                max-width: 100%;
-                width: 100%;
-                /* This creates the margin effect - 0.4in all around */
-                padding: 0.4in;
-                margin: 0;
-                overflow: visible;
-            }
-
-            .header {
-                margin-bottom: 8px;
-                gap: 4px;
-            }
-
-            .name {
-                font-size: 22px;
-            }
-
-            .title {
-                font-size: 11px;
-            }
-
-            .contact {
-                font-size: 8.5px;
+                max-width: none;
+                padding: 0;
             }
 
             .section {
-                margin-bottom: 8px;
-                page-break-inside: auto;
-                break-inside: auto;
-            }
-
-            .section-title,
-            .job-header,
-            .skills-category-title {
-                page-break-after: avoid;
-                break-after: avoid;
-            }
-
-            .skills-grid,
-            .achievements,
-            .description,
-            .skills-category,
-            .private-note {
-                page-break-inside: auto;
-                break-inside: auto;
-            }
-
-            .section-title {
-                margin-bottom: 5px;
-                font-size: 10px;
-            }
-
-            .section-title::after {
-                background: var(--primary);
-            }
-
-            .job {
-                margin-bottom: 6px;
-            }
-
-            .summary {
-                line-height: 1.3;
-            }
-
-            .description {
-                margin-left: 8px;
-            }
-
-            .description li {
-                margin-bottom: 1px;
+                margin-top: 12px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="name">TOMMY HOANG</div>
-            <div class="title">Senior/Lead QA Engineer · AI-Driven Automation Leader · Release Risk Reduction at Scale</div>
-            <div class="contact">
-                <span>New Orleans, LA | Remote | Open to Relocation: Chicago, IL · Dallas, TX · Salt Lake City, UT</span>
-                <span>(504) 453-8178</span>
-                <a href="mailto:hoangtommyquoc@gmail.com">hoangtommyquoc@gmail.com</a>
-                <a href="https://linkedin.com/in/tommyqhoang">linkedin.com/in/tommyqhoang</a>
-                <a href="https://github.com/thoangdev">github.com/thoangdev</a>
-                <a href="https://thoangdev.github.io/">thoangdev.github.io</a>
-            </div>
-        </div>
+    <main class="container">
+        <header class="header">
+            <h1 class="name">TOMMY HOANG</h1>
+            <p class="headline">Senior/Lead QA Engineer | AI-Driven Automation Leader | Release Risk Reduction at Scale</p>
+            <p class="contact-line">New Orleans, LA | Remote | Open to Relocation: Chicago, IL; Dallas, TX; Salt Lake City, UT</p>
+            <p class="contact-line">(504) 453-8178 | <a href="mailto:hoangtommyquoc@gmail.com">hoangtommyquoc@gmail.com</a> | <a href="https://linkedin.com/in/tommyqhoang">linkedin.com/in/tommyqhoang</a> | <a href="https://github.com/thoangdev">github.com/thoangdev</a> | <a href="https://thoangdev.github.io/">thoangdev.github.io</a></p>
+        </header>
 
-        <div class="section">
-            <div class="section-title">Professional Summary</div>
-            <div class="summary">
-                Senior QA leader with 9+ years building AI-powered automation, release gates, and compliance-ready quality systems across fintech, streaming, and enterprise SaaS. Reduced manual testing 70%, raised API coverage from 65% to 92%, cut root-cause analysis time 40%, and built an agentic QA platform with Claude, OpenAI Codex, and Playwright to speed test creation and strengthen release decisions.
-            </div>
-            <div class="summary-highlights">
-                <span>70% Less Manual Testing</span>
-                <span>65% to 92% API Coverage</span>
-                <span>60% Faster Test Development</span>
-                <span>AI QA Orchestration</span>
-                <span>PCI DSS · SOC 2 · OWASP</span>
-                <span>CI/CD · DevSecOps</span>
-            </div>
-        </div>
+        <section class="section" aria-labelledby="summary-title">
+            <h2 class="section-title" id="summary-title">Professional Summary</h2>
+            <p class="summary">Senior QA leader with 9+ years building AI-powered automation, release gates, and compliance-ready quality systems across fintech, streaming, and enterprise SaaS. Reduced manual testing 70%, raised API coverage from 65% to 92%, cut root-cause analysis time 40%, and built an agentic QA platform with Claude, OpenAI Codex, and Playwright to speed test creation and strengthen release decisions.</p>
+            <p class="summary summary-note">Selected highlights: 70% less manual testing; API coverage improved from 65% to 92%; 60% faster test development; AI QA orchestration; PCI DSS, SOC 2, and OWASP validation; CI/CD and DevSecOps leadership.</p>
+        </section>
 
-        <div class="section">
-            <div class="section-title">Core Competencies</div>
-            <div class="skills-grid">
-                <div>
-                    <div class="skills-category">
-                        <div class="skills-category-title">AI-Driven QA Leadership</div>
-                        <div class="skills-list">Agentic AI QA, AI-assisted test generation, release strategy, defect triage automation, quality program leadership, cross-functional stakeholder alignment</div>
-                    </div>
-                    <div class="skills-category">
-                        <div class="skills-category-title">Automation &amp; Framework Design</div>
-                        <div class="skills-list">Playwright (TypeScript), Robot Framework, Selenium WebDriver, PyTest, API and UI test architecture, parallel execution, CI quality gates, TypeScript, JavaScript, Python</div>
-                    </div>
-                    <div class="skills-category">
-                        <div class="skills-category-title">Performance, Security &amp; Compliance</div>
-                        <div class="skills-list">K6, OWASP ZAP, PCI DSS, SOC 2, HIPAA, compliance audit, security regression validation, risk-based testing, performance baselines</div>
-                    </div>
-                    <div class="skills-category">
-                        <div class="skills-category-title">Delivery &amp; Platform Stack</div>
-                        <div class="skills-list">GitHub Actions, Azure DevOps, Jenkins, Docker, Kubernetes, AWS, PostgreSQL, JIRA, Zephyr, Confluence, Sentry, PostHog</div>
-                    </div>
-                </div>
-                <div>
-                    <div class="skills-category">
-                        <div class="skills-category-title">Selective Supporting Tools</div>
-                        <div class="skills-list">Claude, OpenAI Codex, GitHub Copilot, Playwright MCP, REST, GraphQL, Postman, Appium, React Native, Flutter, SQL, Bash/Shell</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <section class="section" aria-labelledby="competencies-title">
+            <h2 class="section-title" id="competencies-title">Core Competencies</h2>
+            <ul class="competency-list">
+                <li><strong>AI-Driven QA Leadership:</strong> Agentic AI QA, AI-assisted test generation, release strategy, defect triage automation, quality program leadership, cross-functional stakeholder alignment.</li>
+                <li><strong>Automation and Framework Design:</strong> Playwright (TypeScript), Robot Framework, Selenium WebDriver, PyTest, API and UI test architecture, parallel execution, CI quality gates, TypeScript, JavaScript, Python.</li>
+                <li><strong>Performance, Security, and Compliance:</strong> K6, OWASP ZAP, PCI DSS, SOC 2, HIPAA, compliance audit, security regression validation, risk-based testing, performance baselines.</li>
+                <li><strong>Delivery and Platform Stack:</strong> GitHub Actions, Azure DevOps, Jenkins, Docker, Kubernetes, AWS, PostgreSQL, JIRA, Zephyr, Confluence, Sentry, PostHog.</li>
+                <li><strong>Supporting Tools:</strong> Claude, OpenAI Codex, GitHub Copilot, Playwright MCP, REST, GraphQL, Postman, Appium, React Native, Flutter, SQL, Bash/Shell.</li>
+            </ul>
+        </section>
 
-        <div class="section">
-            <div class="section-title">Professional Experience</div>
-            
-            <div class="job">
-                <div class="job-header">
-                    <div>
-                        <div class="job-title">QA Tech Lead, Agentic AI QA Platform</div>
-                        <div class="company">Aperca LLC</div>
-                    </div>
-                    <div class="duration">November 2025 – Present</div>
-                </div>
-                <div class="description">
-                    <ul>
-                        <li>Built an <strong>agentic AI QA platform</strong> that turns requirements into executable tests, defects, and release signals with minimal manual handoff</li>
-                        <li>Used <strong>Claude</strong> for requirement reasoning and failure analysis, and <strong>OpenAI Codex</strong> for Playwright test generation and refactoring</li>
-                        <li>Designed a <strong>swappable agents/workflows/skills architecture</strong> so models and execution targets changed without platform rewrites</li>
-                        <li>Automated <strong>JIRA defect creation</strong> with structured outputs and GitHub Actions pipelines for CI-ready quality enforcement</li>
-                        <li>Added <strong>Playwright MCP</strong> to cut test authoring time <strong>60%</strong> through context-aware AI generation</li>
-                        <li>Founded Aperca LLC and shipped products to <strong>10,000+ downloads</strong> with a <strong>4.8★</strong> average rating</li>
-                    </ul>
-                </div>
-            </div>
+        <section class="section" aria-labelledby="experience-title">
+            <h2 class="section-title" id="experience-title">Professional Experience</h2>
 
-            <div class="job">
-                <div class="job-header">
-                    <div>
-                        <div class="job-title">Senior QA Engineer, AI-Augmented Automation &amp; Security</div>
-                        <div class="company">Dispel</div>
-                    </div>
-                    <div class="duration">June 2025 – November 2025</div>
-                </div>
-                <div class="description">
-                    <ul>
-                        <li>Built a <strong>K6 + Docker + Grafana/InfluxDB framework</strong> for load, stress, and spike testing across secure product lines</li>
-                        <li>Expanded Robot Framework + Playwright regression depth while reducing defect escape rate <strong>35%</strong></li>
-                        <li>Integrated <strong>OWASP ZAP</strong> and deterministic PostgreSQL test data into CI/CD for compliance-grade security validation</li>
-                        <li>Used <strong>Playwright MCP + Claude + GitHub Copilot</strong> to cut test development time <strong>60%</strong></li>
-                        <li>Added AI-assisted code review and codebase analysis to catch regression-causing changes before merge</li>
-                        <li>Built Dispel Observability Hub to centralize uptime, SLA routing, and executive incident reporting</li>
-                    </ul>
-                </div>
-            </div>
+            <article class="job">
+                <h3 class="job-title">QA Tech Lead, Agentic AI QA Platform</h3>
+                <p class="job-meta">Aperca LLC | November 2025 - Present</p>
+                <ul class="job-list">
+                    <li>Built an agentic AI QA platform that turns requirements into executable tests, defects, and release signals with minimal manual handoff.</li>
+                    <li>Used Claude for requirement reasoning and failure analysis, and OpenAI Codex for Playwright test generation and refactoring.</li>
+                    <li>Designed a swappable agents, workflows, and skills architecture so models and execution targets changed without platform rewrites.</li>
+                    <li>Automated JIRA defect creation with structured outputs and GitHub Actions pipelines for CI-ready quality enforcement.</li>
+                    <li>Added Playwright MCP to cut test authoring time 60% through context-aware AI generation.</li>
+                    <li>Founded Aperca LLC and shipped products to 10,000+ downloads with a 4.8-star average rating.</li>
+                </ul>
+            </article>
 
-            <div class="job">
-                <div class="job-header">
-                    <div>
-                        <div class="job-title">Technical Lead (QA), Fraud, PCI &amp; Payment Systems</div>
-                        <div class="company">Cognizant, Client: AT&amp;T / DirecTV</div>
-                    </div>
-                    <div class="duration">December 2023 – June 2025</div>
-                </div>
-                <div class="description">
-                    <ul>
-                        <li>Owned <strong>fraud, payments, and PCI QA</strong> for AT&amp;T DirecTV billing flows with direct financial and compliance exposure</li>
-                        <li>Used <strong>GenAI</strong> to map edge cases across refunds, chargebacks, webhooks, and fraud paths, raising API coverage from <strong>65% to 92%</strong></li>
-                        <li>Cut <strong>root-cause analysis time 40%</strong> with AI-assisted stack-trace parsing and targeted regression generation</li>
-                        <li>Ran <strong>AI-backed code reviews</strong> to catch security gaps, PCI issues, and fraud risks before release</li>
-                        <li>Delivered <strong>zero production defects</strong> across major payment launches while leading defect trends and knowledge management</li>
-                        <li>Led Agile execution and mentored junior QA engineers across cross-functional teams</li>
-                    </ul>
-                </div>
-            </div>
+            <article class="job">
+                <h3 class="job-title">Senior QA Engineer, AI-Augmented Automation and Security</h3>
+                <p class="job-meta">Dispel | June 2025 - November 2025</p>
+                <ul class="job-list">
+                    <li>Built a K6, Docker, and Grafana/InfluxDB framework for load, stress, and spike testing across secure product lines.</li>
+                    <li>Expanded Robot Framework and Playwright regression depth while reducing defect escape rate 35%.</li>
+                    <li>Integrated OWASP ZAP and deterministic PostgreSQL test data into CI/CD for compliance-grade security validation.</li>
+                    <li>Used Playwright MCP, Claude, and GitHub Copilot to cut test development time 60%.</li>
+                    <li>Added AI-assisted code review and codebase analysis to catch regression-causing changes before merge.</li>
+                    <li>Built Dispel Observability Hub to centralize uptime, SLA routing, and executive incident reporting.</li>
+                </ul>
+            </article>
 
-            <div class="job">
-                <div class="job-header">
-                    <div>
-                        <div class="job-title">Test Manager, Streaming QA &amp; Automation</div>
-                        <div class="company">DXC Technology</div>
-                    </div>
-                    <div class="duration">May 2022 – October 2023</div>
-                </div>
-                <div class="description">
-                    <ul>
-                        <li>Led QA strategy for <strong>TVOD and MDU launches</strong> that required faster release cycles without production fallout</li>
-                        <li>Cut manual regression effort <strong>70%</strong> by automating UI and API coverage for streaming releases</li>
-                        <li>Added Dockerized parallel execution and CI quality gates to shorten feedback loops and speed sign-off</li>
-                        <li>Owned risk-based planning, triage, release decisions, and stakeholder reporting across multiple launch tracks</li>
-                    </ul>
-                </div>
-            </div>
+            <article class="job">
+                <h3 class="job-title">Technical Lead (QA), Fraud, PCI, and Payment Systems</h3>
+                <p class="job-meta">Cognizant, Client: AT&amp;T / DirecTV | December 2023 - June 2025</p>
+                <ul class="job-list">
+                    <li>Owned fraud, payments, and PCI QA for AT&amp;T DirecTV billing flows with direct financial and compliance exposure.</li>
+                    <li>Used GenAI to map edge cases across refunds, chargebacks, webhooks, and fraud paths, raising API coverage from 65% to 92%.</li>
+                    <li>Cut root-cause analysis time 40% with AI-assisted stack-trace parsing and targeted regression generation.</li>
+                    <li>Ran AI-backed code reviews to catch security gaps, PCI issues, and fraud risks before release.</li>
+                    <li>Delivered zero production defects across major payment launches while leading defect trends and knowledge management.</li>
+                    <li>Led Agile execution and mentored junior QA engineers across cross-functional teams.</li>
+                </ul>
+            </article>
 
-            <div class="job">
-                <div class="job-header">
-                    <div>
-                        <div class="job-title">Automation Engineer, Financial &amp; Data Validation</div>
-                        <div class="company">insightsoftware</div>
-                    </div>
-                    <div class="duration">November 2021 – May 2022</div>
-                </div>
-                <div class="description">
-                    <ul>
-                        <li>Built automated suites for <strong>financial Excel plugins</strong>, protecting formula accuracy, data integrity, and cross-platform behavior</li>
-                        <li>Dockerized test environments to reduce setup drift and make regression runs repeatable</li>
-                    </ul>
-                </div>
-            </div>
+            <article class="job">
+                <h3 class="job-title">Test Manager, Streaming QA and Automation</h3>
+                <p class="job-meta">DXC Technology | May 2022 - October 2023</p>
+                <ul class="job-list">
+                    <li>Led QA strategy for TVOD and MDU launches that required faster release cycles without production fallout.</li>
+                    <li>Cut manual regression effort 70% by automating UI and API coverage for streaming releases.</li>
+                    <li>Added Dockerized parallel execution and CI quality gates to shorten feedback loops and speed sign-off.</li>
+                    <li>Owned risk-based planning, triage, release decisions, and stakeholder reporting across multiple launch tracks.</li>
+                </ul>
+            </article>
 
-            <div class="job">
-                <div class="job-header">
-                    <div>
-                        <div class="job-title">Software Engineer in Test, Security &amp; Performance QA</div>
-                        <div class="company">Accruent (Fortive)</div>
-                    </div>
-                    <div class="duration">November 2018 – February 2021</div>
-                </div>
-                <div class="description">
-                    <ul>
-                        <li>Architected <strong>CI-ready security and performance suites</strong> for enterprise SaaS and stronger release confidence</li>
-                        <li>Built onboarding automation that reduced setup errors and kept regression coverage moving</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+            <article class="job">
+                <h3 class="job-title">Automation Engineer, Financial and Data Validation</h3>
+                <p class="job-meta">insightsoftware | November 2021 - May 2022</p>
+                <ul class="job-list">
+                    <li>Built automated suites for financial Excel plugins, protecting formula accuracy, data integrity, and cross-platform behavior.</li>
+                    <li>Dockerized test environments to reduce setup drift and make regression runs repeatable.</li>
+                </ul>
+            </article>
 
-        <div class="section">
-            <div class="section-title">Education</div>
+            <article class="job">
+                <h3 class="job-title">Software Engineer in Test, Security and Performance QA</h3>
+                <p class="job-meta">Accruent (Fortive) | November 2018 - February 2021</p>
+                <ul class="job-list">
+                    <li>Architected CI-ready security and performance suites for enterprise SaaS and stronger release confidence.</li>
+                    <li>Built onboarding automation that reduced setup errors and kept regression coverage moving.</li>
+                </ul>
+            </article>
+        </section>
+
+        <section class="section" aria-labelledby="education-title">
+            <h2 class="section-title" id="education-title">Education</h2>
             <div class="education-item">
-                <div class="degree">Bachelor of Science - Computer Information Systems</div>
-                <div class="school">Southern University at New Orleans</div>
-                <div class="duration">January 2015 - December 2017</div>
+                <p class="education-line">Bachelor of Science - Computer Information Systems</p>
+                <p class="education-meta">Southern University at New Orleans | January 2015 - December 2017</p>
             </div>
             <div class="education-item">
-                <div class="degree">Associate of Applied Science - Computer Information Technology</div>
-                <div class="school">Delgado Community College</div>
-                <div class="duration">January 2012 - December 2014</div>
+                <p class="education-line">Associate of Applied Science - Computer Information Technology</p>
+                <p class="education-meta">Delgado Community College | January 2012 - December 2014</p>
             </div>
-        </div>
+        </section>
 
-        <div class="section">
-            <div class="section-title">Key Achievements</div>
-            <div class="achievements">
-                <ul>
-                    <li><strong>Built an agentic QA platform:</strong> Turned requirements into tests, defects, and release signals with Claude, Codex, Playwright, and GitHub Actions</li>
-                    <li><strong>Reduced manual testing 70%:</strong> Automated UI and API regression at DXC to speed release validation</li>
-                    <li><strong>Raised API coverage to 92%:</strong> Used GenAI to expose payment edge cases and strengthen fraud-path validation at AT&amp;T DirecTV</li>
-                    <li><strong>Cut test development 60%:</strong> Used Playwright MCP and AI-assisted generation to accelerate authoring at Dispel</li>
-                    <li><strong>Cut root-cause analysis 40%:</strong> Applied AI-assisted stack-trace analysis and targeted regression generation at Cognizant</li>
-                    <li><strong>Reduced regression escapes 35%:</strong> Added AI-driven code review to catch risky changes before merge</li>
-                    <li><strong>Delivered zero-defect launches:</strong> Protected major streaming and payment releases across DXC and Cognizant</li>
-                    <li><strong>Led PCI and security validation:</strong> Owned fraud and payment QA for one of the largest telecom billing environments in the US</li>
-                    <li><strong>Built founder-level product proof:</strong> Shipped 10,000+ downloads and a 4.8★ average rating across Aperca products</li>
-                    <li><strong>Built QA audience reach:</strong> Created QA Vibe App to publish AI testing workflows, Playwright, and K6 content for working engineers</li>
-                </ul>
-            </div>
-        </div>
+        <section class="section" aria-labelledby="achievements-title">
+            <h2 class="section-title" id="achievements-title">Key Achievements</h2>
+            <ul class="plain-list">
+                <li><strong>Built an agentic QA platform:</strong> Turned requirements into tests, defects, and release signals with Claude, Codex, Playwright, and GitHub Actions.</li>
+                <li><strong>Reduced manual testing 70%:</strong> Automated UI and API regression at DXC to speed release validation.</li>
+                <li><strong>Raised API coverage to 92%:</strong> Used GenAI to expose payment edge cases and strengthen fraud-path validation at AT&amp;T DirecTV.</li>
+                <li><strong>Cut test development 60%:</strong> Used Playwright MCP and AI-assisted generation to accelerate authoring at Dispel.</li>
+                <li><strong>Cut root-cause analysis 40%:</strong> Applied AI-assisted stack-trace analysis and targeted regression generation at Cognizant.</li>
+                <li><strong>Reduced regression escapes 35%:</strong> Added AI-driven code review to catch risky changes before merge.</li>
+                <li><strong>Delivered zero-defect launches:</strong> Protected major streaming and payment releases across DXC and Cognizant.</li>
+                <li><strong>Led PCI and security validation:</strong> Owned fraud and payment QA for one of the largest telecom billing environments in the United States.</li>
+                <li><strong>Built founder-level product proof:</strong> Shipped 10,000+ downloads and a 4.8-star average rating across Aperca products.</li>
+                <li><strong>Built QA audience reach:</strong> Created QA Vibe App to publish AI testing workflows, Playwright, and K6 content for working engineers.</li>
+            </ul>
+        </section>
 
-        <div class="section">
-            <div class="section-title">Publications &amp; Content</div>
-            <div class="achievements">
-                <ul>
-                    <li><strong>QA Vibe App</strong>: <a href="https://www.qavibeapp.com" style="color:#2563eb">qavibeapp.com</a> - QA engineering blog covering AI-powered testing workflows, step-by-step Playwright/K6/Robot Framework tutorials, career growth in test automation, and honest reviews of developer tools and gear</li>
-                    <li><strong>We Will Find a Place to Sleep Tonight</strong>: Published memoir chronicling family survival and resilience during Hurricane Katrina in New Orleans (Amazon KDP)</li>
-                </ul>
-            </div>
-        </div>
+        <section class="section" aria-labelledby="publications-title">
+            <h2 class="section-title" id="publications-title">Publications and Content</h2>
+            <ul class="plain-list">
+                <li><strong>QA Vibe App:</strong> <a href="https://www.qavibeapp.com">qavibeapp.com</a> - QA engineering blog covering AI-powered testing workflows, step-by-step Playwright, K6, and Robot Framework tutorials, career growth in test automation, and honest reviews of developer tools and gear.</li>
+                <li><strong>We Will Find a Place to Sleep Tonight:</strong> Published memoir chronicling family survival and resilience during Hurricane Katrina in New Orleans.</li>
+            </ul>
+        </section>
 
-        <div class="section">
-            <div class="section-title">Certifications</div>
-            <div class="skills-grid">
-                <div>
-                    <div class="skills-list">
-                        • CompTIA Security+ (SY0-601)<br>
-                        • AWS Certified Cloud Practitioner<br>
-                        • Google Cybersecurity Certificate<br>
-                    </div>
-                </div>
-                <div>
-                    <div class="skills-list">
-                        • Google Project Management Certificate<br>
-                        • Professional Scrum Master, Scrum.org<br>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        <section class="section" aria-labelledby="certifications-title">
+            <h2 class="section-title" id="certifications-title">Certifications</h2>
+            <ul class="plain-list">
+                <li>CompTIA Security+ (SY0-601)</li>
+                <li>AWS Certified Cloud Practitioner</li>
+                <li>Google Cybersecurity Certificate</li>
+                <li>Google Project Management Certificate</li>
+                <li>Professional Scrum Master, Scrum.org</li>
+            </ul>
+        </section>
+    </main>
 
     <script src="../js/resume-print.js"></script>
 </body>

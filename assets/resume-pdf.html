@@ -107,7 +107,8 @@
 
         .section {
             margin-bottom: 12px;
-            page-break-inside: avoid;
+            page-break-inside: auto;
+            break-inside: auto;
         }
 
         .section-title {
@@ -164,6 +165,7 @@
         .job {
             margin-bottom: 8px;
             page-break-inside: avoid;
+            break-inside: avoid;
         }
 
         .job-header {
@@ -243,6 +245,8 @@
 
         .education-item {
             margin-bottom: 10px;
+            page-break-inside: avoid;
+            break-inside: avoid;
         }
 
         .degree {
@@ -309,6 +313,7 @@
                 /* This creates the margin effect - 0.4in all around */
                 padding: 0.4in;
                 margin: 0;
+                overflow: visible;
             }
 
             .header {
@@ -330,6 +335,24 @@
 
             .section {
                 margin-bottom: 8px;
+                page-break-inside: auto;
+                break-inside: auto;
+            }
+
+            .section-title,
+            .job-header,
+            .skills-category-title {
+                page-break-after: avoid;
+                break-after: avoid;
+            }
+
+            .skills-grid,
+            .achievements,
+            .description,
+            .skills-category,
+            .private-note {
+                page-break-inside: auto;
+                break-inside: auto;
             }
 
             .section-title {

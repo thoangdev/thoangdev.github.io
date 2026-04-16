@@ -892,6 +892,7 @@ button { cursor: pointer; font: inherit; }
   border: 1px solid var(--clr-border);
   border-radius: var(--r-xl);
   padding: var(--sp-5);
+  min-width: 0;
   transition: border-color var(--dur-base) var(--ease);
 }
 .skill-group:hover { border-color: var(--clr-border-hover); }
@@ -931,7 +932,9 @@ button { cursor: pointer; font: inherit; }
   padding: 3px 10px;
   border-radius: var(--r-full);
   transition: all var(--dur-fast) var(--ease);
-  white-space: nowrap;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 .skill-tag:hover,
 .tag:hover {
@@ -2544,11 +2547,15 @@ button { cursor: pointer; font: inherit; }
   .btn-primary-hero, .btn-outline-hero { width: 100%; max-width: 300px; justify-content: center; }
 
   .education-grid { grid-template-columns: 1fr; }
-  .skills-grid { grid-template-columns: 1fr 1fr; }
+  .skills-grid { grid-template-columns: 1fr; }
   .project-detail-grid { grid-template-columns: 1fr; }
   .testimonials-grid { grid-template-columns: 1fr; }
   .certifications-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr; }
+
+  .skill-group-title {
+    align-items: flex-start;
+  }
 
   .timeline-item { grid-template-columns: 20px 1fr; gap: var(--sp-3); }
   .timeline-card-header { flex-direction: column; gap: var(--sp-3); }

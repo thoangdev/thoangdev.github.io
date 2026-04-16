@@ -1222,6 +1222,32 @@ button { cursor: pointer; font: inherit; }
 }
 .project-link:hover { text-decoration: underline; }
 
+.project-visual-proof {
+  display: grid;
+  grid-template-columns: minmax(0, 280px) minmax(0, 1fr);
+  gap: var(--sp-5);
+  margin-top: var(--sp-5);
+  padding: var(--sp-5);
+  background: linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(239,246,255,0.92) 100%);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--r-xl);
+  align-items: center;
+}
+
+.project-visual-proof-copy h3 {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--clr-text);
+  letter-spacing: -.4px;
+  margin: var(--sp-3) 0 var(--sp-2);
+}
+
+.project-visual-proof-copy p {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--clr-text-2);
+}
+
 /* ——————————————————————————————————————
    11. BOOKS
    —————————————————————————————————————— */
@@ -1431,7 +1457,143 @@ button { cursor: pointer; font: inherit; }
 }
 
 /* ——————————————————————————————————————
-   12. TESTIMONIALS
+   12. SCREENSHOT PROOF
+   —————————————————————————————————————— */
+.portfolio-shot {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+}
+
+.portfolio-shot--project {
+  margin-bottom: var(--sp-5);
+}
+
+.portfolio-shot--book {
+  margin: var(--sp-2) 0 var(--sp-1);
+}
+
+.portfolio-shot-frame {
+  display: block;
+  overflow: hidden;
+  border-radius: var(--r-lg);
+  border: 1px solid rgba(15,23,42,.1);
+  background: #fff;
+  box-shadow: var(--shadow-md);
+  transition: transform var(--dur-base) var(--ease), box-shadow var(--dur-base) var(--ease), border-color var(--dur-base) var(--ease);
+}
+
+.portfolio-shot:hover .portfolio-shot-frame,
+.portfolio-shot:focus-visible .portfolio-shot-frame {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(37,99,235,.28);
+}
+
+.portfolio-shot img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.portfolio-shot--wide img {
+  height: 260px;
+  object-position: center top;
+}
+
+.portfolio-shot-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+}
+
+.portfolio-shot-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--clr-text);
+  letter-spacing: -.2px;
+}
+
+.portfolio-shot-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--clr-accent);
+  white-space: nowrap;
+}
+
+.portfolio-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-6);
+  background: rgba(15,23,42,.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.portfolio-lightbox.open {
+  display: flex;
+}
+
+.portfolio-lightbox-panel {
+  position: relative;
+  width: min(1100px, 100%);
+  max-height: 100%;
+}
+
+.portfolio-lightbox-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: var(--r-full);
+  background: rgba(15,23,42,.76);
+  color: #fff;
+  z-index: 1;
+}
+
+.portfolio-lightbox-figure {
+  margin: 0;
+  background: rgba(255,255,255,.98);
+  border-radius: var(--r-2xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+}
+
+.portfolio-lightbox-figure img {
+  width: 100%;
+  max-height: min(78vh, 900px);
+  object-fit: contain;
+  background: linear-gradient(180deg, #f8fafc 0%, #eff6ff 100%);
+}
+
+.portfolio-lightbox-figure figcaption {
+  padding: var(--sp-4) var(--sp-5);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--clr-text-2);
+  border-top: 1px solid var(--clr-border);
+}
+
+/* ——————————————————————————————————————
+   13. TESTIMONIALS
    —————————————————————————————————————— */
 .testimonials-grid {
   display: grid;
@@ -2322,6 +2484,7 @@ button { cursor: pointer; font: inherit; }
   .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
   .books-layout { grid-template-columns: 1fr; }
   .book-coming-soon { min-width: unset; }
+  .project-visual-proof { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .footer-main { grid-column: 1 / -1; }
 }
@@ -2389,6 +2552,10 @@ button { cursor: pointer; font: inherit; }
 
   .timeline-item { grid-template-columns: 20px 1fr; gap: var(--sp-3); }
   .timeline-card-header { flex-direction: column; gap: var(--sp-3); }
+  .portfolio-shot img,
+  .portfolio-shot--wide img { height: 200px; }
+  .portfolio-shot-meta { flex-direction: column; align-items: flex-start; }
+  .portfolio-lightbox { padding: var(--sp-4); }
 }
 
 /* Mobile (480px) */
@@ -2405,6 +2572,10 @@ button { cursor: pointer; font: inherit; }
   .certifications-grid { grid-template-columns: 1fr; }
   .github-strip { flex-direction: column; align-items: flex-start; gap: var(--sp-4); }
   .github-link { margin-left: 0; }
+  .project-visual-proof { padding: var(--sp-4); }
+  .portfolio-shot img,
+  .portfolio-shot--wide img { height: 176px; }
+  .portfolio-lightbox-figure figcaption { padding: var(--sp-4); }
 
   .hero-photo-ring { width: 180px; height: 180px; }
 }

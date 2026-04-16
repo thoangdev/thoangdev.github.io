@@ -191,11 +191,79 @@
         return observer;
     }
 
+    function initScreenshotLightbox(doc) {
+        var triggers = Array.prototype.slice.call(doc.querySelectorAll('.portfolio-shot'));
+        var lightbox = doc.getElementById('screenshotLightbox');
+        var lightboxImage = doc.getElementById('screenshotLightboxImage');
+        var lightboxCaption = doc.getElementById('screenshotLightboxCaption');
+        var closeButton = doc.getElementById('screenshotLightboxClose');
+
+        if (!triggers.length || !lightbox || !lightboxImage || !lightboxCaption || !closeButton) return null;
+
+        var activeTrigger = null;
+        var isOpen = false;
+
+        function openLightbox(trigger) {
+            activeTrigger = trigger;
+            isOpen = true;
+            lightboxImage.src = trigger.getAttribute('data-fullsrc') || '';
+            lightboxImage.alt = trigger.getAttribute('data-alt') || '';
+            lightboxCaption.textContent = trigger.getAttribute('data-caption') || '';
+            lightbox.classList.add('open');
+            lightbox.setAttribute('aria-hidden', 'false');
+            doc.body.style.overflow = 'hidden';
+            closeButton.focus();
+        }
+
+        function closeLightbox() {
+            if (!isOpen) return;
+
+            isOpen = false;
+            lightbox.classList.remove('open');
+            lightbox.setAttribute('aria-hidden', 'true');
+            lightboxImage.src = '';
+            lightboxImage.alt = '';
+            lightboxCaption.textContent = '';
+            doc.body.style.overflow = '';
+
+            if (activeTrigger && typeof activeTrigger.focus === 'function') {
+                activeTrigger.focus();
+            }
+
+            activeTrigger = null;
+        }
+
+        triggers.forEach(function (trigger) {
+            trigger.addEventListener('click', function () {
+                openLightbox(trigger);
+            });
+        });
+
+        closeButton.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', function (event) {
+            if (event.target !== lightbox) return;
+            closeLightbox();
+        });
+
+        doc.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+
+        return {
+            closeLightbox: closeLightbox,
+            isOpen: function () { return isOpen; },
+            openLightbox: openLightbox
+        };
+    }
+
     function boot(win, doc) {
         initNav(doc, win);
         initBottomTabs(doc);
         initSmoothScroll(doc, win);
         initReveal(doc);
+        initScreenshotLightbox(doc);
     }
 
     function autoBoot() {
@@ -222,6 +290,7 @@
         initBottomTabs: initBottomTabs,
         initNav: initNav,
         initReveal: initReveal,
+        initScreenshotLightbox: initScreenshotLightbox,
         initSmoothScroll: initSmoothScroll,
         shouldCloseDrawerOnSwipe: shouldCloseDrawerOnSwipe
     };

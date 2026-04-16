@@ -145,3 +145,56 @@ test('initReveal marks visible entries and unobserves them', function () {
     assert.equal(revealTwo.classList.contains('visible'), false);
     assert.deepEqual(unobserved, [revealOne]);
 });
+
+test('initScreenshotLightbox opens, populates, and closes the shared viewer', function () {
+    const trigger = new FakeElement({
+        attributes: {
+            'data-fullsrc': 'assets/screenshots/1.png',
+            'data-alt': 'Expanded proof image',
+            'data-caption': 'Expanded proof caption'
+        }
+    });
+    const lightbox = new FakeElement({ attributes: { 'aria-hidden': 'true' } });
+    const lightboxImage = new FakeElement();
+    const lightboxCaption = new FakeElement();
+    const closeButton = new FakeElement();
+    const doc = new FakeDocument({
+        body: { style: {} },
+        elementsById: {
+            screenshotLightbox: lightbox,
+            screenshotLightboxImage: lightboxImage,
+            screenshotLightboxCaption: lightboxCaption,
+            screenshotLightboxClose: closeButton
+        },
+        querySelectorAllMap: {
+            '.portfolio-shot': [trigger]
+        }
+    });
+
+    const controls = themeScripts.initScreenshotLightbox(doc);
+
+    trigger.click();
+    assert.equal(controls.isOpen(), true);
+    assert.equal(lightbox.classList.contains('open'), true);
+    assert.equal(lightbox.getAttribute('aria-hidden'), 'false');
+    assert.equal(lightboxImage.src, 'assets/screenshots/1.png');
+    assert.equal(lightboxImage.alt, 'Expanded proof image');
+    assert.equal(lightboxCaption.textContent, 'Expanded proof caption');
+    assert.equal(doc.body.style.overflow, 'hidden');
+    assert.equal(closeButton.wasFocused, true);
+
+    lightbox.dispatchEvent('click', createEvent({ target: lightbox }));
+    assert.equal(controls.isOpen(), false);
+    assert.equal(trigger.wasFocused, true);
+    assert.equal(doc.body.style.overflow, '');
+
+    trigger.click();
+    doc.dispatchEvent('keydown', { key: 'Escape' });
+    assert.equal(controls.isOpen(), false);
+
+    trigger.click();
+    closeButton.click();
+    assert.equal(controls.isOpen(), false);
+    assert.equal(lightboxImage.src, '');
+    assert.equal(lightboxCaption.textContent, '');
+});

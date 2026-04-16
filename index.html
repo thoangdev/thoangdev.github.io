@@ -55,8 +55,8 @@
         <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
 
         <!-- Favicon -->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="assets/profile.jpg" />
+        <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon.png" />
 
         <!-- Performance & resource hints -->
         <meta name="theme-color" content="#2563eb" />
@@ -432,6 +432,8 @@
                             <div class="timeline-card">
                                 <div class="timeline-card-header">
                                     <div class="timeline-company-info">
+                                        <img src="assets/logos/aperca-logo.png" alt="Aperca logo"
+                                             class="company-logo" loading="lazy" width="80" height="32" />
                                         <div>
                                             <h3>QA Tech Lead</h3>
                                             <span class="company-name">Aperca LLC</span>
@@ -793,6 +795,22 @@
                                 </div>
                                 <p>Built to remove manual handoffs between requirement review, test design, execution, and defect triage inside one reusable platform.</p>
 
+                                <button class="portfolio-shot portfolio-shot--project" type="button"
+                                        data-fullsrc="assets/screenshots/1.png"
+                                        data-alt="Aperca Unified Automation Platform screenshot showing the agentic content system, orchestration layers, architecture, and project structure"
+                                        data-caption="Unified automation view showing the content system, test orchestration flow, and supporting architecture details."
+                                        aria-label="Expand Agentic AI QA platform screenshot">
+                                    <span class="portfolio-shot-frame">
+                                        <img src="assets/screenshots/1.png"
+                                             alt="Aperca Unified Automation Platform preview"
+                                             loading="lazy" decoding="async" />
+                                    </span>
+                                    <span class="portfolio-shot-meta">
+                                        <span class="portfolio-shot-title">Platform architecture snapshot</span>
+                                        <span class="portfolio-shot-hint"><i class="fas fa-expand" aria-hidden="true"></i> Click to expand</span>
+                                    </span>
+                                </button>
+
                                 <div class="project-detail-grid">
                                     <div>
                                         <h5>Impact</h5>
@@ -939,6 +957,29 @@
                         </div>
                     </div><!-- /.projects-grid -->
 
+                    <div class="project-visual-proof reveal">
+                        <div class="project-visual-proof-copy">
+                            <span class="project-badge project-badge-current">Visual Proof</span>
+                            <h3>Operational QA dashboard snapshot</h3>
+                            <p>A compact view of the performance, security, and quality maturity reporting I build so teams can move from raw test output to decision-ready release signals.</p>
+                        </div>
+                        <button class="portfolio-shot portfolio-shot--wide" type="button"
+                                data-fullsrc="assets/screenshots/3.png"
+                                data-alt="QA dashboard screenshot combining k6 load testing metrics, OWASP ZAP security findings, and a quality maturity scorecard"
+                                data-caption="Combined QA dashboard covering k6 performance metrics, ZAP security findings, and a quality maturity scorecard for leadership review."
+                                aria-label="Expand QA dashboard screenshot">
+                            <span class="portfolio-shot-frame">
+                                <img src="assets/screenshots/3.png"
+                                     alt="Operational QA dashboard preview"
+                                     loading="lazy" decoding="async" />
+                            </span>
+                            <span class="portfolio-shot-meta">
+                                <span class="portfolio-shot-title">Performance, security, and governance in one view</span>
+                                <span class="portfolio-shot-hint"><i class="fas fa-expand" aria-hidden="true"></i> Click to expand</span>
+                            </span>
+                        </button>
+                    </div>
+
                 </div>
             </section>
 
@@ -964,6 +1005,21 @@
                                 <h4 class="book-title">QA Vibe App</h4>
                                 <p class="book-subtitle">AI-Powered QA &middot; Test Automation &middot; Tech Reviews</p>
                                 <p class="book-desc">A modern learning hub for QA engineers and automation testers who want to level up with AI-powered testing workflows. Real-world, step-by-step tutorials on scalable test automation, career growth in QA, and honest reviews of developer tools and gear.</p>
+                                <button class="portfolio-shot portfolio-shot--book" type="button"
+                                        data-fullsrc="assets/screenshots/2.png"
+                                        data-alt="QA Vibe App screenshot showing the blog layout, infrastructure status view, and uptime table"
+                                        data-caption="QA Vibe App publishing and operations snapshot showing the blog experience and live service monitoring."
+                                        aria-label="Expand QA Vibe App screenshot">
+                                    <span class="portfolio-shot-frame">
+                                        <img src="assets/screenshots/2.png"
+                                             alt="QA Vibe App preview"
+                                             loading="lazy" decoding="async" />
+                                    </span>
+                                    <span class="portfolio-shot-meta">
+                                        <span class="portfolio-shot-title">Publishing and live-status snapshot</span>
+                                        <span class="portfolio-shot-hint"><i class="fas fa-expand" aria-hidden="true"></i> Click to expand</span>
+                                    </span>
+                                </button>
                                 <div class="book-tags">
                                     <span class="skill-tag">Playwright</span>
                                     <span class="skill-tag">AI Testing</span>
@@ -1512,6 +1568,19 @@
                         </a>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div id="screenshotLightbox" class="portfolio-lightbox" role="dialog"
+             aria-labelledby="screenshotLightboxCaption" aria-modal="true" aria-hidden="true">
+            <div class="portfolio-lightbox-panel">
+                <button id="screenshotLightboxClose" class="portfolio-lightbox-close" type="button" aria-label="Close screenshot viewer">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+                <figure class="portfolio-lightbox-figure">
+                    <img id="screenshotLightboxImage" src="" alt="" />
+                    <figcaption id="screenshotLightboxCaption"></figcaption>
+                </figure>
             </div>
         </div>
 

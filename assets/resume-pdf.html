@@ -62,8 +62,8 @@
 
         .section {
             margin-top: 14px;
-            page-break-inside: avoid;
-            break-inside: avoid;
+            page-break-inside: auto;
+            break-inside: auto;
         }
 
         .section-title {
@@ -74,6 +74,8 @@
             font-weight: 700;
             letter-spacing: 0.4px;
             text-transform: uppercase;
+            page-break-after: avoid;
+            break-after: avoid;
         }
 
         .summary,
@@ -149,6 +151,16 @@
 
             .section {
                 margin-top: 12px;
+            }
+
+            .competency-list {
+                columns: 2;
+                column-gap: 18px;
+            }
+
+            .competency-list li {
+                break-inside: avoid;
+                page-break-inside: avoid;
             }
         }
     </style>

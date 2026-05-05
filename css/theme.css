@@ -525,6 +525,21 @@ button { cursor: pointer; font: inherit; }
   text-decoration-color: var(--clr-accent);
 }
 
+/* GitHub Activity */
+.github-activity {
+  margin-top: var(--sp-3);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  border: 1px solid var(--clr-border);
+  display: inline-block;
+  background: var(--clr-surface);
+}
+.github-activity img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 /* ---- Right: Photo ---- */
 .hero-photo-wrapper {
   position: relative;
@@ -2579,6 +2594,8 @@ button { cursor: pointer; font: inherit; }
   .certifications-grid { grid-template-columns: 1fr; }
   .github-strip { flex-direction: column; align-items: flex-start; gap: var(--sp-4); }
   .github-link { margin-left: 0; }
+  .github-activity { max-width: 100%; }
+  .github-activity img { max-width: 100%; }
   .project-visual-proof { padding: var(--sp-4); }
   .portfolio-shot img,
   .portfolio-shot--wide img { height: 176px; }

@@ -184,7 +184,7 @@
             <h2 class="section-title" id="competencies-title">Core Competencies</h2>
             <ul class="competency-list">
                 <li><strong>AI-Driven QA Leadership:</strong> Agentic AI QA, AI-assisted test generation, release strategy, defect triage automation, quality program leadership, cross-functional stakeholder alignment.</li>
-                <li><strong>Automation and Framework Design:</strong> Playwright (TypeScript), Robot Framework, Selenium WebDriver, PyTest, API and UI test architecture, parallel execution, CI quality gates, TypeScript, JavaScript, Python.</li>
+                <li><strong>Automation and Framework Design:</strong> Playwright (TypeScript), Robot Framework, Selenium WebDriver, PyTest, Page Object Model (POM), test fixtures, storageState auth optimization, API and UI test architecture, parallel execution, CI quality gates, TypeScript, JavaScript, Python.</li>
                 <li><strong>Performance, Security, and Compliance:</strong> K6, OWASP ZAP, PCI DSS, SOC 2, HIPAA, compliance audit, security regression validation, risk-based testing, performance baselines.</li>
                 <li><strong>Delivery and Platform Stack:</strong> GitHub Actions, Azure DevOps, Jenkins, Docker, Kubernetes, AWS, PostgreSQL, JIRA, Zephyr, Confluence, Sentry, PostHog.</li>
                 <li><strong>Supporting Tools:</strong> Claude, OpenAI Codex, GitHub Copilot, Playwright MCP, REST, GraphQL, Postman, Appium, React Native, Flutter, SQL, Bash/Shell.</li>
@@ -195,8 +195,8 @@
             <h2 class="section-title" id="experience-title">Professional Experience</h2>
 
             <article class="job">
-                <h3 class="job-title">QA Tech Lead, Agentic AI QA Platform</h3>
-                <p class="job-meta">Aperca LLC | November 2025 - Present</p>
+                <h3 class="job-title">Founder &amp; QA Tech Lead, Agentic AI QA Platform</h3>
+                <p class="job-meta">Aperca LLC (Self-Employed) | June 2025 - Present</p>
                 <ul class="job-list">
                     <li>Built an agentic AI QA platform that turns requirements into executable tests, defects, and release signals with minimal manual handoff.</li>
                     <li>Used Claude for requirement reasoning and failure analysis, and OpenAI Codex for Playwright test generation and refactoring.</li>
@@ -209,13 +209,14 @@
 
             <article class="job">
                 <h3 class="job-title">Senior QA Engineer, AI-Augmented Automation and Security</h3>
-                <p class="job-meta">Dispel | June 2025 - November 2025</p>
+                <p class="job-meta">Dispel (concurrent with Aperca LLC) | June 2025 - November 2025</p>
                 <ul class="job-list">
                     <li>Built a K6, Docker, and Grafana/InfluxDB framework for load, stress, and spike testing across secure product lines.</li>
                     <li>Expanded Robot Framework and Playwright regression depth while reducing defect escape rate 35%.</li>
                     <li>Integrated OWASP ZAP and deterministic PostgreSQL test data into CI/CD for compliance-grade security validation.</li>
                     <li>Used Playwright MCP, Claude, and GitHub Copilot to cut test development time 60%.</li>
                     <li>Added AI-assisted code review and codebase analysis to catch regression-causing changes before merge.</li>
+                    <li>Used multi-context Playwright testing to simulate concurrent users in the same flow, validating real-time access control and session isolation.</li>
                     <li>Built Dispel Observability Hub to centralize uptime, SLA routing, and executive incident reporting.</li>
                 </ul>
             </article>
@@ -228,8 +229,8 @@
                     <li>Used GenAI to map edge cases across refunds, chargebacks, webhooks, and fraud paths, raising API coverage from 65% to 92%.</li>
                     <li>Cut root-cause analysis time 40% with AI-assisted stack-trace parsing and targeted regression generation.</li>
                     <li>Ran AI-backed code reviews to catch security gaps, PCI issues, and fraud risks before release.</li>
-                    <li>Delivered zero production defects across major payment launches while leading defect trends and knowledge management.</li>
-                    <li>Led Agile execution and mentored junior QA engineers across cross-functional teams.</li>
+                    <li>Implemented CI quality gates that blocked merges when critical payment path coverage dropped below threshold — catching a fraud-validation bypass before staging and establishing it as the team standard.</li>
+                    <li>Delivered zero production defects across all major payment launches while leading defect trends, knowledge management, and Agile execution.</li>
                 </ul>
             </article>
 
@@ -248,14 +249,14 @@
                 <h3 class="job-title">Automation Engineer, Financial and Data Validation</h3>
                 <p class="job-meta">insightsoftware | November 2021 - May 2022</p>
                 <ul class="job-list">
-                    <li>Built automated suites for financial Excel plugins, protecting formula accuracy, data integrity, and cross-platform behavior.</li>
+                    <li>Built automated suites for financial Excel plugins validating ETL accuracy — source-to-target row counts, transformation logic, formula correctness, and null/default handling.</li>
                     <li>Dockerized test environments to reduce setup drift and make regression runs repeatable.</li>
                 </ul>
             </article>
 
             <article class="job">
                 <h3 class="job-title">Software Engineer in Test, Security and Performance QA</h3>
-                <p class="job-meta">Accruent (Fortive) | November 2018 - February 2021</p>
+                <p class="job-meta">Accruent (Fortive, NYSE: FTV) | November 2018 - February 2021</p>
                 <ul class="job-list">
                     <li>Architected CI-ready security and performance suites for enterprise SaaS and stronger release confidence.</li>
                     <li>Built onboarding automation that reduced setup errors and kept regression coverage moving.</li>
@@ -295,6 +296,7 @@
             <h2 class="section-title" id="publications-title">Publications and Content</h2>
             <ul class="plain-list">
                 <li><strong>QA Vibe App:</strong> <a href="https://www.qavibeapp.com">qavibeapp.com</a> - QA engineering blog covering AI-powered testing workflows, step-by-step Playwright, K6, and Robot Framework tutorials, career growth in test automation, and honest reviews of developer tools and gear.</li>
+                <li><strong>Web QA Automation Pipeline:</strong> <a href="https://github.com/thoangdev/Web-QA-Automation-Pipeline-Public">github.com/thoangdev/Web-QA-Automation-Pipeline-Public</a> - Production-grade Playwright/TypeScript framework with Page Object Model, reusable fixtures, storageState auth (login once, reuse across suites), and parallel CI execution. Covers smoke, regression, accessibility, visual, and API validation via GitHub Actions.</li>
                 <li><strong>Mobile QA Automation Pipeline:</strong> <a href="https://github.com/thoangdev/Mobile-QA-Automation-Pipeline">github.com/thoangdev/Mobile-QA-Automation-Pipeline</a> - Enterprise mobile testing framework integrating functional, API, visual, security, and accessibility validation in a single CI/CD pipeline. Uses Appium, WebdriverIO, Postman, Percy, MobSF, Axe, and BrowserStack to mirror comprehensive quality engineering practices.</li>
                 <li><strong>Qatra QA Platform:</strong> <a href="https://qatra.qavibeapp.com/">qatra.qavibeapp.com</a> - Unified manual, automation, and reporting for QA teams. Ingests results from 30+ frameworks, supports BDD, mobile, API, visual, accessibility, performance, and security testing. Agent-ready, keyboard-native, and integrates with Jira, GitHub, Slack, and more.</li>
                 <li><strong>ProxyBaby HTTP Inspector:</strong> <a href="https://proxybaby.qavibeapp.com/">proxybaby.qavibeapp.com</a> - On-device HTTP/HTTPS proxy for iOS and Android. Captures, inspects, filters, and exports mobile app traffic—no desktop proxy or server required. Features live capture, HTTPS decryption, blocklists, breakpoints, and privacy-first local storage.</li>

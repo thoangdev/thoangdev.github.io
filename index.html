@@ -445,11 +445,11 @@
                                         <img src="assets/logos/aperca-logo.png" alt="Aperca logo"
                                              class="company-logo" loading="lazy" width="80" height="32" />
                                         <div>
-                                            <h3>QA Tech Lead</h3>
-                                            <span class="company-name">Aperca LLC</span>
+                                            <h3>Founder &amp; QA Tech Lead</h3>
+                                            <span class="company-name">Aperca LLC (Self-Employed)</span>
                                         </div>
                                     </div>
-                                    <time class="timeline-date" datetime="2025-11">Nov 2025 &ndash; Present</time>
+                                    <time class="timeline-date" datetime="2025-06">Jun 2025 &ndash; Present</time>
                                 </div>
                                 <p>Built an <strong>agentic AI QA platform</strong> that turns requirements into executable tests, defects, and release signals with minimal manual handoff.</p>
                                 <ul class="timeline-bullets">
@@ -484,7 +484,7 @@
                                              class="company-logo" loading="lazy" width="80" height="32" />
                                         <div>
                                             <h3>Senior QA Engineer</h3>
-                                            <span class="company-name">Dispel</span>
+                                            <span class="company-name">Dispel (concurrent with Aperca LLC)</span>
                                         </div>
                                     </div>
                                     <time class="timeline-date" datetime="2025-06">Jun 2025 &ndash; Nov 2025</time>
@@ -495,6 +495,7 @@
                                     <li>Used Playwright MCP, Claude, and Copilot to cut test development time <strong>60%</strong> while expanding regression depth.</li>
                                     <li>Added AI-assisted code review and codebase analysis, reducing regression defect escapes <strong>35%</strong> before merge.</li>
                                     <li>Integrated OWASP ZAP and deterministic PostgreSQL test data into CI/CD for compliance-grade security validation.</li>
+                                    <li>Used multi-context Playwright testing to simulate concurrent users in the same flow, validating real-time access control and session isolation.</li>
                                     <li>Built the Dispel Observability Hub to centralize uptime, SLA routing, and executive incident reporting.</li>
                                 </ul>
                                 <div class="timeline-tags">
@@ -534,7 +535,7 @@
                                     <li>Expanded payment API coverage from <strong>65% to 92%</strong> by using GenAI to map edge cases across refunds, chargebacks, webhooks, and fraud flows.</li>
                                     <li>Cut root-cause analysis time <strong>40%</strong> with AI-assisted stack-trace parsing and targeted regression generation.</li>
                                     <li>Ran AI-backed code reviews on payment flows to catch security gaps, PCI issues, and fraud risks before release.</li>
-                                    <li>Delivered <strong>zero production defects</strong> across major payment launches while leading defect trends, knowledge management, and Agile execution.</li>
+                                    <li>Implemented CI quality gates that blocked merges when critical payment path coverage dropped below threshold — catching a fraud-validation bypass before staging and establishing it as the team standard. Delivered <strong>zero production defects</strong> across all major launches.</li>
                                 </ul>
                                 <div class="timeline-tags">
                                     <span class="tag tag-success">Zero-Defect Launches</span>
@@ -603,7 +604,7 @@
                                 </div>
                                 <p>Automated validation for financial Excel plugins, protecting formula accuracy, data integrity, and repeatable releases.</p>
                                 <ul class="timeline-bullets">
-                                    <li>Built Ranorex and C# suites that strengthened coverage for financial calculations and cross-platform behavior.</li>
+                                    <li>Built Ranorex and C# suites validating ETL accuracy — source-to-target row counts, transformation logic, formula correctness, and null/default handling.</li>
                                     <li>Dockerized test environments to reduce setup drift and make regression runs repeatable.</li>
                                 </ul>
                                 <div class="timeline-tags">
@@ -627,7 +628,7 @@
                                              class="company-logo" loading="lazy" width="80" height="32" />
                                         <div>
                                             <h3>Software Engineer in Test</h3>
-                                            <span class="company-name">Accruent (Fortive)</span>
+                                            <span class="company-name">Accruent (Fortive, NYSE: FTV)</span>
                                         </div>
                                     </div>
                                     <time class="timeline-date" datetime="2018-11">Nov 2018 &ndash; Feb 2021</time>
@@ -722,6 +723,9 @@
                                 <span class="skill-tag skill-tag-accent">Robot Framework</span>
                                 <span class="skill-tag skill-tag-accent">TypeScript &amp; Python</span>
                                 <span class="skill-tag">UI / API Test Architecture</span>
+                                <span class="skill-tag">Page Object Model (POM)</span>
+                                <span class="skill-tag">Test Fixtures</span>
+                                <span class="skill-tag">storageState Auth</span>
                                 <span class="skill-tag">Parallel Execution</span>
                                 <span class="skill-tag">CI Quality Gates</span>
                             </div>
@@ -837,6 +841,52 @@
                                     <span class="skill-tag">Axe</span>
                                     <span class="skill-tag">BrowserStack</span>
                                     <span class="skill-tag">CI/CD</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Web QA Automation Pipeline -->
+                        <div class="project-card project-card-featured reveal">
+                            <div class="project-card-body">
+                                <div class="project-card-header">
+                                    <div class="project-meta">
+                                        <span class="project-badge project-badge-current">Open Source</span>
+                                    </div>
+                                    <h3>Web QA Automation Pipeline</h3>
+                                    <p class="project-subtitle">Production-grade Playwright framework with POM, fixtures, storageState auth, and full CI/CD integration</p>
+                                </div>
+                                <p>Demonstrates the full framework architecture used in production QA roles — Page Object Model, reusable test fixtures, storageState-based auth (login once, reuse across tests), and multi-context parallel execution across smoke, regression, accessibility, visual, and API suites.</p>
+                                <a href="https://github.com/thoangdev/Web-QA-Automation-Pipeline-Public" class="btn-project-primary" target="_blank" rel="noopener noreferrer">
+                                    <i class="fab fa-github" aria-hidden="true"></i> View on GitHub
+                                </a>
+                                <div class="project-detail-grid">
+                                    <div>
+                                        <h5>Framework Architecture</h5>
+                                        <ul class="project-list">
+                                            <li>Page Object Model encapsulating locators and actions</li>
+                                            <li>Reusable fixtures for auth state, test data, and setup</li>
+                                            <li>storageState login-once pattern across all test suites</li>
+                                            <li>Utils and factory layers for clean test data management</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h5>Test Coverage</h5>
+                                        <ul class="project-list">
+                                            <li>Smoke, regression, accessibility, and visual suites</li>
+                                            <li>API contract and health validation</li>
+                                            <li>Parallel execution with CI sharding via GitHub Actions</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="project-tags">
+                                    <span class="skill-tag">Playwright</span>
+                                    <span class="skill-tag">TypeScript</span>
+                                    <span class="skill-tag">Page Object Model</span>
+                                    <span class="skill-tag">Test Fixtures</span>
+                                    <span class="skill-tag">storageState</span>
+                                    <span class="skill-tag">GitHub Actions</span>
+                                    <span class="skill-tag">axe-core</span>
+                                    <span class="skill-tag">Lighthouse CI</span>
                                 </div>
                             </div>
                         </div>

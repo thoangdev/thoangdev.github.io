@@ -770,6 +770,12 @@ button { cursor: pointer; font: inherit; }
   color: var(--clr-accent);
 }
 
+.company-client {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--clr-muted, #6c757d);
+}
+
 .company-logo {
   height: 32px; width: auto;
   max-width: 80px;

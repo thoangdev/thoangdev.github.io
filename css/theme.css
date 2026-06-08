@@ -347,6 +347,11 @@ button { cursor: pointer; font: inherit; }
   box-shadow: 0 0 0 2px rgba(22,163,74,.25);
   animation: pulse-dot 2s ease infinite;
 }
+.badge-dot--unavailable {
+  background: #9ca3af;
+  box-shadow: 0 0 0 2px rgba(156,163,175,.25);
+  animation: none;
+}
 @keyframes pulse-dot {
   0%, 100% { box-shadow: 0 0 0 2px rgba(22,163,74,.25); }
   50%       { box-shadow: 0 0 0 5px rgba(22,163,74,.1); }
@@ -1887,7 +1892,15 @@ button { cursor: pointer; font: inherit; }
   flex-shrink: 0;
   animation: pulse-dot 2s ease infinite;
 }
+.availability-dot--unavailable {
+  background: #9ca3af;
+  box-shadow: 0 0 0 6px rgba(156,163,175,.12);
+  animation: none;
+}
 
+.contact-availability--unavailable strong {
+  color: #6b7280;
+}
 .contact-availability strong {
   display: block;
   font-size: 14px;

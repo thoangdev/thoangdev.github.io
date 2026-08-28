@@ -123,7 +123,7 @@ test('resume pdf and 404 pages serve their direct-entry scripts and landmarks', 
     assert.equal(resumeResponse.status, 200);
     assert.match(resumeHtml, /src="\.\.\/js\/resume-print\.js"/);
     assert.match(resumeHtml, /<h2 class="section-title" id="experience-title">Professional Experience<\/h2>/);
-    assert.match(resumeHtml, /Aperca LLC \| November 2025 - Present/);
+    assert.match(resumeHtml, /Daxko \| June 2026 - Present/);
     assert.equal(notFoundResponse.status, 200);
     assert.match(notFoundHtml, /<main class="container" id="main-content">/);
     assert.match(notFoundHtml, /href="assets\/favicon\.ico"/);

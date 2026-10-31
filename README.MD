@@ -50,7 +50,7 @@ thoangdev.github.io/
 │   └── helpers/                # Lightweight DOM test fakes
 ├── 8f3a7d2c9b4e1056.txt        # IndexNow key verification file
 ├── google5e85760eebc133b5.html # Google Search Console verification
-├── sitemap.xml                 # XML sitemap (homepage + resume-pdf)
+├── sitemap.xml                 # XML sitemap (indexable homepage only)
 ├── robots.txt                  # Crawler directives
 ├── 404.html                    # Custom error page
 └── .github/

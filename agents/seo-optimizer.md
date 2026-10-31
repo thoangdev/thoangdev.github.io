@@ -57,4 +57,4 @@ Book            → "We Will Find a Place to Sleep Tonight"
 ## Sitemap Update Checklist
 1. Set `<lastmod>` to today's date in `YYYY-MM-DD` format
 2. Verify `<loc>` URLs are all reachable (no 404s)
-3. Confirm `assets/resume-pdf.html` is included
+3. Confirm sitemap entries are indexable; exclude pages marked `noindex`

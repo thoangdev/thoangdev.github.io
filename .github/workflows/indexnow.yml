@@ -33,8 +33,7 @@ jobs:
               "https://thoangdev.github.io/#projects",
               "https://thoangdev.github.io/#books",
               "https://thoangdev.github.io/#awards",
-              "https://thoangdev.github.io/#contact-form",
-              "https://thoangdev.github.io/assets/resume-pdf.html"
+              "https://thoangdev.github.io/#contact-form"
             ]
           }
           JSON

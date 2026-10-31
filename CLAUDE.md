@@ -19,7 +19,7 @@ thoangdev.github.io/
 ├── index.html                  # Main SPA (~1 500 lines) — single source of truth for all content
 ├── 404.html                    # Custom error page
 ├── robots.txt                  # Crawler directives
-├── sitemap.xml                 # XML sitemap (homepage + resume-pdf)
+├── sitemap.xml                 # XML sitemap (indexable homepage only)
 ├── 8f3a7d2c9b4e1056.txt        # IndexNow key verification file (do NOT delete or rename)
 ├── google5e85760eebc133b5.html # Google Search Console verification (do NOT delete)
 ├── assets/
@@ -75,7 +75,7 @@ All user-facing content lives in **`index.html`** as semantic HTML. There is no 
 Three GitHub Actions workflows support the site:
 1. **`test.yml`** — runs the Node built-in test suite on push, pull request, and manual dispatch.
 2. **`deploy.yml`** — waits for successful `CI Tests` runs on `main`, injects the `GA_MEASUREMENT_ID` secret (replaces `__GA_MEASUREMENT_ID__` placeholder), then deploys to GitHub Pages.
-3. **`indexnow.yml`** — bulk-submits all section URLs to `api.indexnow.org` and `www.bing.com/indexnow`.
+3. **`indexnow.yml`** — submits indexable page URLs to `api.indexnow.org` and `www.bing.com/indexnow`; never submit pages marked `noindex`.
 
 ### Testing
 - Test runner: Node's built-in `node:test`; no npm dependencies or package manifest.
@@ -94,7 +94,7 @@ Powered by Formspree (`https://formspree.io/f/xnjljodd`). Endpoint is hardcoded 
 - JSON-LD structured data: `Person`, `WebSite`, `ProfilePage`, `Organization`, `Book`
 - Meta: title, description, keywords, OG, Twitter, geo tags
 - `robots.txt` → allows all, disallows `index-backup.html`
-- `sitemap.xml` → homepage + resume-pdf, `lastmod: 2026-04-15`
+- `sitemap.xml` → indexable homepage only, `lastmod: 2026-10-30`; exclude pages marked `noindex`
 - IndexNow key: `8f3a7d2c9b4e1056`
 
 ---

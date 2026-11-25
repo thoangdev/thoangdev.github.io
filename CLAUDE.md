@@ -94,7 +94,7 @@ Powered by Formspree (`https://formspree.io/f/xnjljodd`). Endpoint is hardcoded 
 - JSON-LD structured data: `Person`, `WebSite`, `ProfilePage`, `Organization`, `Book`
 - Meta: title, description, keywords, OG, Twitter, geo tags
 - `robots.txt` → allows all, disallows `index-backup.html`
-- `sitemap.xml` → indexable homepage only, `lastmod: 2026-10-30`; exclude pages marked `noindex`
+- `sitemap.xml` → indexable homepage only, `lastmod: 2026-11-25`; exclude pages marked `noindex`
 - IndexNow key: `8f3a7d2c9b4e1056`
 
 ---
